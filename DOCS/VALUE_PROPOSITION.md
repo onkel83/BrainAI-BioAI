@@ -42,4 +42,4 @@ Hier sind drei konkrete Anwendungsfälle für den wirtschaftlichen Mehrwert:
 
 © 2025 BrainAI / Sascha A. Köhne
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
-🔗 [Technische Dokumentation][https://winemp83.github.io/BioAI](https://github.com/onkel83/BrainAI-BioAI/edit/main/DOCS/)
+🔗 [Technische Dokumentation](https://github.com/onkel83/BrainAI-BioAI/blob/main/DOCS/CODEBOOK.md)
