@@ -47,4 +47,4 @@
 
 © 2025 BrainAI / Sascha A. Köhne
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
-🔗 [Weitere Dokumentation](https://brainai.org/docs)
+🔗 [Weitere Dokumentation]([https://brainai.org/DOCS](https://github.com/onkel83/BrainAI-BioAI/edit/main/DOCS/))
