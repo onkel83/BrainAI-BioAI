@@ -56,12 +56,12 @@ Spielcharaktere in Unity/Godot, die echte Bedürfnisse haben, lernen und soziale
 
 Hier finden Sie die detaillierten technischen Dokumente:
 
-* [**Architecture Deep Dive**](docs/ARCHITECTURE.md) – *Why Efficiency beats Brute Force*
-* [**API Reference**](docs/API_REFERENCE.md) – *Methods, Safety & Audit*
-* [**Training Guide**](docs/TRAINING_GUIDE.md) – *Instinct vs. Experience*
-* [**Use Case: Smart Grid**](docs/BENCHMARK_SOLAR.md) – *BioAI vs. Cloud AI vs. Hardcoded*
-* [**Simple Explainer**](docs/SIMPLE_EXPLAINER.md) – *Für Nicht-Techniker (ELI5)*
-* [**CODEBOCK**](docs/CODEBOCK.md) - *CODEBOOK
+* [**Architecture Deep Dive**](DOCS/ARCHITECTURE.md) – *Why Efficiency beats Brute Force*
+* [**API Reference**](DOCS/API_REFERENCE.md) – *Methods, Safety & Audit*
+* [**Training Guide**](DOCS/TRAINING_GUIDE.md) – *Instinct vs. Experience*
+* [**Use Case: Smart Grid**](DOCS/BENCHMARK_SOLAR.md) – *BioAI vs. Cloud AI vs. Hardcoded*
+* [**Simple Explainer**](DOCS/SIMPLE_EXPLAINER.md) – *Für Nicht-Techniker (ELI5)*
+* [**CODEBOCK**](DOCS/CODEBOCK.md) - *CODEBOOK
 ---
 
 ## 🛡️ License & Contact
