@@ -58,7 +58,7 @@ Hier finden Sie die detaillierten technischen Dokumente:
 
 * [**Architecture Deep Dive**](DOCS/ARCHITECTURE.md) – *Why Efficiency beats Brute Force*
 * [**API Reference**](DOCS/API_REFERENCE.md) – *Methods, Safety & Audit*
-* [**Training Guide**](DOCS/TRAINING_GUIDE.md) – *Instinct vs. Experience*
+* [**Training Guide**](DOCS/TRAININGS_GUIDE.md) – *Instinct vs. Experience*
 * [**Use Case: Smart Grid**](DOCS/BENCHMARK_SOLAR.md) – *BioAI vs. Cloud AI vs. Hardcoded*
 * [**Simple Explainer**](DOCS/SIMPLE_EXPLAINER.md) – *Für Nicht-Techniker (ELI5)*
 * [**CODEBOCK**](DOCS/CODEBOCK.md) - *CODEBOOK
