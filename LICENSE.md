@@ -1,4 +1,6 @@
-# BioAI.Core License Agreement
+# BioAI.Core License Agreement ⚖️
+
+**Version:** 0.0.2 (Alpha)
 
 **Copyright © 2025 BrainAI / Sascha A. Köhne. All Rights Reserved.**
 
@@ -48,7 +50,7 @@ Without a commercial license, you are **NOT** permitted to:
 
 A Commercial License is required for:
 1.  **OEM / Hardware:** Embedding BioAI in robots, sensors, or devices sold to third parties.
-2.  **Software:** selling applications or games that utilize BioAI.
+2.  **Software:** Selling applications or games that utilize BioAI.
 3.  **Industry:** Productive internal use in companies to optimize processes.
 
 To acquire a license, please contact the copyright holder:
@@ -61,3 +63,13 @@ To acquire a license, please contact the copyright holder:
 ## 5. DISCLAIMER
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+---
+
+
+**BrainAI** - *Intelligence everywhere.*
+Developed by **Sascha A. Köhne (winemp83)**
+Product: **BioAI v0.0.2 (Alpha)**
+📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
+
+© 2025 BrainAI / Sascha A. Köhne. All rights reserved.
