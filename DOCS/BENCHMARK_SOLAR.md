@@ -1,5 +1,9 @@
 # Case Study: Decentralized Smart Grid Control ⚡
 
+**Version:** 0.0.2 (Alpha)
+
+---
+
 **Szenario:** Steuerung von 30 Haushalten (PV + Batterie) zur Netzstabilisierung ohne Cloud.
 **Vergleich:** BioAI vs. Cloud AI vs. Hardcoded Logic.
 
@@ -55,6 +59,10 @@ Laufende Kosten nach dem Deployment.
 
 ---
 
+
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
 Product: **BioAI v0.0.2 (Alpha)**
+📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
+
+© 2025 BrainAI / Sascha A. Köhne. All rights reserved.
