@@ -1,7 +1,9 @@
-# BioAI: Effizienz durch autonome Edge-Intelligenz
+# BioAI: Effizienz durch autonome Edge-Intelligenz 🧠
+
+**Version:** 0.0.2 (Alpha)
 ### Strategische Vorteile dezentraler Steuerungssysteme
 
-BioAI adressiert das fundamentale Problem moderner Automatisierung: **Ressourcenverschwendung durch starre Regelwerke.**
+BioAI adressiert das fundamentale Problem moderner Automatisierung: **Ressourcenverschwendung durch starre Regelwerke**.
 Anstatt auf permanente Cloud-Verbindungen zu setzen, verlagert BioAI die Entscheidungskompetenz direkt auf das Gerät (Edge Computing).
 
 Hier sind drei konkrete Anwendungsfälle für den wirtschaftlichen Mehrwert:
@@ -40,6 +42,11 @@ Hier sind drei konkrete Anwendungsfälle für den wirtschaftlichen Mehrwert:
 
 ---
 
-© 2025 BrainAI / Sascha A. Köhne
+
+**BrainAI** - *Intelligence everywhere.*
+Developed by **Sascha A. Köhne (winemp83)**
+Product: **BioAI v0.0.2 (Alpha)**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 🔗 [Technische Dokumentation](https://github.com/onkel83/BrainAI-BioAI/blob/main/DOCS/CODEBOOK.md)
+
+© 2025 BrainAI / Sascha A. Köhne. All rights reserved.
