@@ -1,6 +1,8 @@
-# BioAI Training Strategy Guide
+# BioAI Training Strategy Guide 🧠
 
-Wie wird ein BioAI-Agent schlau? Wir nutzen ein erweitertes 3-Stufen-Modell, das biologische Prinzipien mit technischer Präzision vereint.
+**Version:** 0.0.2 (Alpha)
+
+Wie wird ein BioAI-Agent schlau? Wir nutzen ein erweitertes **4-Ebenen-Modell**, das biologische Prinzipien mit technischer Präzision vereint.
 
 ---
 
@@ -45,7 +47,7 @@ Die Fähigkeit, Konsequenzen vorherzusehen, bevor man handelt.
 ---
 
 ## Ebene 4: Schwarm-Wissen (Social Propagation)
-<p align="center"><img src="../images/brainai_logo_bw.png" width="100" alt="BrainAI"></p>
+
 
 Wissen ist nicht an einen einzelnen Agenten gebunden.
 
@@ -58,6 +60,10 @@ Wissen ist nicht an einen einzelnen Agenten gebunden.
 
 ---
 
+
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
 Product: **BioAI v0.0.2 (Alpha)**
+📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
+
+© 2025 BrainAI / Sascha A. Köhne. All rights reserved.
