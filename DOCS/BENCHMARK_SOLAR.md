@@ -26,8 +26,8 @@ Wie ressourcenhungrig ist die Lösung auf dem Gateway?
 | Lösung            | Größe (APK)       | Konsequenz                        |
 |-------------------|-------------------|-----------------------------------|
 | **A. Hardcoded** | ~ 25 MB           | Riesige Logik-Klassen, schwer wartbar |
-| **B. Cloud AI** | 150 MB – 500 MB   | *"Bloatware"*. Zieht Akku leer.   |
-| **C. BioAI** | **~ 20 MB** | KI-Core (`bioai_core.dll`) nur **65 KB** |
+| **B. Cloud AI** | 150 MB – 500 MB   | **Ressourcenintensiv**. Zieht Akku leer.   |
+| **C. BioAI** | **~ 20 MB** | KI-Core (`bioai_core.dll`) nur **65 KB**|
 
 👉 **BioAI-Vorteil:** Läuft auf billigster Hardware und spart Speicher.
 
@@ -41,7 +41,7 @@ Laufende Kosten nach dem Deployment.
 |-------------------|---------------|---------------------------------------------------|
 | **A. Hardcoded** | Hoch          | Wartung bei Tarifänderungen ist teuer (Personal). |
 | **B. Cloud AI** | Exorbitant    | Server-Miete, Traffic, Ausfallrisiko.             |
-| **C. BioAI** | **0 €** | Code läuft **direkt auf dem Gerät** des Kunden.   |
+| **C. BioAI** | **Minimal** | Kosten für Traffic und Server entfallen. Lediglich Kosten für Wartung und Rollout von Updates fallen an. |
 
 ---
 
