@@ -1,4 +1,6 @@
-# BioAI: Erklärung für normale Menschen
+# BioAI: Erklärung für normale Menschen 🧠
+
+**Version:** 0.0.2 (Alpha)
 ### (Kein Tech-Talk)
 
 Wenn Ingenieure über **Künstliche Intelligenz** reden, meinen sie meistens riesige Rechenzentren, die Milliarden an Strom fressen, nur um einen Text zu schreiben.
@@ -24,7 +26,7 @@ BioAI ist Intelligenz für Dinge, die wir jeden Tag benutzen. Es ist keine Zaube
 * **Die BioAI Lösung:**
     * Die Heizung lernt Ihre Gewohnheiten lokal (ohne Internet!).
     * Sie merkt: *"Oh, heute ist Mittwoch, da kommt er oft früher."* -> **Sie heizt vor.**
-* **Das Ergebnis:** Warmes Zuhause, **30% weniger Heizkosten**, keine Daten bei Google.
+* **Das Ergebnis:** Warmes Zuhause, **signifikante Energieeinsparung** durch vorausschauende Steuerung, keine Daten bei Google.
 
 ---
 
@@ -33,13 +35,13 @@ BioAI ist Intelligenz für Dinge, die wir jeden Tag benutzen. Es ist keine Zaube
 Eine Technologie setzt sich nur durch, wenn **alle** sie wollen. BioAI besteht diesen Test:
 
 * **Der 7-Jährige (Intuitiv):**
-  > *"Das Auto mit dem BioAI-Chip fährt um die Wand herum, wie ein echtes Tier."*
+    > *"Das Auto mit dem BioAI-Chip fährt um die Wand herum, wie ein echtes Tier."*
 
 * **Der 18-Jährige (Klimabewusst):**
-  > *"Das ist die einzige KI, die unseren Planeten nicht kocht, weil sie keinen Server braucht."*
+    > *"Das ist **eine KI**, die unseren Planeten nicht kocht, weil sie dezentral und ohne riesige Serverfarmen arbeitet."*
 
 * **Die 80-Jährige (Sparsam):**
-  > *"Es funktioniert einfach und spart mir 50 Euro Strom im Monat."*
+    > *"Es funktioniert einfach und **spart mir jeden Monat bares Geld**."*
 
 ---
 
@@ -54,6 +56,10 @@ Es gibt keins.
 
 ---
 
+
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
 Product: **BioAI v0.0.2 (Alpha)**
+📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
+
+© 2025 BrainAI / Sascha A. Köhne. All rights reserved.
