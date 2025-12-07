@@ -1,4 +1,8 @@
-# BioAI Developer Handbook: Muster und Rezepte (v0.0.2)
+# BioAI Developer Handbook: Muster und Rezepte (v0.0.2) 🧠
+
+**Version:** 0.0.2 (Alpha)
+
+---
 
 Dieses Handbuch ist die universelle Anleitung, die Ihnen zeigt, wie Sie die vier Kernfunktionen des Cores nutzen, um komplexe Probleme zu lösen – **unabhängig von Ihrer Programmiersprache.**
 
@@ -81,6 +85,10 @@ Bevor der Agent handelt, überprüft er die Konsequenzen seiner Entscheidungen (
 
 ---
 
+
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
 Product: **BioAI v0.0.2 (Alpha)**
+📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
+
+© 2025 BrainAI / Sascha A. Köhne. All rights reserved.
