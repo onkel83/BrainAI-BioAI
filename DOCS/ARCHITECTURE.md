@@ -1,4 +1,4 @@
-# BioAI Architecture Deep Dive
+# BioAI Architecture Deep Dive 🧠
 
 **Version:** 0.0.2 (Alpha)
 **Status:** Industrial Gold Standard (C99)
@@ -7,7 +7,7 @@
 
 ## The Philosophy: Efficiency First
 
-Während moderne KI-Forschung (Deep Learning) auf massiven Matrizen-Operationen basiert, kehrt **BioAI** zu den Wurzeln der Kybernetik zurück.  
+Während moderne KI-Forschung (Deep Learning) auf massiven Matrizen-Operationen basiert, kehrt **BioAI** zu den Wurzeln der Kybernetik zurück.
 Wir betrachten Intelligenz als **Signalverarbeitung**, nicht als Statistik.
 
 ---
@@ -16,11 +16,11 @@ Wir betrachten Intelligenz als **Signalverarbeitung**, nicht als Statistik.
 
 Der Kern von BioAI ist eine proprietäre Engine, geschrieben in **ANSI C (C99)**.
 
-- **Keine Garbage Collection:** Speicher wird manuell und deterministisch verwaltet.
-- **Keine Dependencies:** Der Core benötigt keine externen Bibliotheken (kein Python, kein Torch, kein NumPy).
-- **Sparse Memory:** Das System belegt nur Speicher für Konzepte, die es tatsächlich kennt.
-  - Ein *leeres Gehirn* belegt nur wenige Bytes (Header).
-- **Industrial Safety Mode (New):** Über das Flag `fixed_structure` kann die Speicherverwaltung zur Laufzeit komplett deaktiviert werden (`malloc`-Ban). Dies garantiert 100% Schutz vor Speicherfragmentierung im Dauerbetrieb.
+* **Keine Garbage Collection:** Speicher wird manuell und deterministisch verwaltet.
+* **Keine Dependencies:** Der Core benötigt keine externen Bibliotheken (kein Python, kein Torch, kein NumPy).
+* **Sparse Memory:** Das System belegt nur Speicher für Konzepte, die es tatsächlich kennt.
+    * Ein *leeres Gehirn* belegt nur wenige Bytes (Header).
+* **Industrial Safety Mode (New):** Über das Flag `fixed_structure` kann die Speicherverwaltung zur Laufzeit komplett deaktiviert werden (`malloc`-Ban). Dies garantiert 100% Schutz vor Speicherfragmentierung im Dauerbetrieb.
 
 ---
 
@@ -28,9 +28,9 @@ Der Kern von BioAI ist eine proprietäre Engine, geschrieben in **ANSI C (C99)**
 
 Anstatt Inputs durch tiefe Schichten zu leiten, nutzt BioAI ein hochperformantes **Signal-Mapping-Verfahren**, um sensorische Daten (Inputs) und zeitliche Abfolgen in eindeutige **64-Bit Tokens** zu verwandeln.
 
-- **Vorteil:** Verarbeitungskomplexität ist **O(1)**.
-- **Technik:** Eine interne Hashtable mit linearer Sondierung ermöglicht sofortigen Zugriff auf jedes Neuron.
-- **Egal ob 10 oder 10.000 Konzepte:** Die Entscheidungsfindung dauert immer gleich lang (< 1 ms auf modernen MCUs).
+* **Vorteil:** Verarbeitungskomplexität ist **im Durchschnitt O(1)** (konstant) und nutzt hochoptimierte Hashtables.
+* **Technik:** Eine interne Hashtable mit linearer Sondierung ermöglicht sofortigen Zugriff auf jedes Neuron.
+* **Egal ob 10 oder 10.000 Konzepte:** Die Entscheidungsfindung dauert immer gleich lang (auf modernen MCUs).
 
 ---
 
@@ -38,9 +38,9 @@ Anstatt Inputs durch tiefe Schichten zu leiten, nutzt BioAI ein hochperformantes
 
 Das "Gedächtnis" ist als **gerichteter Graph** organisiert.
 
-- **LTM (Long Term Memory):** Speichert validierte Strategien (Synapsen mit hohem Gewicht). Diese sind persistent.
-- **STM (Short Term Memory):** Speichert temporäre Hypothesen.
-- **Trace (Hippocampus):** Ein Ringbuffer speichert die letzten Aktionen, um verzögerte Belohnungen (Delayed Rewards) korrekt zuzuordnen.
+* **LTM (Long Term Memory):** Speichert validierte Strategien (Synapsen mit hohem Gewicht). Diese sind persistent.
+* **STM (Short Term Memory):** Speichert temporäre Hypothesen.
+* **Trace (Hippocampus):** Ein Ringbuffer speichert die letzten Aktionen, um verzögerte Belohnungen (Delayed Rewards) korrekt zuzuordnen.
 
 **Lernverfahren:** BioAI nutzt eine modifizierte Form des **Hebbian Learning** (*"Cells that fire together, wire together"*).
 Wenn ein Reward (`API_Feedback`) eintrifft, verstärkt das System rückwirkend die Pfade im Trace. Nur wenn eine Verbindung im STM oft genug bestätigt wird (`LTM_CONSOLIDATE_HITS`), wird sie permanent.
@@ -61,7 +61,7 @@ Dies deckt sich 1:1 mit den Definitionen in `BioAI_Types.h`:
 | **0x40...** | **LOGIC** | Regeln & Reflexe | Wenn/Dann, Not-Aus (Reflex) |
 | **0x50...** | **SELF** | Innere Zustände | Hunger (Need), Auftrag (Goal), Status |
 
-**Vorteil:** Das System kann generalisierte Regeln lernen (z. B. *"Priorisiere Cluster SELF (Needs) über Cluster ACTION"*), ohne jedes einzelne Bedürfnis neu lernen zu müssen.
+**Vorteil:** Das System kann **Hard-Safety-Regeln** (Cluster LOGIC/Reflex) implementieren, die alle anderen Entscheidungen überschreiben, und ermöglicht die Definition von Prioritäten durch Gewichtsverteilung auf Clusterebene.
 
 ---
 
@@ -69,12 +69,19 @@ Dies deckt sich 1:1 mit den Definitionen in `BioAI_Types.h`:
 
 In Version 0.0.2 wurde eine **Kausalitäts-Ebene** eingeführt.
 
-- **Funktion:** Jedes Neuron speichert nicht nur, was es *auslöst* (Synapse), sondern auch, was *danach passiert* (Prediction).
-- **Simulation:** Durch die Methode `API_Simulate(depth)` kann der Agent diese Kette mental durchlaufen, bevor er handelt.
-- **Code-Basis:** Rekursive Tiefensuche mit `MAX_SIM_DEPTH` Bremse (Stack-Schutz).
+* **Funktion:** Jedes Neuron speichert nicht nur, was es *auslöst* (Synapse), sondern auch, was *danach passiert* (Prediction).
+* **Simulation:** Durch die Methode `API_Simulate(depth)` kann der Agent diese Kette mental durchlaufen, bevor er handelt.
+* **Code-Basis:** Rekursive Tiefensuche mit `MAX_SIM_DEPTH` Bremse (Stack-Schutz).
 
 ---
 
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
 Product: **BioAI v0.0.2 (Alpha)**
+
+---
+## Nächster Schritt
+
+Die Datei `ARCHITECTURE.md` ist nun technisch präziser und wahrt Ihre Geschäftsgeheimnisse.
+
+Möchten Sie als Nächstes die Korrekturen für **`SIMPLE_EXPLAINER.md`** bestätigen, oder mit der dritten Datei **`VALUE_PROPOSITION.md`** fortfahren?
