@@ -17,7 +17,7 @@ Die Architektur von BioAI basiert auf wenigen, abstrakten Primitiven, die eine u
 
 ## 2. 🛡️ Safety & Compliance Features
 
-BioAI.Core wurde speziell für sicherheitskritische Umgebungen entwickelt (ISO 9001 / IEC 61508 Konformität).
+BioAI.Core wurde speziell **unter Berücksichtigung von Anforderungen an sicherheitskritische Umgebungen (z. B. IEC 61508) und Auditierbarkeit** entwickelt.
 
 ### A. Der "Run/Train Switch" (Inference Mode)
 
@@ -28,7 +28,7 @@ BioAI.Core wurde speziell für sicherheitskritische Umgebungen entwickelt (ISO 9
 
 ### B. Universelle Logik (Emotionslose Entscheidungen)
 
-- Keine versteckte Moral oder bias-behaftete Trainingsdaten.
+- Keine versteckte Moral oder bias-behaftete Trainingsdaten. **Der Entwickler definiert die anfängliche Zielrichtung und Bias über explizit injizierte Instinkte und die Reward-Funktion.**
 - Entscheidungen basieren ausschließlich auf den vom Entwickler definierten Clustern (`NEEDS`, `GOALS`) und Rewards.
 - **Zero Hallucination Policy:** BioAI kann nur Aktionen wählen, die vorher explizit als Token definiert wurden.
 
@@ -57,7 +57,7 @@ Unabhängig von der verwendeten Programmiersprache (Wrapper) stellt der Core die
 
 #### `Think(inputs)` / `API_Update`
 - Verarbeitet die aktuelle Wahrnehmung und liefert die optimale Aktion.
-- **Komplexität:** O(1) (Konstant).
+- **Komplexität:** **Im Durchschnitt O(1)** (konstant).
 - **Return:** TokenID der gewählten Aktion.
 
 #### `Simulate(inputs, depth)` ✨ *Neu in v0.0.2*
@@ -124,3 +124,6 @@ Alle offiziellen Wrapper implementieren das Transparency Interface automatisch:
 - **Email:** [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
 © 2025 BrainAI / Sascha A. Köhne. All rights reserved.
+
+---
+Welche Datei möchten Sie als Nächstes überprüfen?
