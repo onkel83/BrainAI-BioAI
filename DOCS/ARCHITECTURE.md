@@ -77,11 +77,7 @@ In Version 0.0.2 wurde eine **Kausalitäts-Ebene** eingeführt.
 
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI v0.0.2 (Alpha)**
+Product: **BioAI v0.0.2a (Alpha)**
 
 ---
-## Nächster Schritt
 
-Die Datei `ARCHITECTURE.md` ist nun technisch präziser und wahrt Ihre Geschäftsgeheimnisse.
-
-Möchten Sie als Nächstes die Korrekturen für **`SIMPLE_EXPLAINER.md`** bestätigen, oder mit der dritten Datei **`VALUE_PROPOSITION.md`** fortfahren?
