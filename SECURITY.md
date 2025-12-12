@@ -8,8 +8,8 @@ We currently support security updates for the following versions of the BioAI Co
 
 | Version | Supported | Notes |
 | :--- | :--- | :--- |
-| **v0.0.2 (Alpha)** | ✅ | Current Stable Release |
-| < v0.0.2 | ❌ | Deprecated. Do not use in production. |
+| **v0.5.1 (Industrial Beta)** | ✅ | Current Stable Release |
+| < 0.5.1 | ❌ | Deprecated. Do not use in production. |
 
 ---
 
@@ -20,21 +20,21 @@ If you have discovered a vulnerability that could compromise the integrity, safe
 
 ### How to Report
 Please send an email to the Lead Architect:
-* **Email:** [koehne83@googlemail.com]
+* **Email:** [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 * **Subject:** `[SECURITY] BioAI Vulnerability Report`
 
 ### What to Include
 Please provide as much detail as possible:
-1.  **Component:** Is it in the *Open Source Wrapper* (C#/Python/etc.) or the *Proprietary C-Core* (`bioai_core.dll` / `.so`)?
+1.  **Component:** Is it in the *Open Source Wrapper* (C#/Python/Java/JS) or the *Proprietary C-Core* (`bioai.dll` / `.so`)?
 2.  **Severity:** Can it bypass the *Safety Reflex Layer*? Does it cause a crash (DoS)? Can it inject false Tokens?
-3.  **Proof of Concept:** A minimal code snippet or description to reproduce the issue.
+3.  **Proof of Concept:** A minimal code snippet, a malicious brain-dump file, or a description to reproduce the issue.
 
 ### Our Response Process
 1.  **Acknowledgment:** We will acknowledge your report within 48 hours.
 2.  **Verification:** We will verify the vulnerability internally.
 3.  **Patching:**
     * **Wrappers:** We will push a fix to the public repo immediately.
-    * **Core:** We will patch the proprietary binary and release a new version (e.g., v0.0.3).
+    * **Core:** We will patch the proprietary binary and release a new version (e.g., v0.5.2).
 4.  **Disclosure:** Once the patch is available to customers/users, we will credit you (if desired) in the release notes.
 
 ---
@@ -42,13 +42,17 @@ Please provide as much detail as possible:
 ## 🔒 Specific Security Scope
 
 ### 1. The C-Core (Binary)
-The Core operates in **Fixed Structure Mode** (No `malloc`/`free`) to prevent memory corruption attacks.
-* **Critical:** Any method to trigger a **Buffer Overflow** or **Memory Leak** in the Core is considered a Critical Severity issue.
+The Core operates in **Fixed Structure Mode** (No `malloc`/`free` during runtime) to prevent memory corruption attacks.
+
+* **Critical:** Any method to trigger a **Buffer Overflow** or **Memory Leak** in the Core (especially via `API_Deserialize`) is considered a Critical Severity issue.
 * **Critical:** Any method to bypass a **ForceInstinct (Reflex)** is considered a Critical Safety Violation.
+* **High:** Breaking the **O(1) Real-Time Guarantee** (e.g., by forcing the engine into an infinite loop or excessive calculation time) constitutes a Denial-of-Service (DoS) against the physical control loop.
 
 ### 2. The Wrappers (Source)
 The wrappers handle the interface between the OS and the Core.
+
 * **High:** Vulnerabilities that allow **Token Injection** (spoofing sensor data) via the API boundaries.
+* **Medium:** DLL-Hijacking vulnerabilities in the library loading mechanism.
 
 ---
 
