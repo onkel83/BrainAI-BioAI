@@ -1,6 +1,7 @@
 # BioAI: Effizienz durch autonome Edge-Intelligenz 🧠
 
-**Version:** 0.0.2 (Alpha)
+**Version:** 0.5.1 (Industrial Beta)
+
 ### Strategische Vorteile dezentraler Steuerungssysteme
 
 BioAI adressiert das fundamentale Problem moderner Automatisierung: **Ressourcenverschwendung durch starre Regelwerke**.
@@ -14,7 +15,7 @@ Hier sind drei konkrete Anwendungsfälle für den wirtschaftlichen Mehrwert:
 *(Effizienzsteigerung durch Echtzeit-Reaktion)*
 
 * **Herausforderung:** Konventionelle Ampelanlagen arbeiten oft mit statischen Zeitintervallen. Dies führt in verkehrsarmen Zeiten (z.B. nachts) zu unnötigen Wartezeiten und erhöhten Emissionen durch Leerlauf.
-* **Die BioAI Lösung:** Das System agiert als lokaler Agent. Es korreliert Sensor-Inputs (Fahrzeugpräsenz) direkt mit der Aktorik (Lichtsignal). Die Entscheidung basiert auf dem aktuellen Bedarf, nicht auf einem Timer.
+* **Die BioAI Lösung:** Das System agiert als lokaler Agent auf kostengünstiger Hardware (IoT Tier). Es korreliert Sensor-Inputs (Fahrzeugpräsenz) direkt mit der Aktorik (Lichtsignal). Die Entscheidung fällt in **O(1)** (Echtzeit), basierend auf dem aktuellen Bedarf, nicht auf einem Timer.
 * **Mehrwert:** Optimierter Verkehrsfluss, Reduktion von CO₂-Emissionen und Vermeidung von unnötigen Wartezeiten ohne zentrale Leitrechner.
 
 ---
@@ -32,21 +33,19 @@ Hier sind drei konkrete Anwendungsfälle für den wirtschaftlichen Mehrwert:
 *(Reduktion der Betriebskosten / OpEx)*
 
 * **Herausforderung:** Industriemaschinen laufen oft in starren Zyklen, unabhängig vom aktuellen Bedarf oder den volatilen Energiepreisen. Dies führt zu vermeidbaren Energiekosten in Leerlaufphasen.
-* **Die BioAI Lösung:** Die Maschine erhält ein "Bewusstsein" für ihren Kontext (Cluster `SELF`). Sie erkennt Zustände wie "Lager voll" oder "Energiepreis hoch" und drosselt selbstständig die Produktionsgeschwindigkeit, statt abrupt zu stoppen oder unnötig weiterzulaufen.
+* **Die BioAI Lösung:** Die Maschine erhält ein "Bewusstsein" für ihren Kontext (Cluster `SELF`). Sie erkennt Zustände wie "Lager voll" (`GOAL` erreicht) oder "Energiepreis hoch" und drosselt selbstständig die Produktionsgeschwindigkeit, statt abrupt zu stoppen oder unnötig weiterzulaufen.
 * **Mehrwert:** Maximale Energieeffizienz und Materialschonung bei gleichbleibender Liefertreue.
 
 ---
 
 ## Fazit
-**BioAI** transformiert starre Hardware in adaptive, intelligente Systeme. Es verbindet die Zuverlässigkeit klassischer Industriesteuerungen mit der Flexibilität moderner KI – ohne die Abhängigkeit und Latenz der Cloud.
+**BioAI** transformiert starre Hardware in adaptive, intelligente Systeme. Es verbindet die Zuverlässigkeit klassischer Industriesteuerungen (SPS) mit der Flexibilität moderner KI – ohne die Abhängigkeit, Latenz und Kosten der Cloud.
 
 ---
 
-
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI v0.0.2 (Alpha)**
+Product: **BioAI v0.5.1 (Industrial Beta)**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
-🔗 [Technische Dokumentation](https://github.com/onkel83/BrainAI-BioAI/blob/main/DOCS/CODEBOOK.md)
 
-© 2025 BrainAI / Sascha A. Köhne. All rights reserved.
+© 2025 BrainAI / Sascha A. Köhne.
