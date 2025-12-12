@@ -1,6 +1,6 @@
 # BioAI Feature Deep Dive 🛠️
 
-**Version:** 0.0.2 (Alpha)
+**Version:** 0.5.1 (Industrial Beta)
 
 ---
 
@@ -17,6 +17,7 @@ Hier erfahren Sie, wie Sie komplexe Industrie-Anforderungen mit den vorhandenen 
 
 **Die BioAI Lösung:**
 * Nutzung der nativen `Serialize()` und `Deserialize()` Funktionen.
+* **Cross-Tier Fähigkeit:** Ein Gehirn kann auf einem **Ultra-Server** trainiert und auf **IoT-Chips** (8-Bit Index) übertragen werden, sofern die Neuronen-Grenzen eingehalten werden.
 * **Ablauf:**
     1.  Roboter A lernt ein neues Hindernis (neue Synapsen im LTM).
     2.  Aufruf von `Serialize()` → Erzeugt einen Byte-Blob (**typischerweise sehr kompakt, wenige Kilobyte**).
@@ -34,7 +35,7 @@ Die gesamte Flotte besitzt sofort das Erfahrungswissen von Roboter A, ohne den F
 "Wir müssen dem TÜV beweisen, warum die Maschine gestoppt hat."
 
 **Die BioAI Lösung:**
-* Der C# Wrapper (`BioAI.cs`) führt ein internes Vokabelheft (`_vocabulary`).
+* Alle Wrapper (C#, Java, Python, C++) führen ein internes Vokabelheft (`dumpVocabulary`).
 * **Ablauf:**
     1.  Maschine stoppt.
     2.  Log-Export zeigt: `[14:00:05] ACTION: STOP (Token: 0x20...A1)`.
@@ -42,7 +43,7 @@ Die gesamte Flotte besitzt sofort das Erfahrungswissen von Roboter A, ohne den F
 * **Beweis:** Der Sensor-Input "HAND" führte zwingend zur Aktion "STOP", basierend auf einer fest injizierten Sicherheitsregel (`ForceInstinct`).
 
 **Ergebnis:**
-Das System ist deterministisch und auditierbar: Gleicher Input → Exakt gleiche Aktion.
+Das System ist deterministisch und auditierbar: Gleicher Input → Exakt gleiche Aktion. Die Entscheidungszeit ist garantiert **O(1)**.
 
 ---
 
@@ -52,15 +53,15 @@ Das System ist deterministisch und auditierbar: Gleicher Input → Exakt gleiche
 "Die KI darf im laufenden Betrieb ihr Verhalten nicht unvorhersehbar ändern."
 
 **Die BioAI Lösung:**
-* Nutzung der Methode `SetMode(BioMode.Production)`.
+* Nutzung der Methode `SetMode(BioMode.PRODUCTION)`.
 * **Technischer Effekt:**
     * Das Flag `fixed_structure` im C-Kernel wird gesetzt.
-    * `malloc` und `free` werden deaktiviert.
+    * `malloc` und `free` werden **physikalisch deaktiviert**.
     * Neue Konzepte werden ignoriert, nur bestehende Gewichte dürfen schwanken.
-* **Garantie:** Ab diesem Punkt ist der Agent eine statische, 100% speichersichere Software-Komponente.
+* **Garantie:** Ab diesem Punkt ist der Agent eine statische, 100% speichersichere Software-Komponente. Kein Memory-Leak möglich.
 
 **Ergebnis:**
-Ideal für die Endabnahme und Zertifizierung nach Industriestandards.
+Ideal für die Endabnahme und Zertifizierung nach Industriestandards (IEC 61508).
 
 ---
 
@@ -73,20 +74,19 @@ Ideal für die Endabnahme und Zertifizierung nach Industriestandards.
 * Nutzung der universellen Token-Logik. Sprache ist nur ein weiterer Input.
 * **Ablauf:**
     1.  Drohne A entscheidet: `ACTION_SEARCH_SECTOR_A`.
-    2.  Drohne A sendet diesen Token-Hash per Funk.
+    2.  Drohne A sendet diesen Token-Hash (64-Bit) per Funk.
     3.  Drohne B empfängt den Hash und speist ihn als Input ein:
         `Think(CreateToken("PARTNER_AT_SECTOR_A"))`
     4.  Drohne B reagiert darauf (z. B. mit `ACTION_GO_TO_SECTOR_B`), um Kollisionen zu vermeiden.
 
 **Ergebnis:**
-Selbstorganisierte Arbeitsteilung ohne Master-Server (Mesh-Intelligence).
+Selbstorganisierte Arbeitsteilung ohne Master-Server (Mesh-Intelligence). Da der Hashing-Algorithmus standardisiert ist, verstehen sich C++ Drohnen und Python Bodenstationen blind.
 
 ---
 
-
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI v0.0.2 (Alpha)**
+Product: **BioAI v0.5.1 (Industrial Beta)**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
 © 2025 BrainAI / Sascha A. Köhne. All rights reserved.
