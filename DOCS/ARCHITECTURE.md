@@ -1,6 +1,6 @@
 # BioAI Architecture Deep Dive 🧠
 
-**Version:** 0.0.2 (Alpha)
+**Version:** 0.5.1 (Industrial Beta)
 **Status:** Industrial Gold Standard (C99)
 
 ---
@@ -18,40 +18,54 @@ Der Kern von BioAI ist eine proprietäre Engine, geschrieben in **ANSI C (C99)**
 
 * **Keine Garbage Collection:** Speicher wird manuell und deterministisch verwaltet.
 * **Keine Dependencies:** Der Core benötigt keine externen Bibliotheken (kein Python, kein Torch, kein NumPy).
-* **Sparse Memory:** Das System belegt nur Speicher für Konzepte, die es tatsächlich kennt.
-    * Ein *leeres Gehirn* belegt nur wenige Bytes (Header).
-* **Industrial Safety Mode (New):** Über das Flag `fixed_structure` kann die Speicherverwaltung zur Laufzeit komplett deaktiviert werden (`malloc`-Ban). Dies garantiert 100% Schutz vor Speicherfragmentierung im Dauerbetrieb.
+* **Sparse Memory:** Das System belegt nur Speicher für Konzepte, die es tatsächlich kennt. Ein *leeres Gehirn* belegt nur wenige Bytes (Header).
+* **Industrial Safety Mode:** Über das Flag `fixed_structure` (Production Mode) kann die Speicherverwaltung zur Laufzeit komplett deaktiviert werden (`malloc`-Ban). Dies garantiert 100% Schutz vor Speicherfragmentierung im Dauerbetrieb (24/7).
 
 ---
 
-## 2. The Symbolic Processing Unit (Temporal Cortex)
+## 2. Scalable Precision (The 3 Tiers)
 
-Anstatt Inputs durch tiefe Schichten zu leiten, nutzt BioAI ein hochperformantes **Signal-Mapping-Verfahren**, um sensorische Daten (Inputs) und zeitliche Abfolgen in eindeutige **64-Bit Tokens** zu verwandeln.
+BioAI löst das Problem der Hardware-Fragmentierung durch eine **adaptive Typisierung**. Der gleiche Algorithmus läuft auf einem 8-Bit Mikrocontroller und einem 64-Bit Server, indem die Datentypen (`Index`) zur Kompilierzeit angepasst werden.
 
-* **Vorteil:** Verarbeitungskomplexität ist **im Durchschnitt O(1)** (konstant) und nutzt hochoptimierte Hashtables.
-* **Technik:** Eine interne Hashtable mit linearer Sondierung ermöglicht sofortigen Zugriff auf jedes Neuron.
-* **Egal ob 10 oder 10.000 Konzepte:** Die Entscheidungsfindung dauert immer gleich lang (auf modernen MCUs).
+| Tier | Index-Typ | Max. Neuronen | Ziel-Hardware | Speicherbedarf |
+| :--- | :--- | :--- | :--- | :--- |
+| **IoT** | `uint8_t` | **255** | Arduino, AVR, ESP8266 | **< 2 KB** |
+| **SmartHome** | `uint16_t` | **65.535** | ESP32, STM32, Raspberry Pi | **~ 64 KB** |
+| **Ultra** | `uint32_t` | **4.2 Mrd.** | PC, Server, Cloud | RAM limitiert |
+
+Dies ermöglicht es, Logik auf dem PC (Ultra) zu trainieren und nahtlos auf den Mikrocontroller (IoT) zu übertragen ("Brain Porting").
 
 ---
 
-## 3. The Associative Brain
+## 3. The Symbolic Processing Unit (Temporal Cortex)
 
-Das "Gedächtnis" ist als **gerichteter Graph** organisiert.
+Anstatt Inputs durch tiefe Schichten zu leiten, nutzt BioAI ein hochperformantes **Signal-Mapping-Verfahren**.
+
+* **Vorteil:** Verarbeitungskomplexität ist **deterministisch O(1)** (Worst-Case Execution Time ist konstant).
+* **Der Beweis:**
+    1.  **Neuron-Zugriff:** Erfolgt über eine optimierte Funktion-> **O(1)**.
+    2.  **Verarbeitung:** Jedes Neuron hat ein striktes Limit an Verbindungen (`MAX_SYNAPSES`, z.B. 16 bei IoT, 256 bei Ultra).
+    3.  **Resultat:** Die Berechnungszeit hängt *nicht* von der Gesamtgröße des Gehirns ab.
+* **Egal ob 10 oder 10 Millionen Konzepte:** Die Entscheidungsfindung für einen einzelnen Reiz dauert immer gleich lang. Das ist essenziell für harte Echtzeitsysteme.
+
+---
+
+## 4. The Associative Brain
+
+Das "Gedächtnis" ist als Graph-Artig organisiert.
 
 * **LTM (Long Term Memory):** Speichert validierte Strategien (Synapsen mit hohem Gewicht). Diese sind persistent.
 * **STM (Short Term Memory):** Speichert temporäre Hypothesen.
 * **Trace (Hippocampus):** Ein Ringbuffer speichert die letzten Aktionen, um verzögerte Belohnungen (Delayed Rewards) korrekt zuzuordnen.
 
-**Lernverfahren:** BioAI nutzt eine modifizierte Form des **Hebbian Learning** (*"Cells that fire together, wire together"*).
-Wenn ein Reward (`API_Feedback`) eintrifft, verstärkt das System rückwirkend die Pfade im Trace. Nur wenn eine Verbindung im STM oft genug bestätigt wird (`LTM_CONSOLIDATE_HITS`), wird sie permanent.
+**Lernverfahren:** BioAI nutzt eine Spezial Form des **Hebbian Learning** (*"Cells that fire together, wire together"*).
+Wenn ein Reward (`API_Feedback`) eintrifft, verstärkt das System rückwirkend die Pfade im Trace. Nur wenn eine Verbindung im STM oft genug bestätigt wird (`LTM_CONSOLIDATE_HITS`), wird sie permanent ins LTM übernommen.
 
 ---
 
-## 4. The Cluster Ontology
+## 5. The Cluster Ontology
 
 Um *Symbol Grounding* (das Verstehen von Bedeutung) zu ermöglichen, erzwingt BioAI eine strikte Typisierung von Signalen durch **Cluster-IDs** (High-Byte des 64-Bit Tokens).
-
-Dies deckt sich 1:1 mit den Definitionen in `BioAI_Types.h`:
 
 | Cluster (Hex) | Name | Beschreibung | Beispiele |
 | :--- | :--- | :--- | :--- |
@@ -61,23 +75,20 @@ Dies deckt sich 1:1 mit den Definitionen in `BioAI_Types.h`:
 | **0x40...** | **LOGIC** | Regeln & Reflexe | Wenn/Dann, Not-Aus (Reflex) |
 | **0x50...** | **SELF** | Innere Zustände | Hunger (Need), Auftrag (Goal), Status |
 
-**Vorteil:** Das System kann **Hard-Safety-Regeln** (Cluster LOGIC/Reflex) implementieren, die alle anderen Entscheidungen überschreiben, und ermöglicht die Definition von Prioritäten durch Gewichtsverteilung auf Clusterebene.
+**Vorteil:** Das System kann **Hard-Safety-Regeln** (Cluster LOGIC/Reflex) implementieren, die alle anderen Entscheidungen überschreiben.
 
 ---
 
-## 5. The Predictive Engine (Imagination)
+## 6. The Predictive Engine (Imagination)
 
-In Version 0.0.2 wurde eine **Kausalitäts-Ebene** eingeführt.
+BioAI verfügt über eine integrierte **Kausalitäts-Ebene**.
 
 * **Funktion:** Jedes Neuron speichert nicht nur, was es *auslöst* (Synapse), sondern auch, was *danach passiert* (Prediction).
 * **Simulation:** Durch die Methode `API_Simulate(depth)` kann der Agent diese Kette mental durchlaufen, bevor er handelt.
-* **Code-Basis:** Rekursive Tiefensuche mit `MAX_SIM_DEPTH` Bremse (Stack-Schutz).
+* **Sicherheit:** Die Rekursionstiefe ist durch `MAX_SIM_DEPTH` begrenzt, um Stack-Overflows auf kleinen Geräten physikalisch auszuschließen.
 
 ---
 
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI v0.0.2a (Alpha)**
-
----
-
+Product: **BioAI v0.5.1 (Industrial Beta)**
