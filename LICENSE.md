@@ -1,6 +1,6 @@
 # BioAI.Core License Agreement ⚖️
 
-**Version:** 0.0.2 (Alpha)
+**Version:** 0.5.1 (Industrial Beta)
 
 **Copyright © 2025 BrainAI / Sascha A. Köhne. All Rights Reserved.**
 
@@ -11,14 +11,14 @@
 This software repository is the intellectual property of **Sascha A. Köhne** ("The Licensor").
 The repository consists of two distinct parts with different license terms:
 
-1.  **The Wrapper Code** (Source files in `/wrappers`, C#, Python, C++ bindings)
-2.  **The Native Core** (Compiled binaries: `bioai_core.dll`, `libbioai.so`)
+1.  **The Wrapper Code** (Source files in `/src`, C#, Python, Java, C++, JS code)
+2.  **The Native Core** (Compiled binaries: `BioAI_Ultra.dll`, `BioAI_IoT.dll`, `BioAI_SmartHome.dll`, `libbioai.so`)
 
 ---
 
 ## 2. PART A: WRAPPER CODE LICENSE (MIT)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of the **Wrapper Source Code files**, to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy of the **Wrapper Source Code files** (e.g., `BioAI.cs`, `BioAI.py`, `BioAI.java`), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
@@ -26,7 +26,7 @@ The above copyright notice and this permission notice shall be included in all c
 
 ## 3. PART B: NATIVE CORE LICENSE (PROPRIETARY)
 
-The compiled binary files (`bioai_core.dll`, `libbioai.so`, and generated static libraries) are **Proprietary Software**. They are **NOT Open Source**.
+The compiled binary files (including but not limited to `BioAI_Ultra.dll`, `BioAI_IoT.dll`, `BioAI_SmartHome.dll`, `libbioai.so`) are **Proprietary Software**. They are **NOT Open Source**.
 
 ### 3.1 Permitted Use (Free License)
 You are permitted to use the Native Core binaries free of charge **ONLY** for the following purposes:
@@ -37,7 +37,7 @@ You are permitted to use the Native Core binaries free of charge **ONLY** for th
 
 ### 3.2 Prohibited Use
 Without a commercial license, you are **NOT** permitted to:
-* **Sell:** Sell hardware or software products that embed BioAI.Core.
+* **Sell:** Sell hardware or software products that embed any version of the BioAI Core.
 * **Monetize:** Use BioAI.Core in a service (SaaS) that charges fees.
 * **Production:** Use BioAI.Core in a productive industrial environment (e.g., controlling factory lines) that generates economic value.
 * **Reverse Engineering:** Decompile, disassemble, or reverse engineer the binary files.
@@ -66,10 +66,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ---
 
-
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI v0.0.2 (Alpha)**
+Product: **BioAI v0.5.1 (Industrial Beta)**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
-© 2025 BrainAI / Sascha A. Köhne. All rights reserved.
+&copy; 2025 BrainAI / Sascha A. Köhne. All rights reserved.
