@@ -1,6 +1,6 @@
 # BioAI: Erklärung für normale Menschen 🧠
 
-**Version:** 0.0.2 (Alpha)
+**Version:** 0.5.1 (Beta)
 ### (Kein Tech-Talk)
 
 Wenn Ingenieure über **Künstliche Intelligenz** reden, meinen sie meistens riesige Rechenzentren, die Milliarden an Strom fressen, nur um einen Text zu schreiben.
@@ -59,7 +59,7 @@ Es gibt keins.
 
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI v0.0.2 (Alpha)**
+Product: **BioAI v0.5.1 (beta)**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
 © 2025 BrainAI / Sascha A. Köhne. All rights reserved.
