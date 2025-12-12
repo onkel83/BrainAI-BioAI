@@ -1,6 +1,6 @@
 # BioAI.Core API Reference 🧠
 
-**Version:** 0.0.2 (Alpha)  
+**Version:** 0.5.1 (Industrial Beta)
 **Architecture:** Neuro-Symbolic / Sparse Associative Memory
 
 ---
@@ -11,13 +11,14 @@ Die Architektur von BioAI basiert auf wenigen, abstrakten Primitiven, die eine u
 
 - **TokenID (uint64):** Ein einzigartiger 64-Bit Hash, der jedes Konzept, Objekt oder jede Aktion im System repräsentiert.
 - **Cluster:** Das höchste Byte einer TokenID definiert ihren Typ (z. B. `0x10` für Objekte, `0x20` für Aktionen, `0x50` für das Selbst).
-- **Brain:** Die spärlich assoziative Speicher-Engine (Sparse Associative Memory), die die Verbindungen zwischen Inputs und Outputs verwaltet.
+- **Brain:** Die spärlich assoziative Speicher-Engine, die Verbindungen zwischen Inputs und Outputs verwaltet.
+- **Tiers:** Die Engine ist in 3 Varianten verfügbar (**IoT**, **SmartHome**, **Ultra**), die sich nur in der Speicheradressierung (8/16/32-Bit) unterscheiden. Die API ist identisch.
 
 ---
 
 ## 2. 🛡️ Safety & Compliance Features
 
-BioAI.Core wurde speziell **unter Berücksichtigung von Anforderungen an sicherheitskritische Umgebungen (z. B. IEC 61508) und Auditierbarkeit** entwickelt.
+BioAI.Core wurde speziell unter Berücksichtigung von Anforderungen an sicherheitskritische Umgebungen (z. B. IEC 61508) und Auditierbarkeit entwickelt.
 
 ### A. Der "Run/Train Switch" (Inference Mode)
 
@@ -57,10 +58,10 @@ Unabhängig von der verwendeten Programmiersprache (Wrapper) stellt der Core die
 
 #### `Think(inputs)` / `API_Update`
 - Verarbeitet die aktuelle Wahrnehmung und liefert die optimale Aktion.
-- **Komplexität:** **Im Durchschnitt O(1)** (konstant).
+- **Komplexität:** **Deterministisch O(1)**. (Garantiert durch Hard-Caps für Synapsen pro Neuron).
 - **Return:** TokenID der gewählten Aktion.
 
-#### `Simulate(inputs, depth)` ✨ *Neu in v0.0.2*
+#### `Simulate(inputs, depth)`
 - Führt eine Kausalitäts-Simulation durch ("Imagination").
 - Prüft: *"Wenn ich jetzt X tue, was passiert in `depth` Schritten?"*
 - **Use Case:** Vorausplanendes Handeln und Kollisionsvermeidung.
@@ -109,13 +110,16 @@ BioAI kann auch klassische Schrittketten (SPS-Modus) abarbeiten.
 
 Alle offiziellen Wrapper implementieren das Transparency Interface automatisch:
 
-- **C# / Unity / MAUI:** `BioBrain` Klasse (IDisposable). Unterstützt Android/Windows/Linux nativ.
-- **Python:** `BioAI` Klasse für Raspberry Pi & Data Science.
-- **C++ / Arduino:** Native Header-Only Integration für Mikrocontroller.
+- **C++:** Header-only für Embedded Systems.
+- **C# / .NET:** Für Unity, Godot & Windows.
+- **Java:** Für Android & Enterprise.
+- **Python:** Für Data Science.
+- **Node.js:** Für Backend Services.
+- **VB.NET:** Für industrielle HMI Panels.
 
 ---
 
-## 📞 Contact & Impressum
+## 📞 Contact
 
 **BioAI** ist ein Produkt von **BrainAI**.
 
@@ -124,6 +128,3 @@ Alle offiziellen Wrapper implementieren das Transparency Interface automatisch:
 - **Email:** [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
 © 2025 BrainAI / Sascha A. Köhne. All rights reserved.
-
----
-Welche Datei möchten Sie als Nächstes überprüfen?
