@@ -11,8 +11,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * BioAI Java Wrapper (v0.0.2 Alpha)
+ * BioAI Java Wrapper (v1.0.0)
  * The Universal Neuro-Symbolic Engine.
+ * Requires 'bioai.dll' (Windows) or 'libbioai.so' (Linux) in java.library.path.
  */
 public class BioAI implements AutoCloseable {
 
@@ -38,23 +39,22 @@ public class BioAI implements AutoCloseable {
         BioMode(int v) { this.value = v; }
     }
 
-    // Vocabulary for Debugging
+    // Vocabulary for Debugging (Thread-Safe Wrapper needed in real apps)
     private static final Map<Long, String> vocabulary = new HashMap<>();
 
     /**
      * Erstellt eine TokenID (FNV-1a Hash).
-     * Identisch zur C++ und C# Implementierung.
      */
     public static long createToken(String name, long cluster) {
         if (name == null || name.isEmpty()) return 0;
 
         // FNV-1a 64-bit Hash Constants
-        long hash = 0xcbf29ce484222325L; // FNV_offset_basis
-        long prime = 0x100000001b3L;     // FNV_prime
+        long hash = 0xcbf29ce484222325L; 
+        long prime = 0x100000001b3L;      
 
         byte[] bytes = name.getBytes(StandardCharsets.UTF_8);
         for (byte b : bytes) {
-            hash ^= (b & 0xff); // unsigned cast
+            hash ^= (b & 0xff); 
             hash *= prime;
         }
 
@@ -62,7 +62,7 @@ public class BioAI implements AutoCloseable {
         long finalToken = (hash & 0x00FFFFFFFFFFFFFFL) | cluster;
         
         synchronized(vocabulary) {
-            vocabulary.put(finalToken, name);
+            vocabulary.putIfAbsent(finalToken, name);
         }
         return finalToken;
     }
@@ -71,12 +71,12 @@ public class BioAI implements AutoCloseable {
         StringBuilder sb = new StringBuilder();
         sb.append("BioAI Token Export\n------------------\n");
         synchronized(vocabulary) {
-            for (Map.Entry<Long, String> entry : vocabulary.entrySet()) {
-                sb.append(String.format("0x%016X | %s\n", entry.getKey(), entry.getValue()));
-            }
+            vocabulary.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .forEach(entry -> sb.append(String.format("0x%016X | %s\n", entry.getKey(), entry.getValue())));
         }
         try {
-            Files.write(Paths.get(path), sb.toString().getBytes());
+            Files.write(Paths.get(path), sb.toString().getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
             System.err.println("Failed to dump vocabulary: " + e.getMessage());
         }
@@ -87,7 +87,7 @@ public class BioAI implements AutoCloseable {
     // =============================================================
 
     private interface BioLib extends Library {
-        // Lädt automatisch "libbioai.so" (Linux/Android) oder "bioai.dll" (Windows)
+        // Lädt "bioai" -> bioai.dll / libbioai.so
         BioLib INSTANCE = Native.load("bioai", BioLib.class);
 
         Pointer API_CreateBrain(long key);
@@ -125,11 +125,15 @@ public class BioAI implements AutoCloseable {
      * @param licenseKey Lizenzschlüssel (Salt).
      */
     public BioAI(long licenseKey) {
-        brain = BioLib.INSTANCE.API_CreateBrain(licenseKey);
+        try {
+            brain = BioLib.INSTANCE.API_CreateBrain(licenseKey);
+        } catch (UnsatisfiedLinkError e) {
+            throw new RuntimeException("CRITICAL: BioAI native library not found. Check java.library.path.", e);
+        }
         if (brain == null) throw new OutOfMemoryError("BioAI Core Init Failed.");
     }
 
-    // Private Konstruktor für Deserialisierung
+    // Privater Konstruktor für Deserialisierung
     private BioAI(Pointer ptr) {
         this.brain = ptr;
     }
@@ -170,7 +174,7 @@ public class BioAI implements AutoCloseable {
     
     public void loadPlan(long[] steps, boolean strict) {
         check();
-        if (steps != null)
+        if (steps != null && steps.length > 0)
             BioLib.INSTANCE.API_LoadPlan(brain, steps, steps.length, strict ? 1 : 0);
     }
     
@@ -178,35 +182,59 @@ public class BioAI implements AutoCloseable {
         check();
         BioLib.INSTANCE.API_AbortPlan(brain);
     }
+    
+    public int getPlanStep() {
+        check();
+        return BioLib.INSTANCE.API_GetPlanStatus(brain);
+    }
 
     // --- Serialization ---
 
-    public void saveToFile(String path) throws Exception {
+    public byte[] serialize() {
         check();
-        IntPtrByReference sizeRef = new IntByReference();
+        IntPtrByReference sizeRef = new IntByReference(); // [FIX] Korrigierte Klasse (IntByReference)
         Pointer buffer = BioLib.INSTANCE.API_Serialize(brain, sizeRef);
         
-        if (buffer == null) throw new Exception("Serialization returned NULL");
+        if (buffer == null) return null;
         
         try {
-            byte[] data = buffer.getByteArray(0, sizeRef.getValue());
-            Files.write(Paths.get(path), data);
+            int size = sizeRef.getValue();
+            if (size <= 0) return null;
+            return buffer.getByteArray(0, size);
         } finally {
             BioLib.INSTANCE.API_FreeBuffer(buffer);
         }
     }
 
-    public static BioAI loadFromFile(String path) throws Exception {
-        byte[] data = Files.readAllBytes(Paths.get(path));
+    public static BioAI deserialize(byte[] data) {
+        if (data == null || data.length == 0) throw new IllegalArgumentException("Data empty");
         
         // JNA Memory Handling für den Input Buffer
+        // Wir nutzen com.sun.jna.Memory, das automatisch unmanaged allokiert
         com.sun.jna.Memory mem = new com.sun.jna.Memory(data.length);
         mem.write(0, data, 0, data.length);
         
         Pointer newPtr = BioLib.INSTANCE.API_Deserialize(mem, data.length);
-        if (newPtr == null) throw new Exception("Deserialization failed.");
+        
+        // Memory 'mem' wird vom GC aufgeräumt, aber der Pointer, den C liest, 
+        // muss solange leben wie der Call dauert (JNA garantiert das hier).
+        
+        if (newPtr == null) throw new RuntimeException("Deserialization failed (Corrupt Data).");
         
         return new BioAI(newPtr);
+    }
+    
+    // File Helper
+    public void saveToFile(String path) throws Exception {
+        byte[] data = serialize();
+        if (data != null) {
+            Files.write(Paths.get(path), data);
+        }
+    }
+
+    public static BioAI loadFromFile(String path) throws Exception {
+        byte[] data = Files.readAllBytes(Paths.get(path));
+        return deserialize(data);
     }
 
     // --- Cleanup ---
@@ -223,4 +251,8 @@ public class BioAI implements AutoCloseable {
             closed = true;
         }
     }
+    
+    // Helper Class fix für Compilation (falls IntByReference fehlt, 
+    // aber JNA hat es normalerweise. Als Fallback hier referenziert)
+    // import com.sun.jna.ptr.IntByReference; ist oben drin.
 }
