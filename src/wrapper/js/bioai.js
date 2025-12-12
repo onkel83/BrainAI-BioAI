@@ -1,214 +1,332 @@
+/**
+ * BioAI Node.js Wrapper (v1.0.0)
+ * Industrial Grade / Multi-Tier Support
+ * * Requires: ffi-napi, ref-napi
+ * npm install ffi-napi ref-napi
+ */
+
 const ffi = require('ffi-napi');
 const ref = require('ref-napi');
 const fs = require('fs');
 const path = require('path');
 
-// --- TYPES ---
-const uint64 = ref.types.uint64;
-const voidPtr = ref.refType(ref.types.void);
-const float = ref.types.float;
-const int = ref.types.int;
-const intPtr = ref.refType(int);
+// --- 1. TYPES & CONSTANTS ---
 
-// --- DLL BINDING ---
-// Automatic detection of platform and library name
-const libName = process.platform === 'win32' ? 'bioai.dll' : 'libbioai.so';
-// Assuming the binary is in a 'bin' folder relative to this script
-const libPath = path.join(__dirname, '../bin', process.platform === 'win32' ? 'windows' : 'linux', libName);
-
-let lib;
-try {
-    lib = ffi.Library(libPath, {
-        'API_CreateBrain': [voidPtr, [uint64]],
-        'API_FreeBrain':   ['void', [voidPtr]],
-        'API_SetMode':     ['void', [voidPtr, int]],
-        
-        'API_Update':      [uint64, [voidPtr, 'pointer', int]],
-        'API_Simulate':    [uint64, [voidPtr, 'pointer', int, int]], 
-        
-        'API_Feedback':    ['void', [voidPtr, float, uint64]],
-        'API_Teach':       ['void', [voidPtr, uint64, uint64, float]],
-        'API_Inspect':     [float,  [voidPtr, uint64, uint64]],
-        
-        'API_LoadPlan':    ['void', [voidPtr, 'pointer', int, int]], 
-        'API_AbortPlan':   ['void', [voidPtr]],
-        'API_GetPlanStatus': [int,  [voidPtr]], 
-
-        'API_Serialize':   [voidPtr, [voidPtr, intPtr]],
-        'API_Deserialize': [voidPtr, ['pointer', int]],
-        'API_FreeBuffer':  ['void', [voidPtr]]
-    });
-} catch (e) {
-    console.error(`[BioAI] FATAL: Could not load native library at ${libPath}.\nEnsure you have renamed 'BioAI_Ultra.dll' (or IoT/SmartHome) to '${libName}'.`, e);
-    process.exit(1);
-}
-
-// --- CONSTANTS ---
-const CLUSTER = {
-    OBJECT: 0x1000000000000000n,
-    ACTION: 0x2000000000000000n,
-    TIME:   0x3000000000000000n,
-    LOGIC:  0x4000000000000000n,
-    SELF:   0x5000000000000000n
+// Native Types Mapping
+const types = {
+    uint64: ref.types.uint64,
+    float: ref.types.float,
+    int: ref.types.int,
+    void: ref.types.void,
+    voidPtr: ref.refType(ref.types.void),
+    intPtr: ref.refType(ref.types.int)
 };
 
-const MODE = {
+/** * Betriebsmodi der Engine 
+ */
+const BioMode = {
     TRAINING: 0,
     PRODUCTION: 1
 };
 
-// Vocabulary Registry (for debugging)
-const vocabulary = new Map();
+/**
+ * Cluster-Ontologie (Identisch zu C-Core)
+ * Nutzung von BigInt für präzise 64-Bit Maskierung.
+ */
+const BioClusters = {
+    // Haupt-Kategorien
+    OBJECT: 0x1000000000000000n,
+    ACTION: 0x2000000000000000n,
+    TIME:   0x3000000000000000n,
+    LOGIC:  0x4000000000000000n,
+    SELF:   0x5000000000000000n,
 
-class BioAI {
+    // Sub-Kategorien (Bitwise OR Logic)
+    REFLEX: 0x4000000000000000n | 0x0010000000000000n, // LOGIC | SUB_REFLEX
+    NEED:   0x5000000000000000n | 0x0010000000000000n, // SELF | SUB_NEED
+    GOAL:   0x5000000000000000n | 0x0020000000000000n, // SELF | SUB_GOAL
+    STATUS: 0x5000000000000000n | 0x0030000000000000n  // SELF | SUB_STATUS
+};
+
+// Globales Vokabular für Debugging
+const _vocabulary = new Map();
+
+// --- 2. NATIVE LOADER ---
+
+let lib = null;
+
+/**
+ * Lädt die native Core-Bibliothek.
+ * Hier wird entschieden, welcher Tier (Ultra/IoT) geladen wird.
+ * * @param {string} [customPath] Optionaler Pfad zur .dll/.so. Wenn leer, sucht er 'bioai' im Systempfad.
+ */
+function loadLibrary(customPath) {
+    const defaultName = process.platform === 'win32' ? 'bioai.dll' : 'libbioai.so';
+    const targetPath = customPath || path.resolve(__dirname, defaultName);
+
+    try {
+        lib = ffi.Library(targetPath, {
+            'API_CreateBrain':   [types.voidPtr, [types.uint64]],
+            'API_FreeBrain':     [types.void,    [types.voidPtr]],
+            'API_SetMode':       [types.void,    [types.voidPtr, types.int]],
+            
+            'API_Update':        [types.uint64,  [types.voidPtr, 'pointer', types.int]],
+            'API_Simulate':      [types.uint64,  [types.voidPtr, 'pointer', types.int, types.int]],
+            
+            'API_Feedback':      [types.void,    [types.voidPtr, types.float, types.uint64]],
+            'API_Teach':         [types.void,    [types.voidPtr, types.uint64, types.uint64, types.float]],
+            'API_Inspect':       [types.float,   [types.voidPtr, types.uint64, types.uint64]],
+            
+            'API_LoadPlan':      [types.void,    [types.voidPtr, 'pointer', types.int, types.int]],
+            'API_AbortPlan':     [types.void,    [types.voidPtr]],
+            'API_GetPlanStatus': [types.int,     [types.voidPtr]],
+
+            'API_Serialize':     [types.voidPtr, [types.voidPtr, types.intPtr]],
+            'API_Deserialize':   [types.voidPtr, ['pointer', types.int]],
+            'API_FreeBuffer':    [types.void,    [types.voidPtr]]
+        });
+        return true;
+    } catch (e) {
+        console.error(`[BioAI] CRITICAL: Failed to load native library from '${targetPath}'.`);
+        console.error("Make sure you have renamed 'BioAI_Ultra.dll' (or IoT/SmartHome) to 'bioai.dll'.");
+        throw e;
+    }
+}
+
+// --- 3. CLASS DEFINITION ---
+
+class BioBrain {
     
-    constructor(seed) {
-        this.handle = lib.API_CreateBrain(seed);
-        if (this.handle.isNull()) throw new Error("BioAI Init Failed (Out of Memory or DLL Error)");
+    /**
+     * Erstellt eine neue KI-Instanz.
+     * @param {BigInt|number} seed Lizenzschlüssel/Seed (z.B. 0x1234n)
+     * @param {string} [dllPath] Optional: Pfad zur spezifischen Tier-DLL (z.B. './bin/BioAI_IoT.dll')
+     */
+    constructor(seed, dllPath = null) {
+        if (!lib) loadLibrary(dllPath); // Lazy Loading beim ersten Instanziieren
+        
+        this.handle = lib.API_CreateBrain(BigInt(seed));
+        if (this.handle.isNull()) {
+            throw new Error("[BioAI] Out Of Memory: Could not create Brain instance.");
+        }
+        this.disposed = false;
     }
 
+    /**
+     * Schaltet den Modus um (ISO Safety).
+     * @param {number} mode 0 = Training, 1 = Production
+     */
     setMode(mode) {
-        if (!this.handle) return;
+        this._check();
         lib.API_SetMode(this.handle, mode);
     }
 
+    /**
+     * Verarbeitet Inputs und trifft eine Entscheidung (O(1)).
+     * @param {BigInt[]} inputs Array von TokenIDs
+     * @returns {BigInt} TokenID der Aktion
+     */
     think(inputs) {
-        if (!this.handle) return 0n;
-        const buf = this._toBuffer(inputs);
+        this._check();
+        if (!inputs || inputs.length === 0) return 0n;
+        
+        const buf = this._arrayToBuffer(inputs);
+        // Rückgabewert explizit zu BigInt casten
         return BigInt(lib.API_Update(this.handle, buf, inputs.length));
     }
 
+    /**
+     * Simuliert die Kausalitätskette ("Träumen").
+     * @param {BigInt[]} inputs Start-Situation
+     * @param {number} depth Tiefe der Simulation
+     * @returns {BigInt} Beste Aktion basierend auf Zukunft
+     */
     simulate(inputs, depth) {
-        if (!this.handle) return 0n;
-        const buf = this._toBuffer(inputs);
+        this._check();
+        if (!inputs || inputs.length === 0) return 0n;
+
+        const buf = this._arrayToBuffer(inputs);
         return BigInt(lib.API_Simulate(this.handle, buf, inputs.length, depth));
     }
 
+    /**
+     * Bestärkt oder bestraft die letzte Handlung.
+     * @param {number} reward Wert zwischen -1.0 und 1.0
+     * @param {BigInt} action Die ausgeführte Aktion
+     */
     learn(reward, action) {
-        if (!this.handle) return;
+        this._check();
         lib.API_Feedback(this.handle, reward, BigInt(action));
     }
 
+    /**
+     * Injiziert einen Instinkt (Hardcoded Rule).
+     * @param {BigInt} input Auslöser
+     * @param {BigInt} action Reaktion
+     * @param {number} weight Stärke (1.0 = Gesetz)
+     */
     forceInstinct(input, action, weight) {
-        if (!this.handle) return;
+        this._check();
         lib.API_Teach(this.handle, BigInt(input), BigInt(action), weight);
     }
 
+    /**
+     * Debugging: Liest das Gewicht einer Synapse.
+     */
     inspect(input, action) {
-        if (!this.handle) return 0.0;
+        this._check();
         return lib.API_Inspect(this.handle, BigInt(input), BigInt(action));
     }
 
-    // --- Sequencer ---
+    // --- SEQUENCER ---
+
     loadPlan(steps, strict) {
-        if (!this.handle) return;
-        const buf = this._toBuffer(steps);
+        this._check();
+        if (!steps || steps.length === 0) return;
+        const buf = this._arrayToBuffer(steps);
         lib.API_LoadPlan(this.handle, buf, steps.length, strict ? 1 : 0);
     }
 
     abortPlan() {
-        if (!this.handle) return;
+        this._check();
         lib.API_AbortPlan(this.handle);
     }
-    
+
     getPlanStep() {
-         if (!this.handle) return -1;
-         return lib.API_GetPlanStatus(this.handle);
+        this._check();
+        return lib.API_GetPlanStatus(this.handle);
     }
 
-    // --- System ---
+    // --- SERIALIZATION ---
 
-    save(pathStr) {
-        if (!this.handle) return;
-        
-        const sizeBuf = Buffer.alloc(4); // Allocate int pointer
-        const dataPtr = lib.API_Serialize(this.handle, sizeBuf);
-        
-        if (dataPtr.isNull()) return;
+    /**
+     * Serialisiert das Gehirn in einen Buffer (Zero-Copy).
+     * @returns {Buffer} Binärdaten
+     */
+    serialize() {
+        this._check();
+        const sizePtr = Buffer.alloc(4); // int pointer
+        const dataPtr = lib.API_Serialize(this.handle, sizePtr);
 
-        const size = sizeBuf.readInt32LE(0); // Read output size
-        
-        // Read native memory into Buffer
-        const data = ref.reinterpret(dataPtr, size);
-        fs.writeFileSync(pathStr, Buffer.from(data)); 
-        
-        lib.API_FreeBuffer(dataPtr); // Important: Free C memory
-    }
+        if (dataPtr.isNull()) return null;
 
-    load(pathStr) {
-        if (!fs.existsSync(pathStr)) throw new Error(`File not found: ${pathStr}`);
-        
-        const data = fs.readFileSync(pathStr);
-        
-        // Deserialize creates a NEW brain handle
-        const newHandle = lib.API_Deserialize(data, data.length);
-        
-        if (!newHandle.isNull()) {
-            if (this.handle) lib.API_FreeBrain(this.handle); // Free old brain
-            this.handle = newHandle;
-        } else {
-            throw new Error("Deserialization failed (Corrupt data or version mismatch).");
+        try {
+            const size = sizePtr.readInt32LE(0);
+            if (size <= 0) return null;
+
+            // Daten in Managed Buffer kopieren
+            const data = ref.reinterpret(dataPtr, size);
+            return Buffer.from(data);
+        } finally {
+            // WICHTIG: C-Speicher freigeben
+            lib.API_FreeBuffer(dataPtr);
         }
+    }
+
+    /**
+     * Lädt ein Gehirn aus einem Buffer.
+     * @param {Buffer} data Binärdaten
+     * @returns {BioBrain} Neue Instanz
+     */
+    static deserialize(data) {
+        if (!data || data.length === 0) throw new Error("Data empty");
+        if (!lib) loadLibrary(); // Sicherstellen, dass Lib geladen ist
+
+        // Daten müssen für C lesbar sein (Buffer ist standardmäßig okay in Node ffi)
+        const newHandle = lib.API_Deserialize(data, data.length);
+
+        if (newHandle.isNull()) {
+            throw new Error("Deserialization failed. Version mismatch or corrupt data.");
+        }
+
+        // Trick: Private Instanz erzeugen und Handle unterschieben
+        const instance = new BioBrain(0n); 
+        lib.API_FreeBrain(instance.handle); // Leeres Brain verwerfen
+        instance.handle = newHandle;        // Geladenes Brain setzen
+        return instance;
+    }
+
+    // --- HELPER ---
+
+    save(filePath) {
+        const data = this.serialize();
+        if (data) fs.writeFileSync(filePath, data);
+    }
+
+    load(filePath) {
+        const data = fs.readFileSync(filePath);
+        // Wir laden in eine neue Instanz und tauschen das Handle aus
+        const loaded = BioBrain.deserialize(data);
+        
+        lib.API_FreeBrain(this.handle);
+        this.handle = loaded.handle;
+        
+        // Verhindern, dass die temporäre 'loaded' Instanz das Handle freed
+        loaded.handle = ref.NULL; 
     }
 
     dispose() {
-        if (this.handle && !this.handle.isNull()) {
+        if (!this.disposed && !this.handle.isNull()) {
             lib.API_FreeBrain(this.handle);
-            this.handle = null;
+            this.handle = ref.NULL;
+            this.disposed = true;
         }
     }
 
-    // Helper: JS Array -> C uint64 Buffer
-    _toBuffer(arr) {
+    _check() {
+        if (this.disposed) throw new Error("BioBrain is disposed.");
+    }
+
+    _arrayToBuffer(arr) {
         const buf = Buffer.alloc(arr.length * 8);
-        arr.forEach((v, i) => buf.writeBigUInt64LE(BigInt(v), i * 8));
+        arr.forEach((val, i) => buf.writeBigUInt64LE(BigInt(val), i * 8));
         return buf;
     }
 
-    // --- STATIC HELPERS ---
-    
+    // --- STATIC TOOLS ---
+
     /**
-     * Creates a deterministic 64-bit FNV-1a Hash Token.
+     * Erstellt Token mit FNV-1a Hash (Bit-Identisch zu C++/C#).
      */
     static createToken(name, cluster) {
         if (!name) return 0n;
-        
+
         const offset_basis = 14695981039346656037n;
         const prime = 1099511628211n;
         const mask64 = 0xFFFFFFFFFFFFFFFFn;
-        
+
         let hash = offset_basis;
         const buffer = Buffer.from(name, 'utf8');
-        
+
         for (let i = 0; i < buffer.length; i++) {
             hash = hash ^ BigInt(buffer[i]);
-            hash = (hash * prime) & mask64; // Strict overflow simulation
+            hash = (hash * prime) & mask64; // Simulieren des 64-Bit Overflows
         }
 
-        // Apply Cluster Mask
         const finalToken = (hash & 0x00FFFFFFFFFFFFFFn) | BigInt(cluster);
-        
-        if (!vocabulary.has(finalToken)) {
-            vocabulary.set(finalToken, name);
+
+        if (!_vocabulary.has(finalToken)) {
+            _vocabulary.set(finalToken, name);
         }
-        
         return finalToken;
     }
 
-    static dumpVocabulary(pathStr) {
-        let content = "BioAI Token Export (Node.js)\n----------------------------\n";
+    static dumpVocabulary(filePath) {
+        let content = "BioAI Vocabulary Dump (Node.js)\n-------------------------------\n";
+        // Sortieren nach TokenID
+        const sorted = [..._vocabulary.entries()].sort((a, b) => (a[0] < b[0] ? -1 : 1));
         
-        // Sort by Token ID for cleaner output
-        const sortedKeys = Array.from(vocabulary.keys()).sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
-        
-        for (const key of sortedKeys) {
-            const name = vocabulary.get(key);
-            // BigInt to Hex String
+        for (const [key, val] of sorted) {
             const hex = key.toString(16).toUpperCase().padStart(16, '0');
-            content += `0x${hex} | ${name}\n`;
+            content += `0x${hex} | ${val}\n`;
         }
-        fs.writeFileSync(pathStr, content);
+        fs.writeFileSync(filePath, content);
     }
 }
 
-module.exports = { BioAI, BioMode: MODE, BioClusters: CLUSTER };
+// Export als sauberes Modul
+module.exports = { 
+    BioAI, 
+    BioMode, 
+    BioClusters 
+};
