@@ -1,6 +1,6 @@
 # Case Study: Decentralized Smart Grid Control ⚡
 
-**Version:** 0.0.2 (Alpha)
+**Version:** 0.5.1 (Industrial Beta)
 
 ---
 
@@ -19,21 +19,21 @@ Wie schnell ist das System einsatzbereit?
 | **B. Cloud AI** | Training eines Modells, API-Bau, Latenz-Optimierung   | 3 – 6 Monate |
 | **C. BioAI** | Definition von 5 Instinkten ("Teile Strom")           | **4 – 8 Stunden** |
 
-👉 **BioAI-Vorteil:** Sofort einsatzbereit durch **Instinkt-Injektion** (`API_Teach`).
+👉 **BioAI-Vorteil:** Sofort einsatzbereit durch **Instinkt-Injektion** (`API_Teach`). Keine Trainingsphase notwendig.
 
 ---
 
 ## 2. App Footprint (Speicherbedarf)
 
-Wie ressourcenhungrig ist die Lösung auf dem Gateway?
+Wie ressourcenhungrig ist die Lösung auf dem Gateway (z.B. Raspberry Pi oder ESP32)?
 
-| Lösung            | Größe (APK)       | Konsequenz                        |
-|-------------------|-------------------|-----------------------------------|
-| **A. Hardcoded** | ~ 25 MB           | Riesige Logik-Klassen, schwer wartbar |
-| **B. Cloud AI** | 150 MB – 500 MB   | **Ressourcenintensiv**. Zieht Akku leer.   |
-| **C. BioAI** | **~ 20 MB** | KI-Core (`bioai_core.dll`) nur **65 KB**|
+| Lösung            | Größe (App/Firmware) | Konsequenz                        |
+|-------------------|----------------------|-----------------------------------|
+| **A. Hardcoded** | ~ 25 MB              | Riesige Logik-Klassen ("Spaghetti-Code"), schwer wartbar. |
+| **B. Cloud AI** | 150 MB – 500 MB      | **Ressourcenintensiv**. Zieht Akku/Datenvolumen leer. |
+| **C. BioAI** | **< 20 MB** | KI-Kern (`bioai.dll`/`.so`) ist nur **20 - 65 KB** groß. |
 
-👉 **BioAI-Vorteil:** Läuft auf billigster Hardware und spart Speicher.
+👉 **BioAI-Vorteil:** Läuft auf billigster Hardware (IoT Tier). Spart Speicher und Energie.
 
 ---
 
@@ -43,9 +43,11 @@ Laufende Kosten nach dem Deployment.
 
 | Lösung            | Kosten / Jahr | Bemerkung                                         |
 |-------------------|---------------|---------------------------------------------------|
-| **A. Hardcoded** | Hoch          | Wartung bei Tarifänderungen ist teuer (Personal). |
-| **B. Cloud AI** | Exorbitant    | Server-Miete, Traffic, Ausfallrisiko.             |
-| **C. BioAI** | **Minimal** | Kosten für Traffic und Server entfallen. Lediglich Kosten für Wartung und Rollout von Updates fallen an. |
+| **A. Hardcoded** | Hoch          | Wartung bei Tarifänderungen ist teuer (Personalaufwand). |
+| **B. Cloud AI** | Exorbitant    | Server-Miete, Traffic-Gebühren, Ausfallrisiko.    |
+| **C. BioAI** | **0 € (Cloud)** | Code läuft **direkt auf dem Gerät** (Edge). Keine Serverkosten. |
+
+👉 **BioAI-Vorteil:** Maximale Unabhängigkeit. Einmal installiert, läuft das System autark.
 
 ---
 
@@ -53,16 +55,15 @@ Laufende Kosten nach dem Deployment.
 
 **BioAI** ermöglicht autonome, resiliente Netze, die auch bei Internetausfall stabil bleiben (*Mesh-Network*).
 
-* **Cloud-Lösungen** versagen ohne Verbindung.
-* **Hardcoded-Lösungen** sind zu starr für dynamische Netze.
-* **BioAI** bietet die Stabilität von Regeln mit der Flexibilität von KI.
+* **Cloud-Lösungen** versagen ohne Verbindung und verursachen Latenz.
+* **Hardcoded-Lösungen** sind zu starr, um auf dynamische Lastspitzen intelligent zu reagieren.
+* **BioAI** bietet die Stabilität von Regeln (Reflexe) mit der Flexibilität lernender KI (Adaption).
 
 ---
 
-
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI v0.0.2 (Alpha)**
+Product: **BioAI v0.5.1 (Industrial Beta)**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
 © 2025 BrainAI / Sascha A. Köhne. All rights reserved.
