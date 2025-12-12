@@ -1,43 +1,58 @@
 # BioAI.Core 🧠
 
-**Version:** 0.0.2 (Alpha)
+**Version:** 0.5.1 (Industrial Beta)
 
 **The Universal Neuro-Symbolic Engine for Edge AI & Swarm Robotics**
 
 <p align="center">
-  <img src="images/bioai_logo_bw.png" width="250" alt="BioAI Logo">
-  <br>
-  <em>"BioAI doesn't guess. It survives."</em>
+  <img src="images/bioai_logo_bw.png" width="250" alt="BioAI Logo">
+  <br>
+  <em>"BioAI doesn't guess. It survives."</em>
 </p>
 
 BioAI.Core ist eine hochperformante, deterministische KI-Engine, entwickelt für **Edge Computing** und **Echtzeit-Systeme**.
 
-Im Gegensatz zu herkömmlichen LLMs (Transformer), die Gigabytes an Speicher und teure GPUs benötigen, liefert BioAI eine vollständige neuro-symbolische Engine in einer **~65 KB großen Binary**.
-Sie läuft lokal, ohne Cloud, auf kleinster Hardware.
+Im Gegensatz zu herkömmlichen LLMs (Transformer), die Gigabytes an Speicher benötigen, liefert BioAI eine vollständige neuro-symbolische Engine in einer **~20 KB bis 65 KB großen Binary**.
+Sie läuft lokal, ohne Cloud, auf kleinster Hardware – vom Arduino bis zum Hochleistungsserver.
 
 ---
 
 ## ⚡ Key Performance Metrics
 
-* **Tiny Footprint:** **Sehr geringer RAM-Verbrauch** (typischerweise unter 2 KB für Basis-Agenten). 300 Agenten laufen auf 20 MB.
-* **Realtime:** Entscheidungsfindung in **durchschnittlich O(1)** (konstante Zeit) dank proprietärer Signal-Verarbeitung. Keine Latenz-Spikes.
-* **Universal:** Läuft auf Arduino, ESP32, Raspberry Pi, Windows/Linux Servern und in Game Engines (Unity/Godot).
+* **Scalable Precision:** Die Engine passt sich der Hardware an (8-Bit, 16-Bit oder 32-Bit Indizierung).
+* **Realtime Safety:** Entscheidungsfindung in **garantiertem O(1)** (konstante Zeit) durch Hard-Caps und Hash-Logik. Zertifizierbar nach ISO-Standards.
+* **Universal:** Läuft auf Bare-Metal (Arduino), RTOS (ESP32), Linux und Windows.
 * **No Hallucination:** Das System ist deterministisch. Es erfindet keine Fakten, sondern optimiert Ziele basierend auf verifizierten Inputs.
+
+---
+
+## 🏗️ Architecture Tiers (Die 3 Editionen)
+
+BioAI.Core ist in drei Leistungsstufen verfügbar, um jeden Hardware-Bereich optimal abzudecken. Der Code ist identisch, die Skalierung erfolgt beim Kompilieren.
+
+| Edition | Ziel-Hardware | Max. Neuronen | Index-Größe | Speicherbedarf (RAM) |
+| :--- | :--- | :--- | :--- | :--- |
+| **IoT** | Arduino, STM32, ESP8266 | **255** | 8-Bit | **< 2 KB** |
+| **SmartHome** | ESP32, Raspberry Pi, HMI | **65.535** | 16-Bit | **~ 50 KB - 1 MB** |
+| **Ultra** | PC, Server, Cloud AI | **4.294.967.295** | 32-Bit | RAM limitiert |
+
+> **Hinweis:** Ein Gehirn, das auf der **Ultra**-Version trainiert wurde, kann auf **IoT**-Hardware laufen, sofern es die maximalen Neuronengrenzen (255) nicht überschreitet.
 
 ---
 
 ## 🌍 Universal Language Support
 
-Der C-Kern ist über native Wrapper in fast jeder Umgebung nutzbar:
+Der C-Kern ist über native Wrapper in fast jeder Umgebung nutzbar.
+Klicken Sie auf die Sprache für die spezifische Integrations-Anleitung:
 
-| Sprache | Use Case | Status |
+| Sprache | Dokumentation | Use Case |
 | :--- | :--- | :--- |
-| **C / C++** | Embedded Systems (Arduino, ESP32), High-Performance | **Native** |
-| **C# / .NET** | Unity 3D, Godot, Windows Desktop Apps | **Wrapper Ready** |
-| **Java** | Android Apps, Enterprise Backend | **Wrapper Ready** |
-| **Python** | Data Science, Raspberry Pi, AI Research | **Wrapper Ready** |
-| **VB.NET** | Legacy Industrial Control Systems | **Wrapper Ready** |
-| **JavaScript** | Node-RED, IoT Web Dashboards | **Wrapper Ready** |
+| **C++** | [📘 **C++ Integration**](DOCS/Wrappers/c++.md) | Embedded Systems, High-Performance, Unreal Engine |
+| **C# / .NET** | [📗 **C# & Unity Guide**](DOCS/Wrappers/c#.md) | Unity 3D, Godot, Windows Desktop, MAUI |
+| **Java** | [☕ **Java JNA Guide**](DOCS/Wrappers/java.md) | Android Apps, Enterprise Backend (Spring) |
+| **Python** | [🐍 **Python Guide**](DOCS/Wrappers/Python.md) | Data Science, Raspberry Pi, Rapid Prototyping |
+| **Node.js** | [🟢 **Node.js Guide**](DOCS/Wrappers/JavaScript.md) | Backend Services, Electron Apps, Node-RED |
+| **VB.NET** | [🏭 **Industrial Guide**](DOCS/Wrappers/vb.md) | Legacy Industrial Control (HMI/SCADA) |
 
 ---
 
@@ -50,7 +65,7 @@ Selbstlernende Heizungssteuerung oder Netz-Stabilisierung (Smart Grid), die ohne
 Hunderte Drohnen koordinieren sich dezentral (*Consent Protocol*), vermeiden Kollisionen und teilen Zielinformationen in Echtzeit ohne Master-Server.
 
 ### 3. Next-Gen NPCs
-Spielcharaktere in Unity/Godot, die echte Bedürfnisse haben, lernen und soziale Strukturen bilden, ohne die CPU **übermäßig** zu belasten.
+Spielcharaktere in Unity/Godot, die echte Bedürfnisse haben, lernen und soziale Strukturen bilden, ohne die CPU durch komplexe Behavior Trees zu belasten.
 
 ---
 
@@ -62,7 +77,7 @@ Hier finden Sie die detaillierten technischen Dokumente:
 * [**API Reference**](DOCS/API_REFERENCE.md) – *Methods, Safety & Audit*
 * [**Training Guide**](DOCS/TRAININGS_GUIDE.md) – *Instinct vs. Experience*
 * [**Use Case: Smart Grid**](DOCS/BENCHMARK_SOLAR.md) – *BioAI vs. Cloud AI vs. Hardcoded*
-* [**Simple Explainer**](DOCS/SIMPLE_EXPLAINER.md) – *Für Nicht-Techniker (ELI5)*
+* [**Simple Explainer**](DOCS/EXPLAIN_LIKE_IM_FIVE.md) – *Für Nicht-Techniker (ELI5)*
 * [**CODEBOOK**](DOCS/CODEBOOK.md) – *Muster und Rezepte*
 
 ---
@@ -73,10 +88,9 @@ BioAI.Core ist **Closed Source Technology**.
 Die Binary ist für nicht-kommerzielle Nutzung frei verfügbar.
 Für industrielle Lizenzen kontaktieren Sie bitte den Entwickler.
 
-
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI v0.0.2 (Alpha)**
+Product: **BioAI v0.5.1 (Industrial Beta)**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
 &copy; 2025 BrainAI / Sascha A. Köhne. All rights reserved.
