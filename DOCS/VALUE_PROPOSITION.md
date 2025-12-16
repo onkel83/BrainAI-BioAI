@@ -1,6 +1,6 @@
 # BioAI: Effizienz durch autonome Edge-Intelligenz 🧠
 
-**Version:** 0.5.1 (Industrial Beta)
+**Version:** 0.5.5 (Industrial Beta / stable fix)
 
 ### Strategische Vorteile dezentraler Steuerungssysteme
 
@@ -45,7 +45,7 @@ Hier sind drei konkrete Anwendungsfälle für den wirtschaftlichen Mehrwert:
 
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI v0.5.1 (Industrial Beta)**
+Product: **BioAI v0.5.5 (Industrial Beta)**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
 © 2025 BrainAI / Sascha A. Köhne.

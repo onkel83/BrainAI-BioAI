@@ -1,6 +1,6 @@
 # BioAI Java JNA Integration ☕
 
-**Version:** 0.5.1
+**Version:** 0.5.5
 **Platform:** Java 8+, Android API 24+
 **Technology:** JNA (Java Native Access)
 **Backend:** Ultra / SmartHome / IoT (Austauschbar)

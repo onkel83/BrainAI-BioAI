@@ -1,6 +1,6 @@
 # BioAI.Core 🧠
 
-**Version:** 0.5.1 (Industrial Beta)
+**Version:** 0.5.5 (Industrial Beta/ stable fix)
 
 **The Universal Neuro-Symbolic Engine for Edge AI & Swarm Robotics**
 
@@ -90,7 +90,7 @@ Für industrielle Lizenzen kontaktieren Sie bitte den Entwickler.
 
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI v0.5.1 (Industrial Beta)**
+Product: **BioAI v0.5.5 (Industrial Beta)**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
 &copy; 2025 BrainAI / Sascha A. Köhne. All rights reserved.

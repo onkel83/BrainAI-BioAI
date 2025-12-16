@@ -1,6 +1,6 @@
 # BioAI Python Integration 🐍
 
-**Version:** 0.5.1
+**Version:** 0.5.5
 **Platform:** Python 3.8+ (Windows / Linux / Mac)
 **Technology:** CTypes
 **Use Case:** Data Science, Rapid Prototyping, Raspberry Pi

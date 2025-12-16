@@ -1,6 +1,6 @@
 # BioAI.Core API Reference 🧠
 
-**Version:** 0.5.1 (Industrial Beta)
+**Version:** 0.5.5 (Industrial Beta / stable fix)
 **Architecture:** Neuro-Symbolic / Sparse Associative Memory
 
 ---

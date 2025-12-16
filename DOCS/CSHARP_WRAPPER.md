@@ -1,6 +1,6 @@
 ﻿# BioAI Integration Guide: C# Interop Wrappers
 
-**Version:** 2.4.0 (Stable/Production)  
+**Version:** 0.5.5 (Industrial Beta / stable fix)  
 **Module:** BrainAI.BioAI Core Interface  
 **Status:** Enterprise / Gold Release
 

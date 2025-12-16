@@ -1,6 +1,6 @@
 # BioAI C++ Header-Only Integration 🚀
 
-**Version:** 0.5.1beta
+**Version:** 0.5.5
 **Type:** Modern C++11 Wrapper (Header-Only)
 **License:** MIT (Wrapper) / Proprietary (Core)
 

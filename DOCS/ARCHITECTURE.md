@@ -1,6 +1,6 @@
 # BioAI Architecture Deep Dive 🧠
 
-**Version:** 0.5.1 (Industrial Beta)
+**Version:** 0.5.5 (Industrial Beta / stable fix)
 **Status:** Industrial Gold Standard (C99)
 
 ---
@@ -91,4 +91,4 @@ BioAI verfügt über eine integrierte **Kausalitäts-Ebene**.
 
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI v0.5.1 (Industrial Beta)**
+Product: **BioAI v0.5.5 (Industrial Beta)**

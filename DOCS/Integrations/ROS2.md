@@ -1,6 +1,6 @@
 # BioAI ROS 2 Integration 🤖
 
-**Version:** 0.5.1 (Industrial Beta)
+**Version:** 0.5.5 (Industrial Beta)
 **Supported Distros:** Humble, Iron, Jazzy
 **Tier:** Ultra / SmartHome (Recommended for Robots)
 
@@ -217,8 +217,4 @@ int main(int argc, char * argv[]) {
 
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI v0.5.1 (Industrial Beta)**
-
-
-Damit hast du jetzt auch die Robotik-Sparte (ROS 2) professionell abgedeckt. Die Struktur mit `package.xml` und `CMakeLists.txt` ist genau das, was ein Robotik-Ingenieur erwartet.
-```
+Product: **BioAI v0.5.5 (Industrial Beta)**

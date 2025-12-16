@@ -1,6 +1,6 @@
 # BioAI .NET & Unity Integration 🧠
 
-**Version:** 0.5.1
+**Version:** 0.5.5
 **Platform:** .NET 6/7/8, Unity 2021+, MAUI/Xamarin
 **Backend:** Ultra / SmartHome / IoT (Austauschbar)
 

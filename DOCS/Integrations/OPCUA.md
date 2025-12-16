@@ -1,6 +1,6 @@
 # BioAI OPC UA Bridge (Industry 4.0) 🏭
 
-**Version:** 0.5.1 (Industrial Beta)
+**Version:** 0.5.5 (Industrial Beta / stable fix)
 **Technology:** C# (.NET 6+) + OPC UA .NET Standard Stack
 **Use Case:** Retrofitting existing PLCs (Siemens S7, Beckhoff TwinCAT) with Edge AI.
 
@@ -185,4 +185,4 @@ Using the **OPC UA Client** block in TIA Portal:
 
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI v0.5.1 (Industrial Beta)**
+Product: **BioAI v0.5.5 (Industrial Beta)**

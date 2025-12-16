@@ -1,6 +1,6 @@
 # BioAI Training Strategy Guide 🧠
 
-**Version:** 0.5.1 (Industrial Beta)
+**Version:** 0.5.5 (Industrial Beta / stable fix)
 
 Wie wird ein BioAI-Agent intelligent? Wir nutzen ein erweitertes **4-Ebenen-Modell**, das biologische Prinzipien mit technischer Präzision und industrieller Sicherheit vereint.
 
@@ -61,7 +61,7 @@ Wissen ist nicht an einen einzelnen Agenten gebunden.
 
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI v0.5.1 (Industrial Beta)**
+Product: **BioAI v0.5.5 (Industrial Beta)**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
 &copy; 2025 BrainAI / Sascha A. Köhne. All rights reserved.

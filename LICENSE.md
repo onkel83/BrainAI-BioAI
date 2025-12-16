@@ -1,6 +1,6 @@
 # BioAI.Core License Agreement ⚖️
 
-**Version:** 0.5.1 (Industrial Beta)
+**Version:** 0.5.5 (Industrial Beta / stable fix)
 
 **Copyright © 2025 BrainAI / Sascha A. Köhne. All Rights Reserved.**
 
@@ -68,7 +68,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI v0.5.1 (Industrial Beta)**
+Product: **BioAI v0.5.5 (Industrial Beta)**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
 &copy; 2025 BrainAI / Sascha A. Köhne. All rights reserved.

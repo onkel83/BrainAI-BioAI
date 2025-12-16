@@ -1,6 +1,6 @@
 # Case Study: Decentralized Smart Grid Control ⚡
 
-**Version:** 0.5.1 (Industrial Beta)
+**Version:** 0.5.5 (Industrial Beta / stable fix)
 
 ---
 
@@ -63,7 +63,7 @@ Laufende Kosten nach dem Deployment.
 
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI v0.5.1 (Industrial Beta)**
+Product: **BioAI v0.5.5 (Industrial Beta)**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
 © 2025 BrainAI / Sascha A. Köhne. All rights reserved.

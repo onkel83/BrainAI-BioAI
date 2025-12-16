@@ -1,6 +1,6 @@
 # BioAI VB.NET Industrial Integration 🏭
 
-**Version:** 0.5.1
+**Version:** 0.5.5
 **Platform:** .NET Framework 4.8 / .NET 6+
 **Use Case:** HMI Panels, SCADA Systems, Legacy Industrial PCs
 **Backend:** Ultra / SmartHome / IoT (Austauschbar)
