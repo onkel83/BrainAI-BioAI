@@ -82,6 +82,19 @@ Hier finden Sie die detaillierten technischen Dokumente:
 
 ---
 
+### 🚀 Update: Arduino Mega Integration (IoT-Edition)
+
+Die Portierung und Integration für den **Arduino Mega 2560** wurde erfolgreich abgeschlossen. Umfangreiche Tests auf echter Hardware haben die industrielle Einsatzreife bestätigt:
+
+* **Garantierte Echtzeit:** Die Entscheidungsfindung (Inferenz) erfolgt in einer stabilen, deterministischen Zeit von **~335 µs** pro Zyklus (O(1) Komplexität).
+* **Minimaler Footprint:** Die IoT-Edition nutzt eine hochoptimierte Binary, die mit **weniger als 2 KB RAM** auskommt.
+* **Hardware-nahe Implementierung:** Volle Unterstützung für neuro-symbolische Instinkte und Echtzeit-Lernen direkt auf dem ATmega2560.
+
+> **Hinweis zur Verfügbarkeit:** > Aufgrund der spezialisierten Natur der Bare-Metal-Optimierung werden die spezifische Library (`.a`), der optimierte Header (`BioAI_Mega.h`) sowie die zugehörigen Dokumentationen aktuell **nur auf Anfrage** herausgegeben.
+
+Bei Interesse an der IoT-Edition für industrielle Anwendungen oder Forschungsprojekte kontaktiere bitte den Entwickler direkt unter: **koehne83@googlemail.com**.
+
+---
 ## 🛡️ License & Contact
 
 BioAI.Core ist **Closed Source Technology**.
