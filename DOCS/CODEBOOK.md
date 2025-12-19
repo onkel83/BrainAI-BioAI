@@ -1,6 +1,6 @@
 # BioAI Developer Handbook: Patterns & Recipes 🧠
 
-**Version:** 0.5.5 (Industrial Beta / stable fix)
+**Version:** 0.7.5 (Industrial Closed Feature)
 
 ---
 
@@ -89,7 +89,7 @@ Bevor der Agent handelt, überprüft er die Konsequenzen seiner Entscheidungen i
 
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI v0.5.5 (Industrial Beta)**
+Product: **BioAI 0.7.5 (Industrial Closed Feature)**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
-&copy; 2025 BrainAI / Sascha A. Köhne. All rights reserved.
+© 2025 BrainAI / Sascha A. Köhne. All rights reserved.

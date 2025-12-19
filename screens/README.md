@@ -1,6 +1,6 @@
 # 📸 BioAI: Visual Proof of Concept (Prototypen-Galerie)
 
-**Status:** v0.0.2 (Alpha)  
+**Status:** 0.7.5 (Industrial Closed Feature)  
 **Platform:** Android (Fire HD 10 Tablet) via .NET MAUI
 
 ---

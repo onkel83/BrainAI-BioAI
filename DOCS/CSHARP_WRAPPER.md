@@ -1,6 +1,6 @@
 ﻿# BioAI Integration Guide: C# Interop Wrappers
 
-**Version:** 0.5.5 (Industrial Beta / stable fix)  
+**Version:** 0.7.5 (Industrial Closed Feature)  
 **Module:** BrainAI.BioAI Core Interface  
 **Status:** Enterprise / Gold Release
 
@@ -233,9 +233,12 @@ Die folgenden Methoden sind in allen Wrappern identisch implementiert und stelle
 
 ### BrainAI Solutions
 
-**Advanced Cognitive Architectures**
+**BrainAI** - *Intelligence everywhere.*
+Developed by **Sascha A. Köhne (winemp83)**
+Product: **BioAI 0.7.5 (Industrial Closed Feature)**
+📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
-Copyright © 2025 BrainAI. All Rights Reserved.  
+© 2025 BrainAI / Sascha A. Köhne. All rights reserved.
 *BioAI Core Technology is a proprietary system.*
 
 [ Documentation ](https://github.com/onkel83/BrainAI-BioAI/tree/main/DOCS) • [ API Reference ](https://github.com/onkel83/BrainAI-BioAI/blob/main/DOCS/API_REFERENCE.md) • [ Enterprise Support ](mailto:koehne83@googlemail.com)

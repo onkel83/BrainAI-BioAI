@@ -217,4 +217,7 @@ int main(int argc, char * argv[]) {
 
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI v0.5.5 (Industrial Beta)**
+Product: **BioAI 0.7.5 (Industrial Closed Feature)**
+📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
+
+© 2025 BrainAI / Sascha A. Köhne. All rights reserved.

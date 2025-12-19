@@ -8,8 +8,8 @@ We currently support security updates for the following versions of the BioAI Co
 
 | Version | Supported | Notes |
 | :--- | :--- | :--- |
-| **v0.5.5 (Industrial Beta)** | ✅ | Current Stable Release |
-| < 0.5.5 | ❌ | Deprecated. Do not use in production. |
+| **v0.7.5 (Industrial Closed Feature)** | ✅ | Current Stable Release |
+| < 0.7.5 | ❌ | Deprecated. Do not use in production. |
 
 ---
 

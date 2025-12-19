@@ -1,6 +1,6 @@
 # BioAI.Core API Reference 🧠
 
-**Version:** 0.5.5 (Industrial Beta / stable fix)
+**Version:** 0.7.5 (Industrial Closed Feature)
 **Architecture:** Neuro-Symbolic / Sparse Associative Memory
 
 ---
@@ -121,10 +121,9 @@ Alle offiziellen Wrapper implementieren das Transparency Interface automatisch:
 
 ## 📞 Contact
 
-**BioAI** ist ein Produkt von **BrainAI**.
-
-- **Developer / Architect:** Sascha A. Köhne (winemp83)
-- **Company:** BrainAI
-- **Email:** [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
+**BrainAI** - *Intelligence everywhere.*
+Developed by **Sascha A. Köhne (winemp83)**
+Product: **BioAI 0.7.5 (Industrial Closed Feature)**
+📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
 © 2025 BrainAI / Sascha A. Köhne. All rights reserved.

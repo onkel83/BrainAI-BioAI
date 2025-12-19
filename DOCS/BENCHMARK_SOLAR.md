@@ -1,6 +1,6 @@
 # Case Study: Decentralized Smart Grid Control ⚡
 
-**Version:** 0.5.5 (Industrial Beta / stable fix)
+**Version:** 0.7.5 (Industrial Closed Feature)
 
 ---
 
@@ -17,7 +17,7 @@ Wie schnell ist das System einsatzbereit?
 |-------------------|-------------------------------------------------------|--------------|
 | **A. Hardcoded (C#)** | Manuelle Regeln: `if (solar > 5 && battery < 10) ...` | 2 – 3 Wochen |
 | **B. Cloud AI** | Training eines Modells, API-Bau, Latenz-Optimierung   | 3 – 6 Monate |
-| **C. BioAI** | Definition von 5 Instinkten ("Teile Strom")           | **4 – 8 Stunden** |
+| **C. BioAI** | Definition von 5 Instinkten ("Teile Strom")           | **8 – 12 Stunden** |
 
 👉 **BioAI-Vorteil:** Sofort einsatzbereit durch **Instinkt-Injektion** (`API_Teach`). Keine Trainingsphase notwendig.
 
@@ -63,7 +63,7 @@ Laufende Kosten nach dem Deployment.
 
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI v0.5.5 (Industrial Beta)**
+Product: **BioAI 0.7.5 (Industrial Closed Feature)**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
 © 2025 BrainAI / Sascha A. Köhne. All rights reserved.

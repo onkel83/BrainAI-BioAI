@@ -6,7 +6,7 @@ BioAI consists of two parts with strictly different contribution rules to protec
 
 ## 🛑 PART A: The BioAI Core (Restricted)
 
-The C-Core (`bioai_core.c` and headers) is **Proprietary Technology** and the intellectual property of **BrainAI**.
+The C-Core (`bioai_"Version".dll/so` and headers) is **Proprietary Technology** and the intellectual property of **BrainAI**.
 
 * **Status:** **READ-ONLY**.
 * **Policy:** We do **NOT** accept Pull Requests, modifications, or "optimizations" for the Core logic.
@@ -30,7 +30,7 @@ The Wrappers (C#, Python, C++, Java, etc.) and Demo Apps are **Open Source** (MI
 ### Contribution Guidelines
 
 1.  **Fork & Branch:** Create a feature branch for your wrapper/tool.
-2.  **No Core Changes:** Ensure your PR does not touch the `core/` directory.
+2.  **No Core Changes:** Ensure your PR does not touch the `libs/` directory.
 3.  **Documentation:** If you add a wrapper, please include a `README` on how to use it.
 
 ---

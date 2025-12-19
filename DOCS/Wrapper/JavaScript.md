@@ -1,6 +1,6 @@
 # BioAI Node.js Enterprise Integration 🟢
 
-**Version:** 0.5.5
+**Version:** 0.7.5
 **Platform:** Node.js 16+ (Server / Electron)
 **Architecture:** FFI (Foreign Function Interface)
 **Backend:** Multi-Tier (IoT / SmartHome / Ultra)
@@ -86,4 +86,9 @@ Kopieren Sie die gewünschte DLL (`BioAI_Ultra.dll` etc.) in das Verzeichnis Ihr
 
 -----
 
-© 2025 BrainAI.
+**BrainAI** - *Intelligence everywhere.*
+Developed by **Sascha A. Köhne (winemp83)**
+Product: **BioAI 0.7.5 (Industrial Closed Feature)**
+📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
+
+© 2025 BrainAI / Sascha A. Köhne. All rights reserved.

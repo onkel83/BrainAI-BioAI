@@ -1,6 +1,6 @@
 # BioAI.Core License Agreement ⚖️
 
-**Version:** 0.5.5 (Industrial Beta / stable fix)
+**Version:** 0.7.5 (Industrial Closed Feature)
 
 **Copyright © 2025 BrainAI / Sascha A. Köhne. All Rights Reserved.**
 
@@ -12,7 +12,7 @@ This software repository is the intellectual property of **Sascha A. Köhne** ("
 The repository consists of two distinct parts with different license terms:
 
 1.  **The Wrapper Code** (Source files in `/src`, C#, Python, Java, C++, JS code)
-2.  **The Native Core** (Compiled binaries: `BioAI_Ultra.dll`, `BioAI_IoT.dll`, `BioAI_SmartHome.dll`, `libbioai.so`)
+2.  **The Native Core** (Compiled binaries: `BioAI_Ultra.dll`, `BioAI_IoT.dll`, `BioAI_SmartHome.dll`, `libbioai.so`, `BioAI_IoT.so`, `BioAI_SmartHome.so`, `BioAI_Ultra.so`)
 
 ---
 
@@ -68,7 +68,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI v0.5.5 (Industrial Beta)**
+Product: **BioAI 0.7.5 (Industrial Closed Feature)**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
 &copy; 2025 BrainAI / Sascha A. Köhne. All rights reserved.

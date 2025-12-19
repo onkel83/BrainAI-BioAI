@@ -1,14 +1,15 @@
 # BioAI.Core 🧠
 
-**Version:** 0.5.5 (Industrial Beta/ stable fix)
+**Version 0.7.5 (Industrial Closed Feature)**
+
+| BrainAI | BioAI |
+| :---: | :---: |
+| <img src="images/brainai_logo_bw.png" width="250" alt="BrainAI Logo"> | <img src="images/bioai_logo_bw.png" width="250" alt="BioAI Logo"> |
+| *„BrainAI, we don't need Bruteforce we know Physics“* | *„BioAI doesn't guess. It survives.“* |</p>
+
+---
 
 **The Universal Neuro-Symbolic Engine for Edge AI & Swarm Robotics**
-
-<p align="center">
-  <img src="images/bioai_logo_bw.png" width="250" alt="BioAI Logo">
-  <br>
-  <em>"BioAI doesn't guess. It survives."</em>
-</p>
 
 BioAI.Core ist eine hochperformante, deterministische KI-Engine, entwickelt für **Edge Computing** und **Echtzeit-Systeme**.
 
@@ -19,7 +20,7 @@ Sie läuft lokal, ohne Cloud, auf kleinster Hardware – vom Arduino bis zum Hoc
 
 ## ⚡ Key Performance Metrics
 
-* **Scalable Precision:** Die Engine passt sich der Hardware an (8-Bit, 16-Bit oder 32-Bit Indizierung).
+* **Scalable Precision:** Die Engine passt sich der Hardware an (8-Bit, 16-Bit, 32-Bit oder 64 Bit Indizierung).
 * **Realtime Safety:** Entscheidungsfindung in **garantiertem O(1)** (konstante Zeit) durch Hard-Caps und Hash-Logik. Zertifizierbar nach ISO-Standards.
 * **Universal:** Läuft auf Bare-Metal (Arduino), RTOS (ESP32), Linux und Windows.
 * **No Hallucination:** Das System ist deterministisch. Es erfindet keine Fakten, sondern optimiert Ziele basierend auf verifizierten Inputs.
@@ -35,6 +36,7 @@ BioAI.Core ist in drei Leistungsstufen verfügbar, um jeden Hardware-Bereich opt
 | **IoT** | Arduino, STM32, ESP8266 | **255** | 8-Bit | **< 2 KB** |
 | **SmartHome** | ESP32, Raspberry Pi, HMI | **65.535** | 16-Bit | **~ 50 KB - 1 MB** |
 | **Ultra** | PC, Server, Cloud AI | **4.294.967.295** | 32-Bit | RAM limitiert |
+| **Next** | High-End Server, HPC | **18.446.744.073.709.551.615** | 64-Bit | RAM limitiert |
 
 > **Hinweis:** Ein Gehirn, das auf der **Ultra**-Version trainiert wurde, kann auf **IoT**-Hardware laufen, sofern es die maximalen Neuronengrenzen (255) nicht überschreitet.
 
@@ -53,6 +55,14 @@ Klicken Sie auf die Sprache für die spezifische Integrations-Anleitung:
 | **Python** | [🐍 **Python Guide**](DOCS/Wrappers/Python.md) | Data Science, Raspberry Pi, Rapid Prototyping |
 | **Node.js** | [🟢 **Node.js Guide**](DOCS/Wrappers/JavaScript.md) | Backend Services, Electron Apps, Node-RED |
 | **VB.NET** | [🏭 **Industrial Guide**](DOCS/Wrappers/vb.md) | Legacy Industrial Control (HMI/SCADA) |
+
+Integrations Beispiele für spezielle Frameworks und Protokolle:
+
+|Schnittstellen | Dokumentation | Use Case |
+|:--- | :--- | :--- |
+| **ROS2** | [🤖 **ROS2 Integration**](DOCS/Wrappers/ros2.md) | Swarm Robotics, Autonomous Systems |
+| **SAP** | [🧩 **SAP Integration**](DOCS/Wrappers/sap.md) | Enterprise Automation, ERP Systems |
+|**OPCUA**| [🔗 **OPCUA Guide**](DOCS/Wrappers/opcua.md) | Industrial IoT, SCADA Systems |
 
 ---
 
@@ -82,9 +92,9 @@ Hier finden Sie die detaillierten technischen Dokumente:
 
 ---
 
-### 🚀 Update: Arduino Mega Integration (IoT-Edition)
+### 🚀 Update: Arduino Mega Integration (IoT-Edition-Spezial)
 
-Die Portierung und Integration für den **Arduino Mega 2560** wurde erfolgreich abgeschlossen. Umfangreiche Tests auf echter Hardware haben die industrielle Einsatzreife bestätigt:
+Die Portierung und Integration für den Arduino Mega 2560 wurde erfolgreich abgeschlossen.
 
 * **Garantierte Echtzeit:** Die Entscheidungsfindung (Inferenz) erfolgt in einer stabilen, deterministischen Zeit von **~335 µs** pro Zyklus (O(1) Komplexität).
 * **Minimaler Footprint:** Die IoT-Edition nutzt eine hochoptimierte Binary, die mit **weniger als 2 KB RAM** auskommt.
@@ -103,7 +113,7 @@ Für industrielle Lizenzen kontaktieren Sie bitte den Entwickler.
 
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI v0.5.5 (Industrial Beta)**
+Product: **BioAI v0.7.5 (Industrial Closed Feature)**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
 &copy; 2025 BrainAI / Sascha A. Köhne. All rights reserved.

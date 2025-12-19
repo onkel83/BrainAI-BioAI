@@ -1,6 +1,6 @@
 # BioAI Architecture Deep Dive 🧠
 
-**Version:** 0.5.5 (Industrial Beta / stable fix)
+**Version:** 0.7.5 (Industrial Closed Feature)
 **Status:** Industrial Gold Standard (C99)
 
 ---
@@ -27,11 +27,12 @@ Der Kern von BioAI ist eine proprietäre Engine, geschrieben in **ANSI C (C99)**
 
 BioAI löst das Problem der Hardware-Fragmentierung durch eine **adaptive Typisierung**. Der gleiche Algorithmus läuft auf einem 8-Bit Mikrocontroller und einem 64-Bit Server, indem die Datentypen (`Index`) zur Kompilierzeit angepasst werden.
 
-| Tier | Index-Typ | Max. Neuronen | Ziel-Hardware | Speicherbedarf |
+| Edition | Ziel-Hardware | Max. Neuronen | Index-Größe | Speicherbedarf (RAM) |
 | :--- | :--- | :--- | :--- | :--- |
-| **IoT** | `uint8_t` | **255** | Arduino, AVR, ESP8266 | **< 2 KB** |
-| **SmartHome** | `uint16_t` | **65.535** | ESP32, STM32, Raspberry Pi | **~ 64 KB** |
-| **Ultra** | `uint32_t` | **4.2 Mrd.** | PC, Server, Cloud | RAM limitiert |
+| **IoT** | Arduino, STM32, ESP8266 | **255** | 8-Bit | **< 2 KB** |
+| **SmartHome** | ESP32, Raspberry Pi, HMI | **65.535** | 16-Bit | **~ 50 KB - 1 MB** |
+| **Ultra** | PC, Server, Cloud AI | **4.294.967.295** | 32-Bit | RAM limitiert |
+| **Next** | High-End Server, HPC | **18.446.744.073.709.551.615** | 64-Bit | RAM limitiert |
 
 Dies ermöglicht es, Logik auf dem PC (Ultra) zu trainieren und nahtlos auf den Mikrocontroller (IoT) zu übertragen ("Brain Porting").
 
@@ -91,4 +92,7 @@ BioAI verfügt über eine integrierte **Kausalitäts-Ebene**.
 
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI v0.5.5 (Industrial Beta)**
+Product: **BioAI 0.7.5 (Industrial Closed Feature)**
+📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
+
+© 2025 BrainAI / Sascha A. Köhne. All rights reserved.
