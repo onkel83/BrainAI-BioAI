@@ -1,53 +1,56 @@
-# Contributing to BioAI
 
-Thank you for your interest in BioAI! 🧠
+# Mitwirken an BioAI 🧠
 
-BioAI consists of two parts with strictly different contribution rules to protect the integrity and safety of the system.
+Vielen Dank für dein Interesse an BioAI!
 
-## 🛑 PART A: The BioAI Core (Restricted)
+BioAI besteht aus zwei Bereichen mit strikt unterschiedlichen Regeln für Beiträge, um die Integrität und Sicherheit (Safety) des Systems zu schützen.
 
-The C-Core (`bioai_"Version".dll/so` and headers) is **Proprietary Technology** and the intellectual property of **BrainAI**.
+## 🛑 TEIL A: Der BioAI Core (Eingeschränkt)
 
-* **Status:** **READ-ONLY**.
-* **Policy:** We do **NOT** accept Pull Requests, modifications, or "optimizations" for the Core logic.
-* **Why?** The Core is certified for specific safety standards (Determinism, Memory Safety, O(1)). Any external modification could break the strict industrial safety guarantees.
-* **Bugs:** If you suspect a bug in the Core, please open an Issue describing the behavior. Do **not** try to fix it yourself in the source code.
+Der C-Core (`bioai_"Version".dll/so` und Header) ist **proprietäre Technologie** und geistiges Eigentum von **BrainAI**.
 
-**Any Pull Request attempting to modify the C-Core logic will be closed immediately.**
+* **Status:** **READ-ONLY** (Nur lesend).
+* **Richtlinie:** Wir akzeptieren **KEINE** Pull Requests, Modifikationen oder „Optimierungen“ für die Core-Logik.
+* **Warum?** Der Kern ist nach spezifischen Sicherheitsstandards zertifiziert (Determinismus, Speichersicherheit, ). Jede externe Änderung könnte die strengen industriellen Sicherheitsgarantien verletzen.
+* **Fehler:** Wenn du einen Fehler im Core vermutest, öffne bitte ein **Issue** und beschreibe das Verhalten. Versuche **nicht**, den Fehler selbst im Quellcode zu beheben.
 
----
-
-## 🟢 PART B: Wrappers & Tools (Open for Contribution)
-
-The Wrappers (C#, Python, C++, Java, etc.) and Demo Apps are **Open Source** (MIT License). We welcome community contributions here to make BioAI accessible on more platforms.
-
-### How to Contribute to Wrappers:
-
-1.  **New Platforms:** You want to run BioAI on Rust, Go, or Swift? Feel free to create a new wrapper that interfaces with the compiled library.
-2.  **Usability:** Improve the Python pip package or the NuGet integration.
-3.  **Examples:** Create demo projects (e.g., for Arduino or Unity) that use the *existing* Core binary.
-
-### Contribution Guidelines
-
-1.  **Fork & Branch:** Create a feature branch for your wrapper/tool.
-2.  **No Core Changes:** Ensure your PR does not touch the `libs/` directory.
-3.  **Documentation:** If you add a wrapper, please include a `README` on how to use it.
+**Jeder Pull Request, der versucht, die Logik des C-Cores zu ändern, wird umgehend geschlossen.**
 
 ---
 
-## 🐛 Reporting Issues
+## 🟢 TEIL B: Wrapper & Tools (Offen für Beiträge)
 
-If you find a bug, please use the Issue Tracker:
+Die Wrapper (C#, Python, C++, Java usw.) und Demo-Anwendungen sind **Open Source** (MIT-Lizenz). Wir begrüßen Beiträge der Community, um BioAI auf weiteren Plattformen zugänglich zu machen.
 
-* **Category:** [Wrapper] or [Core-Behavior]
-* **Description:** Clear description of the error.
-* **Reproduction:** Code snippet using the public API.
+### Wie du zu den Wrappern beitragen kannst:
+
+1. **Neue Plattformen:** Du möchtest BioAI unter Rust, Go oder Swift nutzen? Erstelle gerne einen neuen Wrapper, der die Schnittstelle zur kompilierten Bibliothek (Binary) bildet.
+2. **Benutzerfreundlichkeit:** Verbessere das Python-pip-Paket oder die NuGet-Integration.
+3. **Beispiele:** Erstelle Demo-Projekte (z. B. für Arduino oder Unity), welche die *bestehende* Core-Binary nutzen.
+
+### Richtlinien für Beiträge
+
+1. **Fork & Branch:** Erstelle einen Feature-Branch für deinen Wrapper oder dein Tool.
+2. **Keine Core-Änderungen:** Stelle sicher, dass dein PR das Verzeichnis `libs/` nicht berührt.
+3. **Dokumentation:** Wenn du einen Wrapper hinzufügst, lege bitte eine `README` bei, die erklärt, wie man ihn benutzt.
 
 ---
 
-## ⚖️ License Agreement
+## 🐛 Fehler melden (Issues)
 
-By submitting a Pull Request to the Wrappers or Tools, you agree that your contribution is licensed under the **MIT License**.
-The BioAI Core remains strictly under the **Proprietary License** of BrainAI.
+Wenn du einen Fehler findest, nutze bitte den Issue-Tracker:
 
-**BrainAI Team**
+* **Kategorie:** [Wrapper] oder [Core-Verhalten]
+* **Beschreibung:** Klare Beschreibung des Fehlers.
+* **Reproduktion:** Ein Code-Snippet, das die öffentliche API nutzt.
+
+---
+
+## ⚖️ Lizenzvereinbarung
+
+Durch das Einreichen eines Pull Requests für die Wrapper oder Tools erklärst du dich damit einverstanden, dass dein Beitrag unter der **MIT-Lizenz** lizenziert wird.
+Der BioAI Core bleibt strikt unter der **proprietären Lizenz** von BrainAI.
+
+**Das BrainAI-Team**
+
+---
