@@ -1,67 +1,83 @@
-# Security Policy
+# Sicherheitsrichtlinie (Security Policy) 🛡️
 
-BioAI is designed for **safety-critical edge applications** (Industrial IoT, Robotics, Smart Grids). Therefore, we treat security vulnerabilities not just as software bugs, but as potential physical safety risks.
+BioAI wurde für **sicherheitskritische Edge-Anwendungen** (Industrielles IoT, Robotik, Smart Grids) entwickelt. Daher behandeln wir Sicherheitslücken nicht nur als Software-Fehler, sondern als potenzielle Risiken für die physische Sicherheit (Safety) von Mensch und Maschine.
 
-## 🛡️ Supported Versions
+## 🛡️ Unterstützte Versionen
 
-We currently support security updates for the following versions of the BioAI Core and Wrappers:
+Wir unterstützen derzeit Sicherheits-Updates für die folgenden Versionen des BioAI Cores und der Wrapper:
 
-| Version | Supported | Notes |
-| :--- | :--- | :--- |
-| **v0.7.5 (Industrial Closed Feature)** | ✅ | Current Stable Release |
-| < 0.7.5 | ❌ | Deprecated. Do not use in production. |
-
----
-
-## 🚨 Reporting a Vulnerability
-
-**Do NOT open a public GitHub Issue for security vulnerabilities.**
-If you have discovered a vulnerability that could compromise the integrity, safety, or availability of a system running BioAI, please report it privately.
-
-### How to Report
-Please send an email to the Lead Architect:
-* **Email:** [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
-* **Subject:** `[SECURITY] BioAI Vulnerability Report`
-
-### What to Include
-Please provide as much detail as possible:
-1.  **Component:** Is it in the *Open Source Wrapper* (C#/Python/Java/JS) or the *Proprietary C-Core* (`bioai.dll` / `.so`)?
-2.  **Severity:** Can it bypass the *Safety Reflex Layer*? Does it cause a crash (DoS)? Can it inject false Tokens?
-3.  **Proof of Concept:** A minimal code snippet, a malicious brain-dump file, or a description to reproduce the issue.
-
-### Our Response Process
-1.  **Acknowledgment:** We will acknowledge your report within 48 hours.
-2.  **Verification:** We will verify the vulnerability internally.
-3.  **Patching:**
-    * **Wrappers:** We will push a fix to the public repo immediately.
-    * **Core:** We will patch the proprietary binary and release a new version (e.g., v0.5.2).
-4.  **Disclosure:** Once the patch is available to customers/users, we will credit you (if desired) in the release notes.
+| Version | Unterstützt | Anmerkungen |
+| --- | --- | --- |
+| **v0.7.5 (Industrial Closed Feature)** | ✅ | Aktueller stabiler Release |
+| < 0.7.5 | ❌ | Veraltet (Deprecated). Nicht in der Produktion verwenden. |
 
 ---
 
-## 🔒 Specific Security Scope
+## 🚨 Meldung einer Schwachstelle
 
-### 1. The C-Core (Binary)
-The Core operates in **Fixed Structure Mode** (No `malloc`/`free` during runtime) to prevent memory corruption attacks.
+**Eröffnen Sie KEINE öffentlichen GitHub-Issues für Sicherheitslücken.**
+Wenn Sie eine Schwachstelle entdeckt haben, welche die Integrität, Sicherheit oder Verfügbarkeit eines Systems mit BioAI gefährden könnte, melden Sie diese bitte vertraulich.
 
-* **Critical:** Any method to trigger a **Buffer Overflow** or **Memory Leak** in the Core (especially via `API_Deserialize`) is considered a Critical Severity issue.
-* **Critical:** Any method to bypass a **ForceInstinct (Reflex)** is considered a Critical Safety Violation.
-* **High:** Breaking the **O(1) Real-Time Guarantee** (e.g., by forcing the engine into an infinite loop or excessive calculation time) constitutes a Denial-of-Service (DoS) against the physical control loop.
+### Vorgehensweise
 
-### 2. The Wrappers (Source)
-The wrappers handle the interface between the OS and the Core.
+Bitte senden Sie eine E-Mail an den leitenden Architekten:
 
-* **High:** Vulnerabilities that allow **Token Injection** (spoofing sensor data) via the API boundaries.
-* **Medium:** DLL-Hijacking vulnerabilities in the library loading mechanism.
+* **E-Mail:** [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
+* **Betreff:** `[SECURITY] BioAI Vulnerability Report`
+
+### Erforderliche Informationen
+
+Bitte geben Sie so viele Details wie möglich an:
+
+1. **Komponente:** Betrifft es den *Open Source Wrapper* (C#/Python/Java/JS) oder den *proprietären C-Core* (`bioai.dll` / `.so`)?
+2. **Schweregrad:** Kann die *Sicherheits-Reflex-Ebene* umgangen werden? Verursacht es einen Absturz (DoS)? Können falsche Token injiziert werden?
+3. **Proof of Concept (PoC):** Ein minimales Code-Beispiel, eine bösartige Brain-Dump-Datei oder eine Beschreibung zur Reproduktion des Problems.
+
+### Unser Reaktionsprozess
+
+1. **Eingangsbestätigung:** Wir bestätigen den Erhalt Ihrer Meldung innerhalb von 48 Stunden.
+2. **Verifizierung:** Wir prüfen die Schwachstelle intern.
+3. **Patching:**
+* **Wrapper:** Wir veröffentlichen umgehend einen Fix im öffentlichen Repository.
+* **Core:** Wir patchen die proprietäre Binary und veröffentlichen eine neue Version (z. B. v0.7.6).
+
+
+4. **Offenlegung:** Sobald der Patch für Kunden/Nutzer verfügbar ist, werden wir Sie (falls gewünscht) in den Release-Notes nennen.
 
 ---
 
-## ⚠️ Disclaimer on "Safety" vs. "Security"
+## 🔒 Spezifischer Sicherheitsumfang (Scope)
 
-BioAI distinguishes between **Safety** (preventing harm to the environment) and **Security** (preventing malicious access).
-However, in our architecture, a *Security* breach (e.g., modifying the LTM weights via an exploit) immediately becomes a *Safety* risk (Robot ignoring a stop signal).
+### 1. Der C-Core (Binary)
 
-**We treat all Security reports with the highest priority.**
+Der Core operiert im **Fixed Structure Mode** (kein `malloc`/`free` während der Laufzeit), um Angriffe auf die Speicherintegrität physikalisch auszuschließen.
+
+* **Kritisch:** Jede Methode, die einen **Buffer Overflow** (Pufferüberlauf) oder ein **Memory Leak** im Core auslöst (insbesondere über `API_Deserialize`), wird als kritisch eingestuft.
+* **Kritisch:** Jede Methode, die einen **ForceInstinct (Reflex)** umgeht, gilt als kritische Sicherheitsverletzung.
+* **Hoch:** Das Brechen der **-Echtzeitgarantie** (z. B. durch Erzwingen einer Endlosschleife oder exzessiver Rechenzeit) stellt einen Denial-of-Service (DoS) gegen den physischen Regelkreis dar.
+
+### 2. Die Wrapper (Source)
+
+Die Wrapper bilden die Schnittstelle zwischen dem Betriebssystem und dem Core.
+
+* **Hoch:** Schwachstellen, die eine **Token-Injektion** (Vortäuschen von Sensordaten) über die API-Grenzen hinweg ermöglichen.
+* **Mittel:** DLL-Hijacking-Schwachstellen im Lademechanismus der Bibliotheken.
+
+---
+
+## ⚠️ Hinweis zu „Safety“ vs. „Security“
+
+BioAI unterscheidet zwischen **Safety** (Vermeidung von Schäden für die Umgebung) und **Security** (Schutz vor böswilligem Zugriff).
+In unserer Architektur führt ein *Security*-Bruch (z. B. das Modifizieren der LTM-Gewichte durch einen Exploit) jedoch unmittelbar zu einem *Safety*-Risiko (z. B. ein Roboter ignoriert das Stopp-Signal).
+
+**Wir behandeln alle Sicherheitsberichte mit höchster Priorität.**
+
+---
+
+**BrainAI Security Team**
+
+---
+
 
 ---
 
