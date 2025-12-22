@@ -1,32 +1,38 @@
-💼 Acquisition & Technology Transfer
 ---
-BioAI.Core is a proprietary, high-value IP asset.
 
-The entire core engine, including the full source code, architecture documentation, and deployment toolchains, is currently available for acquisition or industrial licensing. This is a unique opportunity for companies in the fields of Defense, Aerospace, Automotive, or Industrial Automation to own a field-proven, neuro-symbolic AI stack.
+# 💼 Akquisition & Technologietransfer
 
-What is included:
-Full Source Code: 100% C-Core (MISRA-compliant architecture).
+---
 
-Zero-Dependency Build System: No external libraries required.
+**BioAI.Core** ist ein proprietäres, hochwertiges IP-Asset (Geistiges Eigentum).
 
-Cross-Platform Wrappers: Full integration suite (C++, C#, Python, etc.).
+Die gesamte Core-Engine – einschließlich des vollständigen Quellcodes, der Architektur-Dokumentation und der Deployment-Toolchains – steht aktuell für eine **vollständige Akquisition** oder **industrielle Lizenzierung** zur Verfügung. Dies stellt eine einzigartige Gelegenheit für Unternehmen in den Bereichen Verteidigung, Luft- und Raumfahrt, Automotive oder Industrieautomation dar, einen praxiserprobten, neuro-symbolischen KI-Stack in das eigene Portfolio zu übernehmen.
 
-Documentation: Technical specifications, O(1) proof, and safety audit logs.
+## Was im Transfer enthalten ist:
 
-📩 Request an Offer
-If you are interested in acquiring the technology or require a commercial license, please contact the lead developer.
+* **Vollständiger Quellcode:** 100 % C-Core (MISRA-konforme Architektur).
+* **Zero-Dependency Build-System:** Keine externen Bibliotheken erforderlich.
+* **Plattformübergreifende Wrapper:** Vollständige Integrations-Suite (C++, C#, Python, Java etc.).
+* **Dokumentation:** Technische Spezifikationen, mathematischer -Beweis und Sicherheits-Audit-Protokolle.
 
-Serious inquiries only.
+## 📩 Angebot anfordern
 
-[!IMPORTANT] Direct Contact: koehne83@googlemail.com
+Wenn Sie am Erwerb der Technologie interessiert sind oder eine kommerzielle Lizenz benötigen, kontaktieren Sie bitte direkt den leitenden Entwickler.
 
-Non-Disclosure Agreements (NDA) can be provided upon request for deeper technical due diligence.
+**Nur ernsthafte Anfragen.**
+
+> [!IMPORTANT]
+> **Direkter Kontakt:** [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
+
+Vertraulichkeitsvereinbarungen (NDA) können auf Anfrage für eine tiefergehende technische Due-Diligence-Prüfung bereitgestellt werden.
 
 ---
 
 **BrainAI** - *Intelligence everywhere.*
-Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI 0.7.5 (Industrial Closed Feature)**
+Entwickelt von **Sascha A. Köhne (winemp83)**
+Produkt: **BioAI 0.7.5 (Industrial Closed Feature)**
+**#WeKnowPhysiks**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
-© 2025 BrainAI / Sascha A. Köhne. All rights reserved.
+© 2025 BrainAI / Sascha A. Köhne. Alle Rechte vorbehalten.
+
