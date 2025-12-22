@@ -1,74 +1,83 @@
-# BioAI.Core License Agreement ⚖️
+# BioAI.Core Lizenzvertrag ⚖️
 
 **Version:** 0.7.5 (Industrial Closed Feature)
 
-**Copyright © 2025 BrainAI / Sascha A. Köhne. All Rights Reserved.**
+**Urheberrecht © 2025 BrainAI / Sascha A. Köhne. Alle Rechte vorbehalten.**
 
 ---
 
-## 1. PREAMBLE & DEFINITIONS
+## 1. PRÄAMBEL & DEFINITIONEN
 
-This software repository is the intellectual property of **Sascha A. Köhne** ("The Licensor").
-The repository consists of two distinct parts with different license terms:
+Dieses Software-Repository ist geistiges Eigentum von **Sascha A. Köhne** („Der Lizenzgeber“).
+Das Repository besteht aus zwei unterschiedlichen Teilen mit verschiedenen Lizenzbedingungen:
 
-1.  **The Wrapper Code** (Source files in `/src`, C#, Python, Java, C++, JS code)
-2.  **The Native Core** (Compiled binaries: `BioAI_Ultra.dll`, `BioAI_IoT.dll`, `BioAI_SmartHome.dll`, `libbioai.so`, `BioAI_IoT.so`, `BioAI_SmartHome.so`, `BioAI_Ultra.so`)
-
----
-
-## 2. PART A: WRAPPER CODE LICENSE (MIT)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of the **Wrapper Source Code files** (e.g., `BioAI.cs`, `BioAI.py`, `BioAI.java`), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+1. **Der Wrapper-Code** (Quelldateien in `/src`, C#, Python, Java, C++, JS Code)
+2. **Der Native Core** (Kompilierte Binärdateien: `BioAI_Ultra.dll`, `BioAI_IoT.dll`, `BioAI_SmartHome.dll`, `libbioai.so`, `BioAI_IoT.so`, `BioAI_SmartHome.so`, `BioAI_Ultra.so`)
 
 ---
 
-## 3. PART B: NATIVE CORE LICENSE (PROPRIETARY)
+## 2. TEIL A: WRAPPER-CODE LIZENZ (MIT)
 
-The compiled binary files (including but not limited to `BioAI_Ultra.dll`, `BioAI_IoT.dll`, `BioAI_SmartHome.dll`, `libbioai.so`) are **Proprietary Software**. They are **NOT Open Source**.
+Hiermit wird jeder Person, die eine Kopie der **Wrapper-Quellcodedateien** (z. B. `BioAI.cs`, `BioAI.py`, `BioAI.java`) erhält, kostenlos die Erlaubnis erteilt, uneingeschränkt mit der Software zu verfahren, einschließlich, aber nicht beschränkt auf die Rechte zur Nutzung, zum Kopieren, Modifizieren, Zusammenführen, Veröffentlichen, Verteilen, Unterlizenzieren und/oder Verkaufen von Kopien der Software, unter den folgenden Bedingungen:
 
-### 3.1 Permitted Use (Free License)
-You are permitted to use the Native Core binaries free of charge **ONLY** for the following purposes:
-* **Education:** Schools, Universities, Students.
-* **Research:** Non-commercial academic research.
-* **Personal Projects:** Hobbyist projects that do not generate revenue.
-* **Evaluation:** Testing the software in a commercial environment for a limited time (Proof of Concept) before purchasing a license.
-
-### 3.2 Prohibited Use
-Without a commercial license, you are **NOT** permitted to:
-* **Sell:** Sell hardware or software products that embed any version of the BioAI Core.
-* **Monetize:** Use BioAI.Core in a service (SaaS) that charges fees.
-* **Production:** Use BioAI.Core in a productive industrial environment (e.g., controlling factory lines) that generates economic value.
-* **Reverse Engineering:** Decompile, disassemble, or reverse engineer the binary files.
+Der obige Urheberrechtshinweis und dieser Genehmigungshinweis müssen in allen Kopien oder wesentlichen Teilen der Software enthalten sein.
 
 ---
 
-## 4. COMMERCIAL LICENSING
+## 3. TEIL B: NATIVE CORE LIZENZ (PROPRIETÄR)
 
-**"If you make money with it, you need a license."**
+Die kompilierten Binärdateien (einschließlich, aber nicht beschränkt auf `BioAI_Ultra.dll`, `BioAI_IoT.dll`, `BioAI_SmartHome.dll`, `libbioai.so`) sind **Proprietäre Software**. Sie sind **KEIN Open Source**.
 
-A Commercial License is required for:
-1.  **OEM / Hardware:** Embedding BioAI in robots, sensors, or devices sold to third parties.
-2.  **Software:** Selling applications or games that utilize BioAI.
-3.  **Industry:** Productive internal use in companies to optimize processes.
+### 3.1 Zulässige Nutzung (Kostenlose Lizenz)
 
-To acquire a license, please contact the copyright holder:
+Die Nutzung der Native Core Binärdateien ist **NUR** für die folgenden Zwecke kostenlos gestattet:
 
-* **Licensor:** BrainAI (Sascha A. Köhne)
-* **Contact:** [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
+* **Bildung:** Schulen, Universitäten, Studenten.
+* **Forschung:** Nicht-kommerzielle akademische Forschung.
+* **Persönliche Projekte:** Hobby-Projekte, die keinen Umsatz generieren.
+* **Evaluierung:** Testen der Software in einer kommerziellen Umgebung für einen begrenzten Zeitraum (Proof of Concept) vor dem Erwerb einer Lizenz.
+
+### 3.2 Untersagte Nutzung
+
+Ohne eine kommerzielle Lizenz ist es **NICHT** gestattet:
+
+* **Verkauf:** Hardware- oder Softwareprodukte zu verkaufen, die eine Version des BioAI-Core enthalten.
+* **Monetarisierung:** BioAI.Core in einem Dienst (SaaS) zu nutzen, für den Gebühren erhoben werden.
+* **Produktion:** BioAI.Core in einer produktiven industriellen Umgebung (z. B. Steuerung von Fabrikanlagen) einzusetzen, die wirtschaftlichen Wert generiert.
+* **Reverse Engineering:** Die Binärdateien zu dekompilieren, zu disassemblieren oder zurückzuentwickeln.
 
 ---
 
-## 5. DISCLAIMER
+## 4. KOMMERZIELLE LIZENZIERUNG
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+**„Wenn Sie damit Geld verdienen, benötigen Sie eine Lizenz.“**
+
+Eine kommerzielle Lizenz ist erforderlich für:
+
+1. **OEM / Hardware:** Einbettung von BioAI in Roboter, Sensoren oder Geräte, die an Dritte verkauft werden.
+2. **Software:** Verkauf von Anwendungen oder Spielen, die BioAI nutzen.
+3. **Industrie:** Produktive interne Nutzung in Unternehmen zur Prozessoptimierung.
+
+Um eine Lizenz zu erwerben, kontaktieren Sie bitte den Rechteinhaber:
+
+* **Lizenzgeber:** BrainAI (Sascha A. Köhne)
+* **Kontakt:** [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
+
+---
+
+## 5. HAFTUNGSAUSSCHLUSS (DISCLAIMER)
+
+DIE SOFTWARE WIRD "WIE BESEHEN" (AS IS) GELIEFERT, OHNE JEGLICHE AUSDRÜCKLICHE ODER KONKLUDENTE GEWÄHRLEISTUNG, EINSCHLIESSLICH, ABER NICHT BESCHRÄNKT AUF DIE GEWÄHRLEISTUNG DER MARKTGÄNGIGKEIT, DER EIGNUNG FÜR EINEN BESTIMMTEN ZWECK UND DER NICHTVERLETZUNG VON RECHTEN DRITTER. IN KEINEM FALL HAFTEN DIE AUTOREN ODER URHEBERRECHTSINHABER FÜR ANSPRÜCHE, SCHÄDEN ODER SONSTIGE HAFTUNG, SEI ES AUS VERTRAG, UNERLAUBTER HANDLUNG ODER ANDERWEITIG, DIE AUS ODER IM ZUSAMMENHANG MIT DER SOFTWARE ODER DER NUTZUNG ODER DEM SONSTIGEN UMGANG MIT DER SOFTWARE ENTSTEHEN.
 
 ---
 
 **BrainAI** - *Intelligence everywhere.*
-Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI 0.7.5 (Industrial Closed Feature)**
+Entwickelt von **Sascha A. Köhne (winemp83)**
+Produkt: **BioAI 0.7.5 (Industrial Closed Feature)**
+📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
+
+© 2025 BrainAI / Sascha A. Köhne. Alle Rechte vorbehalten.
+
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
 &copy; 2025 BrainAI / Sascha A. Köhne. All rights reserved.
