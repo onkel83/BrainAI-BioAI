@@ -1,5 +1,3 @@
----
-
 # Case Study: Decentralized Smart Grid Control ⚡
 
 **Version:** 0.7.5 (Industrial Closed Feature)
