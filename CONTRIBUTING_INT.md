@@ -51,4 +51,11 @@ If you find a bug, please use the Issue Tracker:
 By submitting a Pull Request to the Wrappers or Tools, you agree that your contribution is licensed under the **MIT License**.
 The BioAI Core remains strictly under the **Proprietary License** of BrainAI.
 
-**BrainAI Team**
+---
+
+**BrainAI** - *-We don't need **BRUTEFORCE**, we know **Physiks**-*
+Developed by **Sascha A. Köhne (winemp83)**
+Product: **BioAI 0.7.6 (Industrial Closed Feature)**
+📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
+
+&copy; 2025 BrainAI / Sascha A. Köhne. All rights reserved.

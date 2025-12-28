@@ -15,7 +15,7 @@ Die detaillierte Übersicht der Phasen:
 * **Status:** *Industrial Beta / stable fix*.
 * **Beschreibung:** Die grundlegende Architektur zur Hard-Safety und deterministischen Steuerung ist vollständig implementiert. Diese Version dient als Grundlage für die interne und externe Langzeit-Evaluierung.
 
-### 2. Core-Finalisierung: Version 0.7.5
+### 2. Core-Finalisierung: Version 0.7.6
 **(Aktueller Stand)**
 
 * **Status:** **Feature-Closed**-Status.

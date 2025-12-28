@@ -1,6 +1,6 @@
 # BioAI Python Integration 🐍
 
-**Version:** 0.7.5
+**Version:** 0.7.6
 **Platform:** Python 3.8+ (Windows / Linux / Mac)
 **Technology:** CTypes
 **Use Case:** Data Science, Rapid Prototyping, Raspberry Pi
@@ -72,7 +72,7 @@ brain.save("brain_iot.bin")
 
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI 0.7.5 (Industrial Closed Feature)**
+Product: **BioAI 0.7.6 (Industrial Closed Feature)**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
 © 2025 BrainAI / Sascha A. Köhne. All rights reserved.

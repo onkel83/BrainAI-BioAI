@@ -30,7 +30,7 @@ Vertraulichkeitsvereinbarungen (NDA) können auf Anfrage für eine tiefergehende
 
 **BrainAI** - *Intelligence everywhere.*
 Entwickelt von **Sascha A. Köhne (winemp83)**
-Produkt: **BioAI 0.7.5 (Industrial Closed Feature)**
+Produkt: **BioAI 0.7.6 (Industrial Closed Feature)**
 **#WeKnowPhysiks**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 

@@ -1,6 +1,6 @@
 # BioAI SAP Bridge (S/4HANA Integration) 🏭
 
-**Version:** 0.7.5 (Industrial Closed Feature)
+**Version:** 0.7.6 (Industrial Closed Feature)
 **Technology:** Python (PyRFC) + BioAI Core
 **Use Case:** Autonomous Supply Chain Management
 
@@ -149,7 +149,7 @@ if __name__ == "__main__":
 
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI 0.7.5 (Industrial Closed Feature)**
+Product: **BioAI 0.7.6 (Industrial Closed Feature)**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
 © 2025 BrainAI / Sascha A. Köhne. All rights reserved.

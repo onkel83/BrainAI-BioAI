@@ -1,6 +1,6 @@
 # BioAI Feature Deep Dive 🛠️
 
-**Version:** 0.7.5 (Industrial Closed Feature)
+**Version:** 0.7.6 (Industrial Closed Feature)
 
 ---
 
@@ -94,7 +94,7 @@ Self-organized division of labor without a master server (Mesh Intelligence). Si
 
 **BrainAI** - *Intelligence protects itself.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI 0.7.5 (Industrial Closed Feature)**
+Product: **BioAI 0.7.6 (Industrial Closed Feature)**
 **#WeKnowPhysiks**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 

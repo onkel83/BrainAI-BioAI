@@ -1,6 +1,6 @@
 # BioAI OPC UA Bridge (Industry 4.0) 🏭
 
-**Version:** 0.7.5 (Industrial Closed Feature)
+**Version:** 0.7.6 (Industrial Closed Feature)
 **Technology:** C# (.NET 6+) + OPC UA .NET Standard Stack
 **Use Case:** Retrofitting existing PLCs (Siemens S7, Beckhoff TwinCAT) with Edge AI.
 
@@ -156,7 +156,7 @@ namespace BioAI.Integration.OpcUa
 ### Windows (Industrial PC)
 
 1.  Compile the OPC UA Server project.
-2.  Place `bioai.dll` (SmartHome or Ultra edition) in the output folder.
+2.  Place `BioAI.dll` (SmartHome or Ultra edition) in the output folder.
 3.  Run the `.exe` as a Service.
 
 ### Docker (Edge Gateway)
@@ -183,9 +183,9 @@ Using the **OPC UA Client** block in TIA Portal:
 
 -----
 
-**BrainAI** - *Intelligence everywhere.*
+**BrainAI** - *-We don't need **BRUTEFORCE**, we know **Physiks**-*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI 0.7.5 (Industrial Closed Feature)**
+Product: **BioAI v0.7.5 (Industrial Closed Feature)**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
-© 2025 BrainAI / Sascha A. Köhne. All rights reserved.
+&copy; 2025 BrainAI / Sascha A. Köhne. All rights reserved.

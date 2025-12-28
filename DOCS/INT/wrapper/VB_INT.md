@@ -1,6 +1,6 @@
 # BioAI VB.NET Industrial Integration 🏭
 
-**Version:** 0.7.5 (Industrial Closed Feature)
+**Version:** 0.7.6 (Industrial Closed Feature)
 
 **Platform:** .NET Framework 4.8 / .NET 6+ / .NET 8+
 
@@ -116,6 +116,6 @@ Industrial VB.NET projects often run on hardware with limited resources. You can
 
 ---
 
-**BrainAI** - *Intelligence everywhere.* **#WeKnowPhysiks** Developed by **Sascha A. Köhne (winemp83)** Product: **BioAI 0.7.5 (Industrial Closed Feature)** 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
+**BrainAI** - *Intelligence everywhere.* **#WeKnowPhysiks** Developed by **Sascha A. Köhne (winemp83)** Product: **BioAI 0.7.6 (Industrial Closed Feature)** 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
 © 2025 BrainAI / Sascha A. Köhne. All rights reserved.

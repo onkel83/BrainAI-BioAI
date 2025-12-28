@@ -1,6 +1,6 @@
 # BioAI .NET & Unity Integration 🧠
 
-**Version:** 0.7.5
+**Version:** 0.7.6
 **Platform:** .NET 6/7/8, Unity 2021+, MAUI/Xamarin
 **Backend:** Ultra / SmartHome / IoT (Austauschbar)
 
@@ -133,7 +133,7 @@ BioClusters.DumpVocabulary(Path.Combine(Application.persistentDataPath, "vocab.t
 
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI 0.7.5 (Industrial Closed Feature)**
+Product: **BioAI 0.7.6 (Industrial Closed Feature)**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
 © 2025 BrainAI / Sascha A. Köhne. All rights reserved.

@@ -1,11 +1,11 @@
 # BioAI.Core 🧠
 
-**Version 0.7.5 (Industrial Closed Feature)**
+**Version 0.7.6 (Industrial Closed Feature)**
 
 | BrainAI | BioAI |
 | :---: | :---: |
 | <img src="images/brainai_logo_bw.png" width="250" alt="BrainAI Logo"> | <img src="images/bioai_logo_bw.png" width="250" alt="BioAI Logo"> |
-| *„BrainAI, we don't need Bruteforce we know Physics“* | *„BioAI doesn't guess. It survives.“* |</p>
+| *„BrainAI, we don't need Bruteforce we know Physiks“* | *„BioAI doesn't guess. It survives.“* |</p>
 
 ---
 
@@ -62,7 +62,7 @@ Integrations Beispiele für spezielle Frameworks und Protokolle:
 |:--- | :--- | :--- |
 | **ROS2** | [🤖 **ROS2 Integration**](DOCS/Wrappers/ros2.md) | Swarm Robotics, Autonomous Systems |
 | **SAP** | [🧩 **SAP Integration**](DOCS/Wrappers/sap.md) | Enterprise Automation, ERP Systems |
-|**OPCUA**| [🔗 **OPCUA Guide**](DOCS/Wrappers/opcua.md) | Industrial IoT, SCADA Systems |
+| **OPCUA** | [🔗 **OPCUA Guide**](DOCS/Wrappers/opcua.md) | Industrial IoT, SCADA Systems |
 
 ---
 
@@ -83,12 +83,30 @@ Spielcharaktere in Unity/Godot, die echte Bedürfnisse haben, lernen und soziale
 
 Hier finden Sie die detaillierten technischen Dokumente:
 
-* [**Architecture Deep Dive**](DOCS/ARCHITECTURE.md) – *Why Efficiency beats Brute Force*
-* [**API Reference**](DOCS/API_REFERENCE.md) – *Methods, Safety & Audit*
-* [**Training Guide**](DOCS/TRAININGS_GUIDE.md) – *Instinct vs. Experience*
-* [**Use Case: Smart Grid**](DOCS/BENCHMARK_SOLAR.md) – *BioAI vs. Cloud AI vs. Hardcoded*
-* [**Simple Explainer**](DOCS/EXPLAIN_LIKE_IM_FIVE.md) – *Für Nicht-Techniker (ELI5)*
-* [**CODEBOOK**](DOCS/CODEBOOK.md) – *Muster und Rezepte*
+* [**Architecture Deep Dive**](docs/Ger/ARCHITECTURE.md) – *Why Efficiency beats Brute Force*
+* [**API Reference**](docs/Ger/API_REFERENCE.md) – *Methods, Safety & Audit*
+* [**Training Guide**](docs/Ger/TRAININGS_GUIDE.md) – *Instinct vs. Experience*
+* [**Use Case: Smart Grid**](docs/Ger/BENCHMARK_SOLAR.md) – *BioAI vs. Cloud AI vs. Hardcoded*
+* [**Simple Explainer**](docs/Ger/EXPLAIN_LIKE_IM_FIVE.md) – *Für Nicht-Techniker (ELI5)*
+* [**CODEBOOK**](docs/Ger/CODEBOOK.md) – *Muster und Rezepte*
+* [**Beispiele**](docs/Ger/Examples.md) – *Beispiele und Vorschläge zur Integration*
+
+Wrapper Dokumentationen:
+
+* [**CPP**](docs/Ger/Wrapper/c++.md) – *CPP Wrapper und Beispiele*
+* [**CSharp**](docs/Ger/Wrapper/c#.md) – *CSharp Wrapper und Beispiele*
+* [**Java**](docs/Ger/Wrapper/java.md) – *Java Wrapper und Beispiele*
+* [**JavaScript**](docs/Ger/JavaScript.md) – *JavaScript Wrapper und Beispiele*
+* [**Python**](docs/Ger/Python.md) – *Python Wrapper und Beispiele*
+* [**VB.net**](docs/Ger/vb.md) – *VB.net Wrapper und Beispiele*
+
+ROS2 / SAP / OPCUA Dokumentationen:
+
+
+* [**ROS2**](docs/Ger/Integrations/ROS2.md) – *Ros2 Beispiel Integration*
+* [**SAP**](docs/Ger/Integrations/SAP.md) – *SAP Beispiel Integration*
+* [**OPCura**](docs/Ger/Integrations/OPCura.md) – *OPCura Beispiel Integration*
+
 
 ---
 
@@ -100,9 +118,9 @@ Die Portierung und Integration für den Arduino Mega 2560 wurde erfolgreich abge
 * **Minimaler Footprint:** Die IoT-Edition nutzt eine hochoptimierte Binary, die mit **weniger als 2 KB RAM** auskommt.
 * **Hardware-nahe Implementierung:** Volle Unterstützung für neuro-symbolische Instinkte und Echtzeit-Lernen direkt auf dem ATmega2560.
 
+>[!IMPORTANT]
 > **Hinweis zur Verfügbarkeit:** > Aufgrund der spezialisierten Natur der Bare-Metal-Optimierung werden die spezifische Library (`.a`), der optimierte Header (`BioAI_Mega.h`) sowie die zugehörigen Dokumentationen aktuell **nur auf Anfrage** herausgegeben.
 
-Bei Interesse an der IoT-Edition für industrielle Anwendungen oder Forschungsprojekte kontaktiere bitte den Entwickler direkt unter: **koehne83@googlemail.com**.
 
 ---
 ## 🛡️ License & Contact
@@ -111,9 +129,9 @@ BioAI.Core ist **Closed Source Technology**.
 Die Binary ist für nicht-kommerzielle Nutzung frei verfügbar.
 Für industrielle Lizenzen kontaktieren Sie bitte den Entwickler.
 
-**BrainAI** - *Intelligence everywhere.*
+**BrainAI** - *-We don't need **BRUTEFORCE**, we know **Physiks**-*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI v0.7.5 (Industrial Closed Feature)**
+Product: **BioAI 0.7.6 (Industrial Closed Feature)**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
 &copy; 2025 BrainAI / Sascha A. Köhne. All rights reserved.

@@ -1,6 +1,6 @@
 # Case Study: Decentralized Smart Grid Control ⚡
 
-**Version:** 0.7.5 (Industrial Closed Feature)
+**Version:** 0.7.6 (Industrial Closed Feature)
 
 ---
 
@@ -63,7 +63,7 @@ Ongoing costs after deployment.
 
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI 0.7.5 (Industrial Closed Feature)**
+Product: **BioAI 0.7.6 (Industrial Closed Feature)**
 **#WeKnowPhysiks**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 

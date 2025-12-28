@@ -1,6 +1,6 @@
 # BioAI C++ Header-Only Integration 🚀
 
-**Version:** 0.7.5
+**Version:** 0.7.6
 **Type:** Modern C++11 Wrapper (Header-Only)
 **License:** MIT (Wrapper) / Proprietary (Core)
 
@@ -117,7 +117,7 @@ anotherAI.LoadFromFile("brain_dump.bin");
 
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI 0.7.5 (Industrial Closed Feature)**
+Product: **BioAI 0.7.6 (Industrial Closed Feature)**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
 © 2025 BrainAI / Sascha A. Köhne. All rights reserved.

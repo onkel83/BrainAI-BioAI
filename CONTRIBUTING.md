@@ -54,3 +54,10 @@ Der BioAI Core bleibt strikt unter der **proprietären Lizenz** von BrainAI.
 **Das BrainAI-Team**
 
 ---
+
+**BrainAI** - *-We don't need **BRUTEFORCE**, we know **Physiks**-*
+Developed by **Sascha A. Köhne (winemp83)**
+Product: **BioAI 0.7.6 (Industrial Closed Feature)**
+📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
+
+&copy; 2025 BrainAI / Sascha A. Köhne. All rights reserved.

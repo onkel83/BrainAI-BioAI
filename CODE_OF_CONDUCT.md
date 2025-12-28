@@ -69,4 +69,14 @@ Die Community-Leitung wird diese Richtlinien für die Auswirkungen auf die Gemei
 
 Dieser Verhaltenskodex basiert auf dem [Contributor Covenant](https://www.google.com/search?q=%5Bhttps://www.contributor-covenant.org%5D(https://www.contributor-covenant.org)), Version 2.1, verfügbar unter [[https://www.contributor-covenant.org/version/2/1/code_of_conduct.html](https://www.contributor-covenant.org/version/2/1/code_of_conduct.html)][v2.1](https://www.google.com/search?q=%5Bhttps://www.contributor-covenant.org/version/2/1/code_of_conduct.html%5D(https://www.contributor-covenant.org/version/2/1/code_of_conduct.html)).
 
+[homepage]: https://www.contributor-covenant.org
+[v2.1]: https://www.contributor-covenant.org/version/2/1/code_of_conduct.html
+
 ---
+
+**BrainAI** - *-We don't need **BRUTEFORCE**, we know **Physiks**-*
+Developed by **Sascha A. Köhne (winemp83)**
+Product: **BioAI 0.7.6 (Industrial Closed Feature)**
+📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
+
+&copy; 2025 BrainAI / Sascha A. Köhne. All rights reserved.

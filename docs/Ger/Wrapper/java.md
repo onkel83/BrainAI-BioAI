@@ -1,6 +1,6 @@
 # BioAI Java JNA Integration ☕
 
-**Version:** 0.7.5
+**Version:** 0.7.6
 **Platform:** Java 8+, Android API 24+
 **Technology:** JNA (Java Native Access)
 **Backend:** Ultra / SmartHome / IoT (Austauschbar)
@@ -142,7 +142,7 @@ long futureOutcome = brain.simulate(inputs, 5);
 
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI 0.7.5 (Industrial Closed Feature)**
+Product: **BioAI 0.7.6 (Industrial Closed Feature)**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
 © 2025 BrainAI / Sascha A. Köhne. All rights reserved.

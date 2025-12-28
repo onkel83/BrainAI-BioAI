@@ -1,6 +1,6 @@
 # BioAI VB.NET Industrial Integration 🏭
 
-**Version:** 0.7.5
+**Version:** 0.7.6
 **Platform:** .NET Framework 4.8 / .NET 6+
 **Use Case:** HMI Panels, SCADA Systems, Legacy Industrial PCs
 **Backend:** Ultra / SmartHome / IoT (Austauschbar)
@@ -112,7 +112,7 @@ Der VB.NET Code muss dafür **nicht** geändert werden.
 
 **BrainAI** - *Intelligence everywhere.*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI 0.7.5 (Industrial Closed Feature)**
+Product: **BioAI 0.7.6 (Industrial Closed Feature)**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
 © 2025 BrainAI / Sascha A. Köhne. All rights reserved.

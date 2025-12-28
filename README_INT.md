@@ -1,6 +1,6 @@
 # BioAI.Core 🧠
 
-**Version 0.7.5 (Industrial Closed Feature)**
+**Version 0.7.6 (Industrial Closed Feature)**
 
 | BrainAI | BioAI |
 | --- | --- |
@@ -111,9 +111,9 @@ BioAI.Core is **Closed Source Technology**.
 The binary is available for non-commercial use.
 For industrial licensing, please contact the developer.
 
-**BrainAI** - *Intelligence everywhere.* **#WeKnowPhysiks**
+**BrainAI** - *-We don't need **BRUTEFORCE**, we know **Physiks**-*
 Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI v0.7.5 (Industrial Closed Feature)**
+Product: **BioAI 0.7.6 (Industrial Closed Feature)**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
-© 2025 BrainAI / Sascha A. Köhne. All rights reserved.
+&copy; 2025 BrainAI / Sascha A. Köhne. All rights reserved.

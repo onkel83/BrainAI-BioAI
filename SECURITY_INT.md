@@ -9,7 +9,7 @@ We currently support security updates for the following versions of the BioAI Co
 
 | Version | Supported | Notes |
 | :--- | :--- | :--- |
-| **v0.7.5 (Industrial Closed Feature)** | ✅ | Current Stable Release |
+| **v0.7.6 (Industrial Closed Feature)** | ✅ | Current Stable Release |
 | < 0.7.5 | ❌ | Deprecated. Do not use in production. |
 
 ---
@@ -63,3 +63,12 @@ BioAI distinguishes between **Safety** (preventing harm to the environment) and 
 However, in our architecture, a *Security* breach (e.g., modifying the LTM weights via an exploit) immediately becomes a *Safety* risk (Robot ignoring a stop signal).
 
 **We treat all Security reports with the highest priority.**
+
+---
+
+**BrainAI** - *-We don't need **BRUTEFORCE**, we know **Physiks**-*
+Developed by **Sascha A. Köhne (winemp83)**
+Product: **BioAI 0.7.6 (Industrial Closed Feature)**
+📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
+
+&copy; 2025 BrainAI / Sascha A. Köhne. All rights reserved.
