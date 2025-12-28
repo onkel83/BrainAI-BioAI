@@ -183,9 +183,9 @@ Using the **OPC UA Client** block in TIA Portal:
 
 -----
 
-**BrainAI** - *-We don't need **BRUTEFORCE**, we know **Physiks**-*
-Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI v0.7.5 (Industrial Closed Feature)**
+**BrainAI** - *-We don't need **BRUTEFORCE**, we know **Physiks**-*</br>
+Developed by **Sascha A. Köhne (winemp83)**</br>
+Product: **BioAI 0.7.6 (Industrial Closed Feature)**</br>
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
 &copy; 2025 BrainAI / Sascha A. Köhne. All rights reserved.

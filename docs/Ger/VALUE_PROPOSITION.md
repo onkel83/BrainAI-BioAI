@@ -43,9 +43,9 @@ Hier sind drei konkrete Anwendungsfälle für den wirtschaftlichen Mehrwert:
 
 ---
 
-**BrainAI** - *Intelligence everywhere.*
-Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI 0.7.6 (Industrial Closed Feature)**
+**BrainAI** - *-We don't need **BRUTEFORCE**, we know **Physiks**-*</br>
+Developed by **Sascha A. Köhne (winemp83)**</br>
+Product: **BioAI 0.7.6 (Industrial Closed Feature)**</br>
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
-© 2025 BrainAI / Sascha A. Köhne.
+&copy; 2025 BrainAI / Sascha A. Köhne. All rights reserved.

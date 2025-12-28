@@ -233,12 +233,9 @@ Die folgenden Methoden sind in allen Wrappern identisch implementiert und stelle
 
 ### BrainAI Solutions
 
-**BrainAI** - *Intelligence everywhere.*
-Developed by **Sascha A. Köhne (winemp83)**
-Product: **BioAI 0.7.6 (Industrial Closed Feature)**
+**BrainAI** - *-We don't need **BRUTEFORCE**, we know **Physiks**-*</br>
+Developed by **Sascha A. Köhne (winemp83)**</br>
+Product: **BioAI 0.7.6 (Industrial Closed Feature)**</br>
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
-© 2025 BrainAI / Sascha A. Köhne. All rights reserved.
-*BioAI Core Technology is a proprietary system.*
-
-[ Documentation ](https://github.com/onkel83/BrainAI-BioAI/tree/main/DOCS) • [ API Reference ](https://github.com/onkel83/BrainAI-BioAI/blob/main/DOCS/API_REFERENCE.md) • [ Enterprise Support ](mailto:koehne83@googlemail.com)
+&copy; 2025 BrainAI / Sascha A. Köhne. All rights reserved.

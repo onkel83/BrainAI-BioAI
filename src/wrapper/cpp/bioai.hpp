@@ -1,209 +1,120 @@
 #pragma once
 
-#include <vector>
 #include <string>
+#include <vector>
 #include <fstream>
-#include <iostream>
-#include <cstring>
 #include <stdexcept>
-#include <cstdint>
+#include <iostream>
+#include <iomanip>
 
-// --- C-INTERFACE IMPORT (Muss exakt zum Core passen!) ---
-extern "C" {
-    // Lifecycle
-    void* API_CreateBrain(uint64_t key);
-    void API_FreeBrain(void* ptr);
-    
-    // Core Logic (const correctness applied)
-    uint64_t API_Update(void* ptr, const uint64_t* inputs, int count);
-    uint64_t API_Simulate(void* ptr, const uint64_t* inputs, int count, int depth);
-    void API_Feedback(void* ptr, float reward, uint64_t action);
-    void API_Teach(void* ptr, uint64_t input, uint64_t action, float weight);
-    
-    // Management
-    void API_SetMode(void* ptr, int mode);
-    float API_Inspect(void* ptr, uint64_t input, uint64_t action);
-    
-    // Sequencer / Planer
-    void API_LoadPlan(void* ptr, const uint64_t* steps, int count, int strict);
-    void API_AbortPlan(void* ptr);
-    int API_GetPlanStatus(void* ptr);
+// Einbindung der nativen Schnittstelle
+#include "BioAI_Interface.h"
 
-    // Serialisierung
-    // Serialize nimmt const ptr, da es das Gehirn nicht Ã¤ndert
-    void* API_Serialize(const void* ptr, int* outSize);
-    // Deserialize nimmt const data, da es den Buffer nur liest
-    void* API_Deserialize(const void* data, int size);
-    
-    void API_FreeBuffer(void* buffer);
-}
+// Einfaches JSON-Parsing (Beispielhaft mit nlohmann/json)
+#include <nlohmann/json.hpp> 
+using json = nlohmann::json;
 
 namespace BioAI {
 
-    enum class BioMode : int {
-        Training = 0,
-        Production = 1
-    };
-
-    // Cluster Definitionen (MÃ¼ssen mit BioAI_Types.h Ã¼bereinstimmen)
-    enum class Cluster : uint64_t {
-        Object = 0x10,
-        Action = 0x20,
-        Time   = 0x30,
-        Logic  = 0x40,
-        Self   = 0x50
-    };
-
-    // Sub-Clusters Helper
-    static const uint64_t CLUSTER_REFLEX = (uint64_t)Cluster::Logic | 0x0010000000000000ULL;
-
-    // --- AGENT CLASS ---
-    class Agent {
-        void* brain;
-        uint64_t id;
-
-        // Kopieren verbieten (Brain Pointer Ownership ist unique)
-        Agent(const Agent&) = delete;
-        Agent& operator=(const Agent&) = delete;
+    /**
+     * @brief Hochperformanter C++ Wrapper für die BioAI-Engine (v0.7.6).
+     * Implementiert das RAII-Prinzip für automatische Speicherverwaltung.
+     */
+    class BioBrainInstance {
+    private:
+        void* _brainHandle;
+        uint64_t _licenseKey;
 
     public:
-        // RAII: Konstruktor holt Ressource, Destruktor gibt sie frei
-        explicit Agent(uint64_t seed_id) : id(seed_id) {
-            brain = API_CreateBrain(seed_id);
-            if (!brain) throw std::runtime_error("BioAI Core Init Failed (OOM or DLL missing)");
+        /**
+         * @brief Erzeugt eine neue Instanz und lädt den Schlüssel aus einer JSON-Datei.
+         * @param jsonPath Pfad zur ISS-generierten key.json.
+         */
+        explicit BioBrainInstance(const std::string& jsonPath) : _brainHandle(nullptr), _licenseKey(0) {
+            // 1. Key aus JSON laden
+            std::ifstream file(jsonPath);
+            if (!file.is_open()) throw std::runtime_error("BioAI: key.json nicht gefunden.");
+
+            json keyData;
+            file >> keyData;
+            std::string rawKey = keyData["customer_key"];
+
+            // 2. Hex-String zu uint64_t konvertieren (Entfernt C-Suffixe)
+            if (rawKey.find("ULL") != std::string::npos)
+                rawKey.erase(rawKey.find("ULL"), 3);
+
+            _licenseKey = std::stoull(rawKey, nullptr, 16);
+
+            // 3. Native Instanz über die API erzeugen
+            _brainHandle = API_CreateBrain(_licenseKey);
+            if (!_brainHandle) throw std::runtime_error("BioAI: Initialisierung fehlgeschlagen.");
         }
 
-        ~Agent() {
-            if (brain) API_FreeBrain(brain);
-            brain = nullptr;
-        }
-
-        // Move-Semantik erlauben (optional, aber nÃ¼tzlich fÃ¼r std::vector<Agent>)
-        Agent(Agent&& other) noexcept : brain(other.brain), id(other.id) {
-            other.brain = nullptr;
-        }
-
-        Agent& operator=(Agent&& other) noexcept {
-            if (this != &other) {
-                if (brain) API_FreeBrain(brain);
-                brain = other.brain;
-                id = other.id;
-                other.brain = nullptr;
+        /**
+         * @brief Destruktor garantiert die Freigabe der nativen Ressourcen.
+         */
+        ~BioBrainInstance() {
+            if (_brainHandle) {
+                API_FreeBrain(_brainHandle);
+                _brainHandle = nullptr;
             }
-            return *this;
         }
 
-        // --- CORE FEATURES ---
+        // Kopieren verhindern, um Handle-Konflikte zu vermeiden
+        BioBrainInstance(const BioBrainInstance&) = delete;
+        BioBrainInstance& operator=(const BioBrainInstance&) = delete;
 
-        // Denken (O(1))
-        uint64_t Think(const std::vector<uint64_t>& inputs) {
-            if (inputs.empty()) return 0;
-            return API_Update(brain, inputs.data(), (int)inputs.size());
+        /**
+         * @brief 0 = Training, 1 = Produktion (Fixed Structure).
+         */
+        void setMode(int mode) { API_SetMode(_brainHandle, mode); }
+
+        /**
+         * @brief Liefert die optimale Aktion basierend auf der aktuellen Wahrnehmung.
+         */
+        TokenID update(const std::vector<TokenID>& inputs) {
+            return API_Update(_brainHandle, inputs.data(), static_cast<int>(inputs.size()));
         }
 
-        // Simulieren (Prediction)
-        uint64_t Simulate(const std::vector<uint64_t>& inputs, int depth) {
-            if (inputs.empty()) return 0;
-            return API_Simulate(brain, inputs.data(), (int)inputs.size(), depth);
+        /**
+         * @brief Simuliert zukünftige Kausalitäten (Imagination).
+         */
+        TokenID simulate(const std::vector<TokenID>& inputs, int depth) {
+            return API_Simulate(_brainHandle, inputs.data(), static_cast<int>(inputs.size()), depth);
         }
 
-        // Lernen (Feedback)
-        void Learn(float reward, uint64_t action) {
-            API_Feedback(brain, reward, action);
+        /**
+         * @brief Passt Verhaltensgewichte via Reinforcement Learning an.
+         */
+        void feedback(float reward, TokenID action) {
+            API_Feedback(_brainHandle, reward, action);
         }
 
-        // Instinkt (Hardcoded Rules)
-        void ForceInstinct(uint64_t input, uint64_t action, float weight) {
-            API_Teach(brain, input, action, weight);
+        /**
+         * @brief Injiziert eine harte Regel (Reflex) direkt in das LTM.
+         */
+        void teach(TokenID input, TokenID action, float weight) {
+            API_Teach(_brainHandle, input, action, weight);
         }
 
-        // Modus setzen (Industrial Safety)
-        void SetMode(BioMode mode) {
-            API_SetMode(brain, (int)mode);
+        /**
+         * @brief Liest ein gelerntes Gewicht unter Anwendung des De-Salting aus.
+         */
+        float inspect(TokenID input, TokenID action) {
+            return API_Inspect(_brainHandle, input, action);
         }
 
-        // Debugging / Inspection
-        float Inspect(uint64_t input, uint64_t action) {
-            return API_Inspect(brain, input, action);
-        }
-
-        // --- SEQUENCER (Planer) ---
-
-        void LoadPlan(const std::vector<uint64_t>& steps, bool strict) {
-            if (steps.empty()) {
-                API_AbortPlan(brain);
-                return;
-            }
-            API_LoadPlan(brain, steps.data(), (int)steps.size(), strict ? 1 : 0);
-        }
-
-        void AbortPlan() {
-            API_AbortPlan(brain);
-        }
-
-        int GetPlanStep() {
-            return API_GetPlanStatus(brain);
-        }
-
-        // --- SERIALISIERUNG (Save/Load) ---
-
-        std::vector<uint8_t> Serialize() const {
+        /**
+         * @brief Erzeugt einen Snapshot des Gehirns.
+         */
+        std::vector<uint8_t> serialize() {
             int size = 0;
-            // API_Serialize erwartet const void* im ersten Parameter (nach Update)
-            void* ptr = API_Serialize(brain, &size);
-            
-            std::vector<uint8_t> data;
-            if (ptr && size > 0) {
-                data.resize(size);
-                std::memcpy(data.data(), ptr, size);
-                API_FreeBuffer(ptr); // WICHTIG: C-Buffer freigeben
-            }
+            void* buffer = API_Serialize(_brainHandle, &size);
+            if (!buffer) return {};
+
+            std::vector<uint8_t> data(static_cast<uint8_t*>(buffer), static_cast<uint8_t*>(buffer) + size);
+            API_FreeBuffer(buffer); // Puffer im C-Kern freigeben
             return data;
-        }
-
-        void Deserialize(const std::vector<uint8_t>& data) {
-            if (data.empty()) return;
-            
-            // API_Deserialize erwartet const void* (nach Update)
-            void* newBrain = API_Deserialize(data.data(), (int)data.size());
-            
-            if (newBrain) {
-                if (brain) API_FreeBrain(brain); // Altes lÃ¶schen
-                brain = newBrain;
-            } else {
-                throw std::runtime_error("Deserialization failed (Corrupt Data or Version Mismatch)");
-            }
-        }
-
-        // File Helper
-        void SaveToFile(const std::string& filename) const {
-            auto data = Serialize();
-            std::ofstream fout(filename, std::ios::out | std::ios::binary);
-            if (!fout) throw std::runtime_error("Cannot write to file");
-            fout.write(reinterpret_cast<const char*>(data.data()), data.size());
-        }
-
-        void LoadFromFile(const std::string& filename) {
-            std::ifstream fin(filename, std::ios::in | std::ios::binary);
-            if (fin.is_open()) {
-                std::vector<uint8_t> data((std::istreambuf_iterator<char>(fin)), std::istreambuf_iterator<char>());
-                Deserialize(data);
-            } else {
-                throw std::runtime_error("Cannot open file for reading");
-            }
-        }
-
-        // --- STATIC HELPER ---
-
-        // CreateToken (FNV-1a Hash, deterministic across platforms)
-        static uint64_t CreateToken(const std::string& name, Cluster c) {
-            uint64_t hash = 14695981039346656037ULL;
-            for (char ch : name) {
-                hash ^= (uint8_t)ch;
-                hash *= 1099511628211ULL;
-            }
-            // Cluster Maskierung (High Byte setzen, Rest vom Hash behalten)
-            return ((uint64_t)c << 56) | (hash & 0x00FFFFFFFFFFFFFFULL);
         }
     };
 }
