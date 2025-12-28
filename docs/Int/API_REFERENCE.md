@@ -1,114 +1,88 @@
-# BioAI.Core API Reference 🧠
+# BioAI.Core | Öffentliche API-Referenz 🧠
 
-**Version:** 0.7.6 (Industrial Closed Feature)
+**Version:** 0.7.6 (Industrial Release)
 
-**Architecture:** Neuro-Symbolic / Sparse Associative Memory (SAM)
+**Architektur:** Sparse Associative Memory (SAM) / Neuro-Symbolic Engine
 
----
-
-## 1. Core Concepts
-
-The BioAI architecture is built upon a few abstract primitives that guarantee universal compatibility across all supported hardware tiers.
-
-* **TokenID (uint64):** A unique 64-bit hash representing every concept, object, or action within the system.
-* **Cluster:** The highest byte of a `TokenID` defines its type (e.g., `0x10` for Objects, `0x20` for Actions, `0x50` for Self/States).
-* **Brain:** The Sparse Associative Memory engine managing connections between inputs and outputs.
-* **Tiers:** The engine is available in 3 variants (**IoT**, **SmartHome**, **Ultra**). They differ only in memory addressing (8/16/32-bit), while the API remains identical.
+**Hardware-Unterstützung:** Multi-Tier (8-Bit bis 64-Bit)
 
 ---
 
-## 2. 🛡️ Safety & Compliance Features
+## 1. System-Übersicht & Hardware-Tiers
 
-BioAI.Core was specifically developed to meet the requirements of safety-critical environments (e.g., IEC 61508) and high-level auditability.
+Die BioAI-Engine passt ihre Kapazität automatisch an die zugrunde liegende Hardware-Architektur an. Lizenznehmer können zwischen verschiedenen Tiers wählen, um Speicherverbrauch und Rechenleistung zu optimieren.
 
-### A. The "Run/Train" Switch (Inference Mode)
-
-* **Training Mode (Mode 0):** The system adapts weights based on feedback. New synaptic connections are formed.
-* **Production Mode (Mode 1):** Structural learning is **physically frozen**. `malloc` and `free` are disabled. The system behaves 100% deterministically and is memory-safe (no fragmentation).
-
-### B. Universal Logic (Emotionless Decisions)
-
-* No hidden "moral alignment" or biased training data. **The developer defines the initial direction and bias through explicitly injected instincts and reward functions.**
-* **Zero Hallucination Policy:** BioAI can only select actions that were previously and explicitly defined as tokens.
+| Tier | Zielplattform | Index-Breite | Max. Kapazität | Merkmale |
+| --- | --- | --- | --- | --- |
+| **IoT** | Embedded / AVR | 8-Bit | Niedrig | Minimaler RAM-Footprint |
+| **SmartHome** | Edge / ESP32 | 16-Bit | Mittel | Optimiert für lokale Automation |
+| **Ultra** | Desktop / Server | 32-Bit | Hoch | Standard für industrielle Analytik |
+| **Next** | HPC / 64-Bit | 64-Bit | Maximum | Double-Precision für komplexe Simulationen |
 
 ---
 
-## 3. The Transparency Layer (Glass Box Interface)
+## 2. Datenstrukturen & Adressierung
 
-Since the BioAI core is delivered as a highly optimized binary, the wrapper classes provide the necessary transparency for industrial auditing.
+### TokenID (uint64_t)
 
-### Vocabulary Export (Decision Explainability)
+Die gesamte Kommunikation mit der Engine erfolgt über 64-Bit-Identifikatoren, sogenannte **Tokens**. Diese Tokens repräsentieren sensorische Eingaben, interne Zustände oder motorische Aktionen.
 
-* The system maintains an internal "registry" that translates hashes (e.g., `0xA4F...`) back into human-readable names (`Motor_Start`).
-* **Function:** `DumpVocabulary()` generates a manifest for engineers.
-* **Purpose:** Enables post-mortem analysis of malfunctions by matching hashes in the logs to actual concepts.
+### Cluster-Organisation
 
-### Inspection API
+Tokens sind in logische Cluster unterteilt, die über die höchstwertigen Bits (MSB) adressiert werden:
 
-* Use `Inspect()` to query the status and weight of every single synapse during runtime.
-* **Purpose:** Real-time monitoring of learning progress and causal links.
+* **Objekt-Cluster:** Repräsentation von Entitäten und Sensordaten.
+* **Aktions-Cluster:** Definition ausführbarer Operationen.
+* **Logik- & Reflex-Cluster:** Hochpriorisierte Steuerungsbefehle.
+* **Sicherheits-Reflexe:** Spezielle Token-Masken lösen unmittelbare Reaktionen aus, die Standard-Entscheidungen überschreiben können.
+
+
 
 ---
 
-## 4. Universal API Methods
+## 3. Funktions-Schnittstellen (API)
 
-Regardless of the programming language (Wrapper), the Core provides the following methods:
+### A. Lifecycle & Steuerung
 
-### A. Cognition & Learning
+* **`API_CreateBrain(key)`**: Initialisiert eine Instanz. Der erforderliche Lizenzschlüssel dient der Integritätsprüfung und der internen Datenabsicherung.
+* **`API_FreeBrain(brainPtr)`**: Beendet die Instanz und gibt alle Ressourcen sicher frei.
+* **`API_SetMode(brainPtr, mode)`**: Wechselt zwischen **Lernmodus** (dynamisch) und **Produktionsmodus** (Fixed Structure). Im Produktionsmodus findet kein strukturelles Wachstum statt, was 100% deterministisches Verhalten garantiert.
 
-#### `Think(inputs)` / `API_Update`
+### B. Interaktion & Kognition
 
-* Processes the current perception and returns the optimal action.
-* **Complexity:** **Deterministic **. Guaranteed by hard-caps on synapses per neuron.
-* **Return:** `TokenID` of the chosen action.
+* **`API_Update(inputs, count)`**: Verarbeitet aktuelle Reize und liefert die optimale Aktion zurück. Die Funktion berücksichtigt dabei gelerntes Wissen, aktive Pläne und Reflexe.
+* **`API_Simulate(inputs, count, depth)`**: Ermöglicht eine vorausschauende Analyse ("Imagination"), um die langfristigen Auswirkungen einer Aktion über mehrere Schritte zu bewerten.
 
-#### `Simulate(inputs, depth)`
+### C. Lernen & Training
 
-* Performs a causality simulation ("Imagination").
-* Checks: *"If I do X now, what will happen in `depth` steps?"*
-
-#### `Learn(reward, action)` / `API_Feedback`
-
-* Applies Reinforcement Learning to the Short-Term Memory (Trace).
-* **Parameters:**
-* `reward`: Float (-10.0 to +10.0). Positive = Reward, Negative = Punishment.
-* `action`: `TokenID` of the action being evaluated.
-
-
-
-#### `ForceInstinct(input, action, weight)` / `API_Teach`
-
-* Injects a hard rule (Reflex) directly into the Long-Term Memory.
-* **Weight 1.0:** Represents a non-negotiable law (Hard Safety).
-
-### B. Sequencer (Process Control)
-
-BioAI can also handle classic step-chains (PLC Mode).
-
-#### `LoadPlan(steps, strict)`
-
-* Loads a fixed list of actions (e.g., `[Move_X, Drill, Move_Y]`).
-* **Strict Mode (true):** BioAI executes the plan rigidly. It only aborts for high-priority reflexes.
-* **Adaptive Mode (false):** BioAI attempts the plan but is allowed to deviate temporarily for stabilization.
+* **`API_Feedback(reward, action)`**: Wendet Reinforcement-Learning auf die letzte Aktionskette an. Positive Werte verstärken Verhaltensweisen, negative Werte führen zur Abschwächung.
+* **`API_Teach(input, action, weight)`**: Erlaubt die explizite Programmierung von Wissen oder Sicherheitsregeln direkt in das Langzeitgedächtnis.
+* **`API_Inspect(input, action)`**: Bietet volle Transparenz ("Glass Box"), indem die aktuelle Stärke einer spezifischen neuronalen Verbindung abgefragt werden kann.
 
 ---
 
-## 5. Language Specifics & Wrappers
+## 4. Industrielle Sicherheit & Persistenz
 
-All official wrappers automatically implement the Transparency Interface:
+### Integritätssicherung
 
-* **C++:** Header-only for Embedded Systems.
-* **C# / .NET:** For Unity, Godot & Windows Enterprise.
-* **Java:** For Android & Enterprise Backend.
-* **Python:** For Data Science & Rapid Prototyping.
-* **Node.js:** For Backend Services and IoT Gateways.
-* **VB.NET:** For legacy industrial HMI panels.
+Die BioAI-Engine nutzt ein internes Verschlüsselungsverfahren (Salting), um die im RAM gespeicherten neuronalen Gewichte gegen unbefugtes Auslesen und Manipulation zu schützen. Dieses Verfahren ist untrennbar mit dem bereitgestellten Lizenzschlüssel verknüpft.
+
+### Serialisierung
+
+Der gesamte Zustand eines "Brains" kann exportiert und wieder importiert werden.
+
+* **`API_Serialize()`**: Erzeugt einen plattformunabhängigen Binär-Snapshot.
+* **`API_Deserialize()`**: Lädt einen Zustand und validiert dabei die Tier-Kompatibilität, um Fehlkonfigurationen auf Zielhardware zu vermeiden.
 
 ---
 
-## 📞 Contact
+## 5. Rechtliche Hinweise
 
-**BrainAI** - *Intelligence everywhere.* **#WeKnowPhysiks** Developed by **Sascha A. Köhne (winemp83)** Product: **BioAI 0.7.6 (Industrial Closed Feature)** 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
+Dieses Dokument beschreibt die öffentliche Schnittstelle der BioAI Core-Bibliothek. Die interne Implementierung, die spezifischen Salting-Algorithmen sowie die mathematischen Modelle zur Kausalitätsanalyse sind proprietäres Eigentum von BrainAI und durch Urheberrechte sowie Betriebsgeheimnisse geschützt.
+
+**BrainAI** *- We don't need **BRUTEFORCE**, we know **Physics** -*</br>
+Developed by **Sascha A. Köhne (winemp83)**</br>
+Product: **BioAI 0.7.6 (Industrial Closed Feature)**</br>
+📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
 © 2025 BrainAI / Sascha A. Köhne. All rights reserved.
-
