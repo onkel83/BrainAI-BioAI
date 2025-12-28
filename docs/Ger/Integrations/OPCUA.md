@@ -1,57 +1,55 @@
-# BioAI OPC UA Bridge (Industry 4.0) 🏭
+# 🏭 BioAI OPC UA Bridge (Industry 4.0)
 
 **Version:** 0.7.6 (Industrial Closed Feature)
-**Technology:** C# (.NET 6+) + OPC UA .NET Standard Stack
-**Use Case:** Retrofitting existing PLCs (Siemens S7, Beckhoff TwinCAT) with Edge AI.
+
+**Technologie:** C# (.NET 8.0) + OPC UA .NET Standard Stack
+
+**Anwendungsbereich:** Retrofitting von Bestandsanlagen (S7, Beckhoff) zu "Intelligent Edge Nodes" mit SAP HANA-Synchronisation.
 
 ---
 
-## 1. Overview
+## 1. Übersicht
 
-This integration wraps the BioAI Core in an **OPC UA Server**.
-Legacy industrial controllers (PLCs) can connect to this server as clients. They write sensor tokens to an Input-Node and immediately receive the calculated Action-Token from an Output-Node.
+Diese Integration kapselt den BioAI Core in einem hochperformanten **OPC UA Server**. Industrielle Steuerungen (SPS) agieren als Clients, schreiben Sensor-Tokens in einen Input-Node und erhalten deterministisch berechnete Aktions-Tokens zur unmittelbaren Prozesssteuerung.
 
-### Architecture
-* **SPS (Client):** Writes `SensorInput` (UInt64).
-* **BioAI (Server):** Triggers `Think()` on write event (Interrupt-driven).
-* **Result:** Updates `ActionOutput` (UInt64) within microseconds.
+### Architektur-Vorteile
+
+* **Determinisimus:** Durch den `Fixed Structure` Modus (Mode 1) arbeitet der Server allokationsfrei und garantiert Antwortzeiten im Mikrosekundenbereich.
+* **Hybride Kopplung:** Die Bridge fungiert als Nexus, der Maschinendaten (S7) vorverarbeitet und nur geschäftsrelevante Ereignisse an SAP HANA meldet.
+* **Verschleierung:** Die gelernten Prozessgewichte sind im RAM durch den `license_key` geschützt (Salting).
 
 ---
 
-## 2. Implementation (`BioAIServer.cs`)
+## 2. Implementierung (`BioAINodeManager.cs`)
 
-This NodeManager integrates seamlessly into the [OPC UA .NET Standard Reference Server](https://github.com/OPCFoundation/UA-.NETStandard).
+Der NodeManager nutzt den offiziellen **C# RAII-Wrapper**, um die native `.dll` (Windows) oder `.so` (Linux) Bibliothek sicher anzusprechen.
 
 ```csharp
-using System;
-using System.Collections.Generic;
 using Opc.Ua;
 using Opc.Ua.Server;
-using BrainAI.BioAI; // The BioAI C# Wrapper
+using BioAI.Wrapper; // Der offizielle C# Wrapper für v0.7.6
 
 namespace BioAI.Integration.OpcUa
 {
     public class BioAINodeManager : CustomNodeManager2
     {
-        private BioBrain _brain;
+        private BioBrainInstance _brain; // RAII Wrapper Instanz
         private BaseDataVariableState _inputVar;
         private BaseDataVariableState _outputVar;
-        
+
         public BioAINodeManager(IServerInternal server, ApplicationConfiguration configuration)
         : base(server, configuration)
         {
-            SystemContext.NodeIdFactory = this;
-
-            // 1. Initialize BioAI Core (IoT or SmartHome Tier DLL required)
+            // 1. Initialisierung des Kerns mit Industrial Key
             try 
             {
-                _brain = new BioBrain(0xPLC_SECRET_KEY);
-                _brain.SetMode(BioMode.Production); // Freeze learning for safety
-                Console.WriteLine("[BioAI] Core attached to OPC UA Address Space.");
+                _brain = new BioBrainInstance("config/key.json");
+                _brain.SetMode(1); // Modus 1: Produktion (Echtzeitsicher)
+                Console.WriteLine("[BioAI] Core v0.7.6 initialisiert und mit OPC UA verknüpft.");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[FATAL] BioAI Init Failed: {ex.Message}");
+                Console.WriteLine($"[FATAL] Initialisierung fehlgeschlagen: {ex.Message}");
             }
         }
 
@@ -59,133 +57,92 @@ namespace BioAI.Integration.OpcUa
         {
             lock (Lock)
             {
-                // Create Root Folder "BioAI_Controller"
-                FolderState root = CreateFolder(null, "BioAI_Controller", "BioAI");
-                AddRootNotifier(root);
+                // Erstellung des BioAI_Controller Ordners
+                FolderState root = CreateFolder(null, "BioAI_Nexus", "BioAI");
 
-                // --- INPUT NODE (PLC writes here) ---
+                // --- INPUT NODE (SPS schreibt hierher) ---
                 _inputVar = CreateVariable(root, "SensorInput", DataTypeIds.UInt64);
-                _inputVar.AccessLevel = AccessLevels.CurrentReadOrWrite;
-                _inputVar.UserAccessLevel = AccessLevels.CurrentReadOrWrite;
-                _inputVar.Value = (ulong)0;
-                
-                // Hook into the Write Event for Real-Time Reaction
-                _inputVar.OnWriteValue = OnSensorInputChanged;
+                _inputVar.OnWriteValue = OnSensorInputChanged; // Interrupt-gesteuerte Inferenz
 
-                // --- OUTPUT NODE (PLC reads here) ---
+                // --- OUTPUT NODE (SPS liest hier) ---
                 _outputVar = CreateVariable(root, "ActionOutput", DataTypeIds.UInt64);
-                _outputVar.AccessLevel = AccessLevels.CurrentRead; // Read-Only for PLC
-                _outputVar.Value = (ulong)0;
+                _outputVar.AccessLevel = AccessLevels.CurrentRead;
 
-                // Add to Server Address Space
                 AddPredefinedNode(SystemContext, root);
             }
         }
 
-        /// <summary>
-        /// Real-Time Trigger: Called immediately when PLC writes a value.
-        /// </summary>
-        private ServiceResult OnSensorInputChanged(ISystemContext context, NodeState node, NumericRange indexRange, QualifiedName dataEncoding, ref object value)
+        private ServiceResult OnSensorInputChanged(ISystemContext context, NodeState node, ref object value)
         {
-            try 
-            {
-                ulong sensorToken = (ulong)value;
-                
-                if (sensorToken != 0 && _brain != null)
-                {
-                    // 2. O(1) Execution Step
-                    ulong actionToken = _brain.Think(sensorToken);
+            ulong sensorToken = (ulong)value;
+            
+            // 2. Deterministische Inferenz (O(1))
+            // Wandelt Sensorwert direkt in Aktions-Token um.
+            ulong actionToken = _brain.Update(new List<ulong> { sensorToken });
 
-                    // 3. Update Output Node immediately
-                    _outputVar.Value = actionToken;
-                    _outputVar.ClearChangeMasks(SystemContext, false); // Push update to subscribers
-                }
-                
-                return ServiceResult.Good;
-            }
-            catch (Exception ex)
-            {
-                return new ServiceResult(StatusCodes.BadInternalError, ex.Message);
-            }
-        }
+            // 3. Update des Output-Nodes für die SPS
+            _outputVar.Value = actionToken;
+            _outputVar.ClearChangeMasks(SystemContext, false);
 
-        // --- OPC UA Helpers ---
+            // 4. Optional: Audit-Log für SAP HANA
+            float confidence = _brain.Inspect(sensorToken, actionToken);
+            if(confidence > 0.9f) SyncToHana(actionToken, confidence);
 
-        private FolderState CreateFolder(NodeState parent, string path, string name)
-        {
-            FolderState folder = new FolderState(parent);
-            folder.SymbolicName = name;
-            folder.ReferenceTypeId = ReferenceTypeIds.Organizes;
-            folder.TypeDefinitionId = ObjectTypeIds.FolderType;
-            folder.NodeId = new NodeId(path, NamespaceIndex);
-            folder.BrowseName = new QualifiedName(name, NamespaceIndex);
-            folder.DisplayName = new LocalizedText(name);
-            folder.WriteMask = AttributeWriteMask.None;
-            folder.UserWriteMask = AttributeWriteMask.None;
-            folder.EventNotifier = EventNotifiers.None;
-
-            if (parent != null) parent.AddChild(folder);
-            return folder;
-        }
-
-        private BaseDataVariableState CreateVariable(NodeState parent, string name, NodeId type)
-        {
-            BaseDataVariableState variable = new BaseDataVariableState(parent);
-            variable.SymbolicName = name;
-            variable.ReferenceTypeId = ReferenceTypeIds.Organizes;
-            variable.TypeDefinitionId = VariableTypeIds.BaseDataVariableType;
-            variable.NodeId = new NodeId(name, NamespaceIndex);
-            variable.BrowseName = new QualifiedName(name, NamespaceIndex);
-            variable.DisplayName = new LocalizedText(name);
-            variable.DataType = type;
-            variable.ValueRank = ValueRanks.Scalar;
-            variable.AccessLevel = AccessLevels.CurrentReadOrWrite;
-            variable.UserAccessLevel = AccessLevels.CurrentReadOrWrite;
-
-            if (parent != null) parent.AddChild(variable);
-            return variable;
+            return ServiceResult.Good;
         }
     }
 }
-````
 
------
-
-## 3\. Deployment
-
-### Windows (Industrial PC)
-
-1.  Compile the OPC UA Server project.
-2.  Place `BioAI.dll` (SmartHome or Ultra edition) in the output folder.
-3.  Run the `.exe` as a Service.
-
-### Docker (Edge Gateway)
-
-```dockerfile
-FROM [mcr.microsoft.com/dotnet/runtime:6.0](https://mcr.microsoft.com/dotnet/runtime:6.0)
-COPY ./bin/Release/net6.0/publish/ /app/
-# Copy the Linux .so Native Library
-COPY ./libs/libbioai.so /app/
-WORKDIR /app
-ENTRYPOINT ["dotnet", "OpcUaServer.dll"]
 ```
 
------
+---
 
-## 4\. Usage in PLC (Example: Siemens S7-1500)
+## 3. Industrial Deployment
 
-Using the **OPC UA Client** block in TIA Portal:
+### Ordnerstruktur für Edge-Gateways
 
-1.  **Connect** to `opc.tcp://<gateway-ip>:4840`.
-2.  **Write** Sensor Token ID to `ns=2;s=SensorInput`.
-3.  **Read** Action Token ID from `ns=2;s=ActionOutput`.
-4.  **Map** the Action ID to a function block call (e.g., `0xA1...` -\> `StartConveyor()`).
+```text
+/app
+├── BioAI_OpcServer.exe      # .NET 8 Applikation
+├── config/
+│   └── key.json             # Lizenzschlüssel (Verschleierung)
+├── runtimes/
+│   ├── win-x64/native/      # libbioai_core.dll (Ultra Tier)
+│   └── linux-x64/native/    # libbioai_core.so (Ultra Tier)
 
------
+```
 
-**BrainAI** - *-We don't need **BRUTEFORCE**, we know **Physiks**-*</br>
-Developed by **Sascha A. Köhne (winemp83)**</br>
-Product: **BioAI 0.7.6 (Industrial Closed Feature)**</br>
+### Docker-Konfiguration (Linux Edge)
+
+```dockerfile
+FROM mcr.microsoft.com/dotnet/runtime:8.0
+WORKDIR /app
+COPY ./publish .
+# Native Engine (v0.7.6) kopieren
+COPY ./libs/libbioai_core.so /usr/lib/libbioai_core.so
+ENTRYPOINT ["dotnet", "BioAI.OpcUa.Server.dll"]
+
+```
+
+---
+
+## 4. Anbindung an Siemens S7 (TIA Portal)
+
+Der Austausch erfolgt über den Standard-OPC UA Client der S7-1500:
+
+1. **Subscription:** Die SPS abonniert `ns=2;s=ActionOutput`.
+2. **Trigger:** Bei Prozessänderung schreibt die SPS die entsprechende **TokenID** (z.B. `CLUSTER_OBJECT | 0x01`) in `ns=2;s=SensorInput`.
+3. **Reaktion:** BioAI berechnet die Antwort in < 1ms.
+4. **Action:** Die SPS empfängt das neue Token am Output-Node und führt den entsprechenden Funktionsbaustein aus.
+
+---
+
+**BrainAI** - *-We don't need **BRUTEFORCE**, we know **Physics**-*
+
+Developed by **Sascha A. Köhne (winemp83)**
+
+Product: **BioAI 0.7.6 (Industrial Closed Feature)**
+
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
-&copy; 2025 BrainAI / Sascha A. Köhne. All rights reserved.
+© 2025 BrainAI / Sascha A. Köhne. All rights reserved.

@@ -1,155 +1,119 @@
-# BioAI SAP Bridge (S/4HANA Integration) 🏭
+# 🏢 BioAI SAP Bridge (S/4HANA Integration)
 
 **Version:** 0.7.6 (Industrial Closed Feature)
-**Technology:** Python (PyRFC) + BioAI Core
-**Use Case:** Autonomous Supply Chain Management
+**Technologie:** Python 3.10+ (PyRFC) + BioAI Native Core
+**Anwendungsbereich:** Autonome Supply Chain Optimierung & Predictive Procurement
 
 ---
 
-## 1. Overview
+## 1. Übersicht
 
-This integration demonstrates how **BioAI** can act as an autonomous agent within an **SAP S/4HANA** environment.
-Instead of static MRP runs, BioAI continuously monitors stock levels via RFC (Remote Function Call) and makes real-time procurement decisions based on learned patterns (e.g., delivery delays, seasonal spikes).
+Diese Integration demonstriert den Einsatz von **BioAI** als autonomer Agent in einer **SAP S/4HANA** Umgebung. Anstatt statischer MRP-Läufe überwacht BioAI kontinuierlich Bestände via RFC (Remote Function Call) und trifft deterministische Entscheidungen basierend auf gelernten Mustern oder injizierten Geschäftsregeln.
 
-### Prerequisites
-* **SAP System:** Access to an S/4HANA or ECC instance.
-* **User:** A CPIC or Dialog user with RFC authorizations (`S_RFC`).
-* **Software:**
-    * Python 3.8+
-    * `pip install pyrfc` (Requires SAP NW RFC SDK)
-    * `bioai.py` and `bioai.dll` (from this repository)
+### Kernvorteile
+
+* **Echtzeit-Inferenz:** Entscheidungen in  (O(1) Komplexität).
+* **Fixed Structure:** Im Produktionsmodus arbeitet der Kern ohne zusätzliche Speicherallokationen, was die Stabilität des Gateway-Servers garantiert.
+* **Security (Salting):** Alle Geschäftsgeheimnisse (Gewichte) sind im RAM durch den industriellen Lizenzschlüssel verschleiert.
 
 ---
 
-## 2. The Bridge Code
+## 2. Implementierung (`bioai_sap_bridge.py`)
 
-This script connects the SAP "Material Management" (MM) module with the BioAI brain.
+Dieser Code nutzt den offiziellen Python-Wrapper, um die native `.so` (Linux) oder `.dll` (Windows) Bibliothek anzusprechen.
 
 ```python
-# BIOAI SAP BRIDGE
-# Dependencies: pip install pyrfc
+# BIOAI SAP BRIDGE (v0.7.6)
+# Dependencies: pip install pyrfc nlohmann_json_wrapper
 
-import sys
 import time
-from pyrfc import Connection, ABAPApplicationError, LogonError, CommunicationError
-from bioai import BioAI, BioClusters, create_token
+from pyrfc import Connection
+from bioai_wrapper import BioBrainInstance, CLUSTER_OBJECT, CLUSTER_ACTION, SUB_LOGIC_REFLEX
 
-# --- SAP CONFIGURATION ---
+# --- SAP KONFIGURATION ---
 SAP_CONFIG = {
-    'user':     'BIOAI_BOT',
-    'passwd':   'Secret123!',
-    'ashost':   '192.168.1.100',
-    'sysnr':    '00',
-    'client':   '100',
-    'lang':     'EN'
+    'user': 'BIOAI_BOT', 'passwd': 'Password123!', 
+    'ashost': '10.0.0.50', 'sysnr': '00', 'client': '100'
 }
 
-# --- MAIN LOOP ---
 def main():
-    print("[SAP-Bridge] Connecting to SAP S/4HANA...")
-    
-    try:
-        conn = Connection(**SAP_CONFIG)
-        print("[SAP-Bridge] Connection established.")
-    except LogonError as e:
-        print(f"[FATAL] Login failed: {e}")
-        sys.exit(1)
-    except CommunicationError as e:
-        print(f"[FATAL] Network error: {e}")
-        sys.exit(1)
+    # 1. Initialisierung mit RAII-Prinzip (Key-Injektion)
+    # Lädt den license_key aus der key.json zur Entschleierung der Gewichte
+    brain = BioBrainInstance("config/key.json")
+    brain.set_mode(1) # Produktionsmodus: Struktur eingefroren
 
-    # 1. Initialize BioAI (using the local DLL)
-    # Using a fixed seed ensures reproducible behavior during testing.
-    brain = BioAI(seed=0xSAP2025)
-    
-    # 2. Define Ontology (Vocabulary)
-    # These tokens map physical SAP concepts to the AI's internal logic.
-    T_STOCK_CRITICAL = create_token("Stock_Critical", BioClusters.OBJECT)
-    T_STOCK_NORMAL   = create_token("Stock_Normal",   BioClusters.OBJECT)
-    T_ACTION_ORDER   = create_token("Create_PO",      BioClusters.ACTION)
-    
-    # 3. Inject Safety Rule (Instinct)
-    # "If stock is critical, ALWAYS order." (Hard Safety)
-    brain.force_instinct(T_STOCK_CRITICAL, T_ACTION_ORDER, 1.0)
-    
-    print("[SAP-Bridge] Autonomous Agent active. Monitoring Loop started.")
+    # 2. Token-Definition (Mapping SAP -> BioAI Cluster)
+    T_STOCK_CRITICAL = CLUSTER_OBJECT | 0x01  # Kritischer Bestand
+    T_ACTION_ORDER   = CLUSTER_ACTION | 0x0A  # Bestellung auslösen
+    T_SAFETY_LOCK    = SUB_LOGIC_REFLEX | 0x99 # Budget-Sperre
+
+    # 3. Regel-Injektion (Reflex)
+    # Harte Regel: Bei kritischem Bestand IMMER bestellen.
+    brain.teach(T_STOCK_CRITICAL, T_ACTION_ORDER, 1.0) 
+
+    conn = Connection(**SAP_CONFIG)
+    print("[SAP-Bridge] Autonomer Agent aktiv.")
 
     while True:
-        try:
-            # --- STEP A: PERCEPTION (RFC Read) ---
-            # Call BAPI to get current stock level for a material
-            result = conn.call('BAPI_MATERIAL_GET_DETAIL', 
-                               MATERIAL='ROBOT_ARM_V2', 
-                               PLANT='1000', 
-                               VALUATIONAREA='1000')
-            
-            # Parse SAP Return Structure
-            # Note: In a real scenario, handle 'RETURN' messages for errors.
-            current_stock = float(result.get('MATERIAL_VALUATIONDATA', {}).get('TOTAL_STOCK', 0))
-            
-            print(f"[Sensor] Material: ROBOT_ARM_V2 | Stock: {current_stock}")
+        # --- SCHRITT A: WAHRNEHMUNG (RFC READ) ---
+        # Abruf des Materialstamms aus S/4HANA
+        res = conn.call('BAPI_MATERIAL_GET_DETAIL', MATERIAL='AX_CORE_01', PLANT='1000')
+        stock = float(res['MATERIAL_VALUATIONDATA']['TOTAL_STOCK'])
 
-            # --- STEP B: TOKENIZATION ---
-            # Map continuous value to discrete state token
-            current_state = T_STOCK_NORMAL
-            if current_stock < 50.0:
-                current_state = T_STOCK_CRITICAL
-            
-            # --- STEP C: COGNITION (Think) ---
-            # The AI decides based on instincts (safety) or experience (optimization)
-            # O(1) Execution Time
-            action = brain.think([current_state])
-            
-            # --- STEP D: ACTION (RFC Write) ---
-            if action == T_ACTION_ORDER:
-                print(">> DECISION: Triggering Purchase Order (PO)...")
-                
-                # In production: Call BAPI_PO_CREATE1 here
-                # result_po = conn.call('BAPI_PO_CREATE1', ...)
-                
-                # Simulate success for this demo
-                po_success = True 
-                
-                if po_success:
-                    print("   [SAP] PO Created successfully.")
-                    # Reinforce the behavior: Action led to a valid state
-                    brain.learn(1.0, action)
-            else:
-                print(">> DECISION: Wait / No Action.")
+        # --- SCHRITT B: TOKENISIERUNG ---
+        perception = []
+        if stock < 50.0:
+            perception.append(T_STOCK_CRITICAL)
 
-            # Heartbeat
-            time.sleep(10) 
+        # --- SCHRITT C: KOGNITION (THINK) ---
+        # Inferenz über den C-Kern (deterministisch)
+        decision = brain.update(perception)
 
-        except CommunicationError:
-            print("[Network] Connection lost. Retrying in 60s...")
-            time.sleep(60)
-            # Reconnect logic would go here
-        except ABAPApplicationError as e:
-            print(f"[SAP Error] ABAP Exception: {e}")
-            time.sleep(10)
-        except KeyboardInterrupt:
-            print("\n[SAP-Bridge] Shutdown requested.")
-            # Save brain state before exit
-            brain.save("sap_agent.bin")
-            break
+        # --- SCHRITT D: AKTION (RFC WRITE) ---
+        if decision == T_ACTION_ORDER:
+            # Hier würde BAPI_PO_CREATE1 aufgerufen
+            print(">> DECISION: Purchase Order via SAP RFC ausgelöst.")
+            # Reinforcement Learning basierend auf Prozesserfolg
+            brain.feedback(1.0, decision) 
+
+        time.sleep(10) # Zykluszeit
 
 if __name__ == "__main__":
     main()
-````
 
------
+```
 
-## 3\. Deployment Strategy
+---
 
-1.  **Environment:** Run this script on a secure gateway server or within a Docker container that has access to the SAP network subnet.
-2.  **Library Path:** Ensure `bioai.dll` (Windows) or `libbioai.so` (Linux) is in the same folder or in `LD_LIBRARY_PATH`.
-3.  **Security:** Use a restricted SAP Service User (`System` type) with minimal RFC privileges for the specific BAPIs used.
+## 3. Ordnerstruktur & Deployment
 
------
+Für den produktiven Einsatz auf einem SAP BTP Sidecar oder Edge-Gateway:
 
-**BrainAI** - *-We don't need **BRUTEFORCE**, we know **Physiks**-*</br>
-Developed by **Sascha A. Köhne (winemp83)**</br>
-Product: **BioAI 0.7.6 (Industrial Closed Feature)**</br>
+```text
+/sap_bridge
+├── bioai_sap_bridge.py      # Haupt-Skript
+├── bioai_wrapper.py         # Python-Binding für die API
+├── config/
+│   └── key.json             # Lizenzschlüssel (wichtig für Salting)
+├── lib/
+│   └── libbioai_core.so     # Native Engine (Ultra/Next Tier)
+└── logs/                    # Audit-Logs
+
+```
+
+---
+
+## 4. Sicherheit & Audit (Transparency Layer)
+
+* **Glass-Box Transparenz:** Über `brain.inspect(input, action)` kann SAP jederzeit abfragen, welches synaptische Gewicht zu einer Bestellung geführt hat.
+* **IP-Schutz:** Da die Engine im Speicher "gesalzen" ist, sind die gelernten Dispositionsstrategien vor Speicher-Dumping geschützt.
+* **Fehlersicherheit:** Die Nutzung der `SUB_LOGIC_REFLEX` Maske erlaubt es, Compliance-Regeln (z.B. Budgetgrenzen) so zu verankern, dass sie niemals durch gelerntes Verhalten überschrieben werden.
+
+---
+
+**BrainAI** - *We know Physics, from Shop Floor to Top Floor.*
+Entwickelt von **Sascha A. Köhne (winemp83)**
+Produkt: **BioAI 0.7.6 (Industrial Closed Feature)**
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
-&copy; 2025 BrainAI / Sascha A. Köhne. All rights reserved.
+© 2025 BrainAI / Sascha A. Köhne. All rights reserved.

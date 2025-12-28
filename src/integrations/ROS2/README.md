@@ -1,6 +1,6 @@
-# 📘 BioAI ROS 2 Integration Guide (0.7.6)
+﻿# 📘 BioAI ROS 2 Integration Guide (0.7.6)
 
-**Status:** Industrial Release (Stable Feature Closed)
+**Status:** Industrial Release (Stable)
 
 **Unterstützte Distributionen:** Humble, Iron, Jazzy
 
