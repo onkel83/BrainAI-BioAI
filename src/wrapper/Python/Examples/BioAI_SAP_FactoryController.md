@@ -1,4 +1,4 @@
-﻿# 🏭 Dokumentation: BIOAI SAP Factory Controller (v0.7.6)
+﻿# 🏭 Dokumentation: BIOAI SAP Factory Controller (0.7.6)
 
 Diese Dokumentation beschreibt die Funktionsweise und Integration des autonomen Fertigungs-Controllers, der als Bindeglied zwischen **SAP S/4HANA** (ERP-Ebene) und der **physischen Produktion** (Shop Floor) agiert.
 

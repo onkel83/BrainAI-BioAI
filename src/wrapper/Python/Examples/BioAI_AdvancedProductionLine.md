@@ -1,4 +1,4 @@
-﻿# 🏭 BioAI Advanced Production Line Demo (v0.7.6)
+﻿# 🏭 BioAI Advanced Production Line Demo (0.7.6)
 
 **Status:** Industrial Demo (Python-Integration)
 

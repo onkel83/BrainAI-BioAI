@@ -1,4 +1,4 @@
-﻿# 📘 BioAI JSON Messaging Guide (v0.7.6)
+﻿# 📘 BioAI JSON Messaging Guide (0.7.6)
 
 Dieser Guide beschreibt das standardisierte JSON-Protokoll zur Kommunikation mit der BioAI-Engine.
 
