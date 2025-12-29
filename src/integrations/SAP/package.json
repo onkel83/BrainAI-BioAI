@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js"
   },
-  "author": "Sascha A. Köhne (winemp83)",
+  "author": "Sascha A. Kï¿½hne (winemp83)",
   "license": "Proprietary",
   "dependencies": {
     "express": "^4.18.2",
