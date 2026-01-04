@@ -1,4 +1,4 @@
-
+﻿
 # Contributor Covenant Code of Conduct
 
 ## Our Pledge
@@ -68,3 +68,13 @@ This Code of Conduct is adapted from the [Contributor Covenant][homepage], versi
 
 [homepage]: https://www.contributor-covenant.org
 [v2.1]: https://www.contributor-covenant.org/version/2/1/code_of_conduct.html
+
+---
+
+**BrainAI** - *-We don't need **BRUTEFORCE**, we know **Physiks**-*</br>
+Developed by **Sascha A. Köhne (winemp83)**</br>
+Product: **BioAI 0.7.6 (Industrial Closed Feature)**</br>
+📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
+
+&copy; 2025 BrainAI / Sascha A. Köhne. All rights reserved.
+

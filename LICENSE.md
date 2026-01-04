@@ -1,6 +1,6 @@
 # BioAI.Core Lizenzvertrag ⚖️
 
-**Version:** 0.7.5 (Industrial Closed Feature)
+**Version:** 0.7.6 (Industrial Closed Feature)
 
 **Urheberrecht © 2025 BrainAI / Sascha A. Köhne. Alle Rechte vorbehalten.**
 
@@ -71,13 +71,10 @@ DIE SOFTWARE WIRD "WIE BESEHEN" (AS IS) GELIEFERT, OHNE JEGLICHE AUSDRÜCKLICHE 
 
 ---
 
-**BrainAI** - *Intelligence everywhere.*
-Entwickelt von **Sascha A. Köhne (winemp83)**
-Produkt: **BioAI 0.7.5 (Industrial Closed Feature)**
-📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
-
-© 2025 BrainAI / Sascha A. Köhne. Alle Rechte vorbehalten.
-
+**BrainAI** - *-We don't need **BRUTEFORCE**, we know **Physiks**-*</br>
+Developed by **Sascha A. Köhne (winemp83)**</br>
+Product: **BioAI 0.7.6 (Industrial Closed Feature)**</br>
 📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
 &copy; 2025 BrainAI / Sascha A. Köhne. All rights reserved.
+

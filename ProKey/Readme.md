@@ -26,4 +26,3 @@ ProKey wurde ursprünglich für das **BioAI-Ökosystem** entwickelt, um hochempf
 * Sicherung von Kommunikationskanälen in der Robotik und IoT.
 * Laufzeit-Obfuskation von geschäftskritischer Logik.
 * Hardware-gebundene Lizenzierung von High-End-Software.
-

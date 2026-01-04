@@ -8,8 +8,8 @@ Wir unterstützen derzeit Sicherheits-Updates für die folgenden Versionen des B
 
 | Version | Unterstützt | Anmerkungen |
 | --- | --- | --- |
-| **v0.7.5 (Industrial Closed Feature)** | ✅ | Aktueller stabiler Release |
-| < 0.7.5 | ❌ | Veraltet (Deprecated). Nicht in der Produktion verwenden. |
+| **v0.7.6 (Industrial Closed Feature)** | ✅ | Aktueller stabiler Release |
+| < 0.7.6 | ❌ | Veraltet (Deprecated). Nicht in der Produktion verwenden. |
 
 ---
 
@@ -74,11 +74,10 @@ In unserer Architektur führt ein *Security*-Bruch (z. B. das Modifizieren der L
 
 ---
 
-**BrainAI Security Team**
+**BrainAI** - *-We don't need **BRUTEFORCE**, we know **Physiks**-*</br>
+Developed by **Sascha A. Köhne (winemp83)**</br>
+Product: **BioAI 0.7.6 (Industrial Closed Feature)**</br>
+📧 [koehne83@googlemail.com](mailto:koehne83@googlemail.com)
 
----
+&copy; 2025 BrainAI / Sascha A. Köhne. All rights reserved.
 
-
----
-
-**BrainAI Security Team**
